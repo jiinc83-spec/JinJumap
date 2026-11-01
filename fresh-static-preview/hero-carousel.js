@@ -25,6 +25,7 @@
 
   const heading = hero.querySelector('h1');
   const description = hero.querySelector('.hero-copy p:not(.eyebrow)');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const controls = document.createElement('div');
   controls.className = 'hero-carousel-controls';
   controls.setAttribute('aria-label', '첫 화면 사진 넘기기');
@@ -41,13 +42,33 @@
   });
 
   let current = 0;
+  let activeImage = null;
   function showSlide(index) {
-    current = (index + slides.length) % slides.length;
+    const next = (index + slides.length) % slides.length;
+    if (activeImage && next === current) return;
+    current = next;
     const slide = slides[current];
-    hero.style.setProperty('--hero-image', `url("${slide.image}")`);
+    const image = document.createElement('div');
+    image.className = 'hero-carousel-image';
+    image.style.setProperty('--slide-image', `url("${slide.image}")`);
+    image.setAttribute('aria-hidden', 'true');
+    hero.append(image);
+    const previousImages = [...hero.querySelectorAll('.hero-carousel-image')].filter(layer => layer !== image);
+    if (!activeImage || reducedMotion.matches) {
+      image.classList.add('is-visible');
+      previousImages.forEach(layer => layer.remove());
+    } else {
+      requestAnimationFrame(() => requestAnimationFrame(() => image.classList.add('is-visible')));
+      window.setTimeout(() => previousImages.forEach(layer => layer.remove()), 750);
+    }
+    activeImage = image;
+    hero.classList.add('hero-carousel-ready');
     hero.dataset.slide = String(current + 1);
     heading.innerHTML = slide.title;
     description.innerHTML = slide.description;
+    hero.querySelector('.hero-copy').classList.remove('hero-carousel-copy-enter');
+    void hero.offsetWidth;
+    hero.querySelector('.hero-copy').classList.add('hero-carousel-copy-enter');
     controls.querySelector('.hero-carousel-count').textContent = `${current + 1} / ${slides.length}`;
     [...dots.children].forEach((dot, dotIndex) => {
       if (dotIndex === current) dot.setAttribute('aria-current', 'true');

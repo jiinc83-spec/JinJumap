@@ -1,3 +1,10 @@
+.hero.hero-carousel-ready{background-image:none}
+.hero-carousel-image{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;background-image:linear-gradient(270deg,rgba(7,24,17,.78) 0%,rgba(8,29,22,.48) 42%,rgba(8,31,27,.03) 76%),var(--slide-image);background-position:center bottom;background-size:cover;background-repeat:no-repeat;transition:opacity .65s cubic-bezier(.22,1,.36,1)}
+.hero-carousel-image.is-visible{opacity:1}
+.hero-carousel-copy-enter{animation:hero-carousel-copy-enter .55s cubic-bezier(.22,1,.36,1) both}
+@keyframes hero-carousel-copy-enter{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:640px){.hero-carousel-image{background-position:36% bottom}}
+body.mobile-layout .hero-carousel-image{background-image:linear-gradient(0deg,rgba(6,25,17,.88),rgba(6,25,17,.32) 55%,transparent 85%),var(--slide-image);background-position:35% bottom}
 .hero-carousel-controls{position:absolute;top:14px;right:14px;z-index:3;display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:999px;background:rgba(12,32,23,.68);color:#fff;backdrop-filter:blur(8px)}
 .hero-carousel-controls button{display:grid;place-items:center;border:0;background:transparent;color:inherit;cursor:pointer}
 .hero-carousel-arrow{width:25px;height:25px;padding:0;font-size:21px;line-height:1}
@@ -8,4 +15,4 @@
 .hero-carousel-count{min-width:27px;text-align:center;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
 body.mobile-layout .hero-carousel-controls{top:10px;right:10px;gap:5px;padding:5px 7px}
 body.mobile-layout .hero-carousel-arrow{width:26px;height:26px}
-@media(prefers-reduced-motion:reduce){.hero-carousel-controls *{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.hero-carousel-image,.hero-carousel-controls *{transition:none!important}.hero-carousel-copy-enter{animation:none}}
