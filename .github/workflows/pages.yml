@@ -25,6 +25,7 @@ jobs:
         run: |
           mkdir -p dist
           cp fresh-static-preview/index.html dist/index.html
+          cp fresh-static-preview/mobile-preview.html dist/mobile-preview.html
           cp -R fresh-static-preview/pages fresh-static-preview/assets dist/
           node --input-type=module -e "import { writeFileSync } from 'node:fs'; writeFileSync('dist/kakao-config.js', 'window.KAKAO_MAP_APP_KEY = ' + JSON.stringify(process.env.KAKAO_MAP_APP_KEY || '') + ';');"
         env:
