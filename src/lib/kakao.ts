@@ -6,7 +6,15 @@ export interface KakaoMap {
   addControl(control: unknown, position: unknown): void;
 }
 export interface KakaoMarker { setMap(map: KakaoMap | null): void }
+export interface GeocodeResult {
+ x: string; y: string; address_name: string;
+ road_address?: { address_name: string } | null;
+}
 export interface KakaoMaps {
+  services?: {
+    Status: { OK: string; ZERO_RESULT: string };
+    Geocoder: new () => { addressSearch(query: string, callback: (results: GeocodeResult[], status: string) => void): void };
+  };
   load(callback: () => void): void;
   LatLng: new (lat: number, lng: number) => KakaoPosition;
   Map: new (element: HTMLElement, options: {center: KakaoPosition; level: number}) => KakaoMap;
@@ -23,7 +31,7 @@ export function loadKakaoMaps(key: string): Promise<KakaoMaps> {
     const script = document.createElement('script');
     const timeout = window.setTimeout(() => fail(), 15000);
     function fail() { clearTimeout(timeout); script.remove(); reject(new Error('Kakao Maps SDK unavailable')); }
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false`;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(key)}&autoload=false&libraries=services`;
     script.async = true;
     script.onerror = fail;
     script.onload = () => {
