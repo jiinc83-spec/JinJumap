@@ -26,6 +26,18 @@
   const heading = hero.querySelector('h1');
   const description = hero.querySelector('.hero-copy p:not(.eyebrow)');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mobileTrack = document.body.classList.contains('mobile-layout') ? document.createElement('div') : null;
+  if (mobileTrack) {
+    mobileTrack.className = 'hero-carousel-track';
+    mobileTrack.setAttribute('aria-hidden', 'true');
+    slides.forEach(slide => {
+      const panel = document.createElement('div');
+      panel.className = 'hero-carousel-panel';
+      panel.style.setProperty('--slide-image', `url("${slide.image}")`);
+      mobileTrack.append(panel);
+    });
+    hero.prepend(mobileTrack);
+  }
   const controls = document.createElement('div');
   controls.className = 'hero-carousel-controls';
   controls.setAttribute('aria-label', '첫 화면 사진 넘기기');
@@ -43,11 +55,32 @@
 
   let current = 0;
   let activeImage = null;
+  function updateSlide(index) {
+    if (hero.dataset.slide === String(index + 1)) return;
+    current = index;
+    const slide = slides[index];
+    hero.dataset.slide = String(index + 1);
+    heading.innerHTML = slide.title;
+    description.innerHTML = slide.description;
+    const copy = hero.querySelector('.hero-copy');
+    copy.classList.remove('hero-carousel-copy-enter');
+    void hero.offsetWidth;
+    copy.classList.add('hero-carousel-copy-enter');
+    controls.querySelector('.hero-carousel-count').textContent = `${index + 1} / ${slides.length}`;
+    [...dots.children].forEach((dot, dotIndex) => {
+      if (dotIndex === index) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
+  }
   function showSlide(index) {
     const next = (index + slides.length) % slides.length;
+    if (mobileTrack) {
+      mobileTrack.scrollTo({ left: next * mobileTrack.clientWidth, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+      updateSlide(next);
+      return;
+    }
     if (activeImage && next === current) return;
-    current = next;
-    const slide = slides[current];
+    const slide = slides[next];
     const image = document.createElement('div');
     image.className = 'hero-carousel-image';
     image.style.setProperty('--slide-image', `url("${slide.image}")`);
@@ -63,17 +96,7 @@
     }
     activeImage = image;
     hero.classList.add('hero-carousel-ready');
-    hero.dataset.slide = String(current + 1);
-    heading.innerHTML = slide.title;
-    description.innerHTML = slide.description;
-    hero.querySelector('.hero-copy').classList.remove('hero-carousel-copy-enter');
-    void hero.offsetWidth;
-    hero.querySelector('.hero-copy').classList.add('hero-carousel-copy-enter');
-    controls.querySelector('.hero-carousel-count').textContent = `${current + 1} / ${slides.length}`;
-    [...dots.children].forEach((dot, dotIndex) => {
-      if (dotIndex === current) dot.setAttribute('aria-current', 'true');
-      else dot.removeAttribute('aria-current');
-    });
+    updateSlide(next);
   }
 
   controls.querySelectorAll('.hero-carousel-arrow')[0].addEventListener('click', () => showSlide(current - 1));
@@ -83,19 +106,68 @@
     if (event.key === 'ArrowRight') { event.preventDefault(); showSlide(current + 1); }
   });
 
-  let touchStart = null;
-  hero.addEventListener('touchstart', event => {
-    const touch = event.changedTouches[0];
-    touchStart = { x: touch.clientX, y: touch.clientY };
-  }, { passive: true });
-  hero.addEventListener('touchend', event => {
-    if (!touchStart) return;
-    const touch = event.changedTouches[0];
-    const dx = touch.clientX - touchStart.x;
-    const dy = touch.clientY - touchStart.y;
-    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) showSlide(current + (dx < 0 ? 1 : -1));
-    touchStart = null;
-  }, { passive: true });
+  if (mobileTrack) {
+    hero.classList.add('hero-carousel-ready');
+    let scrollTimer;
+    let touchStart = null;
+    let dragging = false;
+    mobileTrack.addEventListener('scroll', () => {
+      if (dragging) return;
+      clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => {
+        updateSlide(Math.max(0, Math.min(slides.length - 1, Math.round(mobileTrack.scrollLeft / mobileTrack.clientWidth))));
+      }, 120);
+    }, { passive: true });
+    mobileTrack.addEventListener('touchstart', event => {
+      clearTimeout(scrollTimer);
+      const touch = event.changedTouches[0];
+      touchStart = { x: touch.clientX, y: touch.clientY, left: mobileTrack.scrollLeft };
+      dragging = false;
+    }, { passive: true });
+    mobileTrack.addEventListener('touchmove', event => {
+      if (!touchStart) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - touchStart.x;
+      const dy = touch.clientY - touchStart.y;
+      if (!dragging && (Math.abs(dx) < 8 || Math.abs(dx) <= Math.abs(dy))) return;
+      dragging = true;
+      event.preventDefault();
+      mobileTrack.style.scrollSnapType = 'none';
+      mobileTrack.scrollLeft = Math.max(0, Math.min(mobileTrack.scrollWidth - mobileTrack.clientWidth, touchStart.left - dx));
+    }, { passive: false });
+    function finishTouch(event) {
+      if (!touchStart) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - touchStart.x;
+      const startIndex = Math.round(touchStart.left / mobileTrack.clientWidth);
+      mobileTrack.style.scrollSnapType = '';
+      if (dragging) {
+        const threshold = Math.min(55, mobileTrack.clientWidth * .16);
+        showSlide(Math.abs(dx) > threshold ? startIndex + (dx < 0 ? 1 : -1) : startIndex);
+      }
+      touchStart = null;
+      dragging = false;
+    }
+    mobileTrack.addEventListener('touchend', finishTouch, { passive: true });
+    mobileTrack.addEventListener('touchcancel', finishTouch, { passive: true });
+    window.addEventListener('resize', () => {
+      mobileTrack.scrollTo({ left: current * mobileTrack.clientWidth, behavior: 'instant' });
+    });
+  } else {
+    let touchStart = null;
+    hero.addEventListener('touchstart', event => {
+      const touch = event.changedTouches[0];
+      touchStart = { x: touch.clientX, y: touch.clientY };
+    }, { passive: true });
+    hero.addEventListener('touchend', event => {
+      if (!touchStart) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - touchStart.x;
+      const dy = touch.clientY - touchStart.y;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) showSlide(current + (dx < 0 ? 1 : -1));
+      touchStart = null;
+    }, { passive: true });
+  }
 
   slides.slice(1).forEach(slide => { const image = new Image(); image.src = slide.image; });
   showSlide(0);
