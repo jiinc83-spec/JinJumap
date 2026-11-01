@@ -2,6 +2,7 @@
 export interface KakaoPosition { getLat(): number; getLng(): number }
 export interface KakaoMap {
   setCenter(position: KakaoPosition): void;
+  getCenter?(): KakaoPosition;
   relayout(): void;
   addControl(control: unknown, position: unknown): void;
 }

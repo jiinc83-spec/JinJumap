@@ -4,7 +4,7 @@ import fs from 'node:fs';
 const stores=JSON.parse(fs.readFileSync(new URL('../src/data/stores.json',import.meta.url)));
 test('report has exactly twelve unique candidates and none are field-verified',()=>{
  assert.equal(stores.length,12);assert.equal(new Set(stores.map(s=>s.id)).size,12);
- for(const s of stores){assert.equal(s.verified,false);assert.equal(s.coordinates,null);assert.equal(s.coordinateSource,null);assert.ok(s.page>=3&&s.page<=15);assert.ok(s.participation.length>=2);assert.ok(s.sources.length>0);for(const u of s.sources)assert.equal(new URL(u).protocol,'https:');}
+ for(const s of stores){assert.equal(s.verified,false);assert.ok(s.page>=3&&s.page<=15);assert.ok(s.participation.length>=2);assert.ok(s.sources.length>0);for(const u of s.sources)assert.equal(new URL(u).protocol,'https:');}
 });
 test('point filters contain only report-supported participants',()=>{
  assert.deepEqual(stores.filter(s=>s.tags.includes('points')).map(s=>s.id),['starbucks','mega','hansalim']);
@@ -23,7 +23,7 @@ test('application filters, coordinate validation and Kakao direction fallbacks',
  assert.deepEqual(filterStores('mobility','').map(s=>s.id),['biketani','samchuly']);
  assert.equal(filterStores('cup','').length,3);
  assert.equal(filterStores('points',' 한살림 ').length,1);
- const store=stores[0];
+ const store=stores.find(s=>s.id==='ediya');
  assert.equal(hasCoordinates(store),false);
  assert.equal(new URL(directionsLink(store)).hostname,'map.kakao.com');
  assert.equal(new URL(directionsLink(store)).searchParams.get('q'),`${store.name} ${store.address}`);
@@ -32,4 +32,13 @@ test('application filters, coordinate validation and Kakao direction fallbacks',
  assert.ok(directionsLink(located).startsWith('https://map.kakao.com/link/to/'));
  assert.equal(hasCoordinates({...located,coordinateSource:null}),false);
  assert.equal(hasCoordinates({...located,coordinates:[100,128]}),false);
+});
+
+test('provided coordinates preserve missing locations and apartment caveat',()=>{
+ assert.equal(stores.filter(s=>s.coordinates).length,10);
+ assert.deepEqual(stores.filter(s=>!s.coordinates).map(s=>s.id),['ediya','natural']);
+ for(const s of stores){if(s.coordinates){assert.ok(s.coordinateSource.startsWith('사용자 제공 · '));assert.ok(s.coordinates[0]>35 && s.coordinates[0]<36);assert.ok(s.coordinates[1]>128 && s.coordinates[1]<129);}else assert.equal(s.coordinateSource,null);}
+ const apartment=stores.find(s=>s.id==='hasamdong');
+ assert.deepEqual(apartment.coordinates,[35.167373,128.055881]);
+ assert.match(apartment.coordinateNote,/대표 좌표/);
 });
