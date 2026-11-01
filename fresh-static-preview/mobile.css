@@ -15,27 +15,37 @@ body.mobile-layout .hero-copy{flex:1;max-width:100%;padding:22px}
 body.mobile-layout .hero h1{font-size:26px;line-height:1.35;letter-spacing:-1px;margin:10px 0}
 body.mobile-layout .hero p:not(.eyebrow){font-size:10px;line-height:1.6;margin-bottom:0}
 body.mobile-layout .eyebrow{font-size:8px}
-body.mobile-layout .category-overview{display:block;overflow:visible;padding:0}
-body.mobile-layout .category-overview>.category-section{display:block;min-width:0;margin:0 0 30px;scroll-snap-align:none}
-body.mobile-layout .category-overview>.category-section>.category-heading{height:auto;min-height:0;gap:10px;align-items:center;margin:0 0 12px;transform:none}
-body.mobile-layout .category-overview>.category-section>.category-heading h2{font-size:18px;line-height:1.3}
+body.mobile-layout .category-browser-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 12px}
+body.mobile-layout .category-browser-head h2{margin:0;color:#19351f;font-size:19px;letter-spacing:-.6px}
+body.mobile-layout .category-browser-head p{margin:4px 0 0;color:#829187;font-size:10px}
+body.mobile-layout .category-browser-count{flex:none;color:#63816d;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums}
+body.mobile-layout .category-overview{display:flex;align-items:stretch;gap:12px;overflow-x:auto;overflow-y:hidden;padding:0 48px 5px 0;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;touch-action:pan-y}
+body.mobile-layout .category-overview::-webkit-scrollbar{display:none}
+body.mobile-layout .category-overview>.category-section{box-sizing:border-box;display:flex;flex:0 0 100%;flex-direction:column;min-width:0;min-height:355px;margin:0;padding:0;overflow:hidden;border:1px solid #e5ebe4;border-radius:18px;background:#fff;box-shadow:0 8px 22px #213a2509;scroll-snap-align:start;scroll-snap-stop:always}
+body.mobile-layout .category-overview>.category-section>.category-heading{box-sizing:border-box;height:auto;min-height:78px;gap:10px;align-items:center;margin:0;padding:13px 15px;transform:none}
+body.mobile-layout .category-overview>.category-section>.category-heading h2{font-size:17px;line-height:1.3}
 body.mobile-layout .category-overview>.category-section>.category-heading p{font-size:10px;line-height:1.4}
 body.mobile-layout .category-overview>.category-section>.category-heading>a{display:none}
-body.mobile-layout .category-overview .tumbler-entry,body.mobile-layout .category-overview .feature-empty,body.mobile-layout .category-overview #bicycle .card{width:100%;height:auto;min-height:0;aspect-ratio:auto;display:flex;flex-direction:column;border-radius:15px;overflow:hidden}
-body.mobile-layout .category-overview .tumbler-entry .cup-icon,body.mobile-layout .category-overview .feature-empty .feature-visual,body.mobile-layout .category-overview #bicycle .card-art{width:100%;height:88px;min-height:88px;align-self:stretch;margin:0;border-radius:0;font-size:36px}
-body.mobile-layout .category-overview .tumbler-entry>div:not(.tumbler-actions),body.mobile-layout .category-overview .feature-empty>div:last-child{padding:15px 16px}
+body.mobile-layout .category-overview .tumbler-entry,body.mobile-layout .category-overview .feature-empty,body.mobile-layout .category-overview .bicycle .card{box-sizing:border-box;width:100%;height:auto;min-height:0;aspect-ratio:auto;display:flex;flex:1;flex-direction:column;margin:0;border:0;border-radius:0;overflow:hidden;box-shadow:none}
+body.mobile-layout .category-overview .tumbler-entry .cup-icon,body.mobile-layout .category-overview .feature-empty .feature-visual,body.mobile-layout .category-overview .bicycle .card-art{width:100%;height:105px;min-height:105px;align-self:stretch;margin:0;border-radius:0;font-size:39px}
+body.mobile-layout .category-overview .tumbler-entry>div:not(.tumbler-actions),body.mobile-layout .category-overview .feature-empty>div:last-child{padding:14px 16px}
 body.mobile-layout .category-overview .tumbler-entry strong,body.mobile-layout .category-overview .feature-empty strong{font-size:14px}
 body.mobile-layout .category-overview .tumbler-entry p,body.mobile-layout .category-overview .feature-empty p{font-size:11px;line-height:1.5;margin-top:5px}
-body.mobile-layout .category-overview .tumbler-actions{width:100%;margin:0;padding:0 16px 16px;display:flex;flex-direction:row;align-items:center;gap:12px}
+body.mobile-layout .category-overview .tumbler-actions{width:100%;margin:auto 0 0;padding:0 16px 16px;display:flex;flex-direction:row;align-items:center;gap:12px}
 body.mobile-layout .category-overview .tumbler-actions button{width:auto;flex:1;padding:10px 12px;font-size:10px}
 body.mobile-layout .category-overview .tumbler-map-link{font-size:10px}
-body.mobile-layout .category-overview #bicycle .grid{grid-template-columns:1fr;gap:10px}
-body.mobile-layout .category-overview #bicycle .card-body{display:flex;flex-direction:column;gap:4px;padding:13px 16px;min-height:0}
-body.mobile-layout .category-overview #bicycle .card h3{font-size:14px}
-body.mobile-layout .category-overview #bicycle .name,body.mobile-layout .category-overview #bicycle .address{font-size:10px}
-body.mobile-layout .category-overview #bicycle .prep{font-size:10px;padding:7px;margin-top:4px}
-body.mobile-layout .category-overview #bicycle .card-foot{margin-top:7px;padding-top:7px}
-body.mobile-layout .category-overview #bicycle .card-foot button{font-size:10px;padding:9px}
+body.mobile-layout .category-overview .bicycle .grid{display:flex;flex:1;min-height:0}
+body.mobile-layout .category-overview .bicycle .card-body{display:flex;flex:1;flex-direction:column;gap:4px;padding:13px 16px;min-height:0}
+body.mobile-layout .category-overview .bicycle .card h3{font-size:14px;min-height:0;margin:0}
+body.mobile-layout .category-overview .bicycle .name,body.mobile-layout .category-overview .bicycle .address{font-size:10px}
+body.mobile-layout .category-overview .bicycle .prep{font-size:10px;padding:7px;margin-top:4px}
+body.mobile-layout .category-overview .bicycle .card-foot{margin:auto 0 0;padding-top:7px}
+body.mobile-layout .category-overview .bicycle .card-foot button{font-size:10px;padding:9px}
+body.mobile-layout .category-browser-controls{display:flex;align-items:center;justify-content:center;gap:15px;margin:10px 0 26px}
+body.mobile-layout .category-browser-controls>button{display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid #dce8dc;border-radius:50%;background:#fff;color:#4d7554;font-size:22px;cursor:pointer}
+body.mobile-layout .category-browser-dots{display:flex;align-items:center;gap:7px}
+body.mobile-layout .category-browser-dots button{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:#cddbcc;cursor:pointer}
+body.mobile-layout .category-browser-dots button[aria-current="true"]{width:19px;background:#78be32}
 body.mobile-layout #tumbler-details .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 body.mobile-layout #tumbler-details .category-heading h2{font-size:18px}
 body.mobile-layout .location-panel:not([hidden]){grid-template-columns:1fr}

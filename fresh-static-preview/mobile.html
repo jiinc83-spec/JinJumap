@@ -219,8 +219,92 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
     const categoryOverview=document.createElement('div');
     categoryOverview.className='category-overview';
     document.querySelector('#tumbler').before(categoryOverview);
-    categoryOverview.append(...['#tumbler','#upcycle','#bicycle','#recycling'].map(selector=>document.querySelector(selector)));
-    categoryOverview.after(document.querySelector('#tumbler-locations'),document.querySelector('#tumbler-details'));
+    const secondBicycle=document.createElement('section');
+    secondBicycle.className='category-section bicycle bicycle-second';
+    secondBicycle.id='bicycle-second';
+    const secondBicycleGrid=document.createElement('div');
+    secondBicycleGrid.className='grid';
+    secondBicycleGrid.append(document.querySelector('#bicycle-cards .card:last-child'));
+    secondBicycle.append(document.querySelector('#bicycle .category-heading').cloneNode(true),secondBicycleGrid);
+    categoryOverview.append(document.querySelector('#tumbler'),document.querySelector('#upcycle'),document.querySelector('#bicycle'),secondBicycle,document.querySelector('#recycling'));
+    const browserHead=document.createElement('div');
+    browserHead.className='category-browser-head';
+    browserHead.innerHTML='<div><h2>실천 장소 둘러보기</h2><p>카드를 옆으로 밀어 다음 장소를 확인하세요</p></div><span class="category-browser-count" aria-live="polite">01 / 05</span>';
+    categoryOverview.before(browserHead);
+    const browserControls=document.createElement('div');
+    browserControls.className='category-browser-controls';
+    browserControls.setAttribute('aria-label','실천 장소 카드 넘기기');
+    browserControls.innerHTML='<button type="button" aria-label="이전 카드">‹</button><div class="category-browser-dots"></div><button type="button" aria-label="다음 카드">›</button>';
+    categoryOverview.after(browserControls,document.querySelector('#tumbler-locations'),document.querySelector('#tumbler-details'));
+    const browserPages=[...categoryOverview.children];
+    const browserDots=browserControls.querySelector('.category-browser-dots');
+    const browserArrows=browserControls.querySelectorAll(':scope > button');
+    let browserPage=0;
+    function browserPosition(index){return browserPages[index].offsetLeft-browserPages[0].offsetLeft}
+    function updateBrowser(index){
+      browserPage=index;
+      browserHead.querySelector('.category-browser-count').textContent=`${String(index+1).padStart(2,'0')} / ${String(browserPages.length).padStart(2,'0')}`;
+      [...browserDots.children].forEach((dot,dotIndex)=>dot.setAttribute('aria-current',String(dotIndex===index)));
+      browserArrows[0].disabled=index===0;
+      browserArrows[1].disabled=index===browserPages.length-1;
+    }
+    function goToBrowser(index){
+      const next=Math.max(0,Math.min(browserPages.length-1,index));
+      categoryOverview.scrollTo({left:browserPosition(next),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+      updateBrowser(next);
+    }
+    browserPages.forEach((page,index)=>{
+      const dot=document.createElement('button');
+      dot.type='button';
+      dot.setAttribute('aria-label',`${index+1}번 카드: ${page.querySelector('h2').textContent}${page.querySelector('.name')?' · '+page.querySelector('.name').textContent:''}`);
+      dot.onclick=()=>goToBrowser(index);
+      browserDots.append(dot);
+    });
+    browserArrows[0].onclick=()=>goToBrowser(browserPage-1);
+    browserArrows[1].onclick=()=>goToBrowser(browserPage+1);
+    let browserScrollTimer;
+    let browserTouch=null;
+    let browserDragging=false;
+    categoryOverview.addEventListener('scroll',()=>{
+      if(browserDragging)return;
+      clearTimeout(browserScrollTimer);
+      browserScrollTimer=setTimeout(()=>{
+        const closest=browserPages.reduce((best,page,index)=>Math.abs(categoryOverview.scrollLeft-browserPosition(index))<Math.abs(categoryOverview.scrollLeft-browserPosition(best))?index:best,0);
+        updateBrowser(closest);
+      },120);
+    },{passive:true});
+    categoryOverview.addEventListener('touchstart',event=>{
+      clearTimeout(browserScrollTimer);
+      const touch=event.changedTouches[0];
+      browserTouch={x:touch.clientX,y:touch.clientY,left:categoryOverview.scrollLeft,page:browserPage};
+      browserDragging=false;
+    },{passive:true});
+    categoryOverview.addEventListener('touchmove',event=>{
+      if(!browserTouch)return;
+      const touch=event.changedTouches[0];
+      const dx=touch.clientX-browserTouch.x;
+      const dy=touch.clientY-browserTouch.y;
+      if(!browserDragging&&(Math.abs(dx)<8||Math.abs(dx)<=Math.abs(dy)))return;
+      browserDragging=true;
+      event.preventDefault();
+      categoryOverview.style.scrollSnapType='none';
+      categoryOverview.scrollLeft=Math.max(0,Math.min(categoryOverview.scrollWidth-categoryOverview.clientWidth,browserTouch.left-dx));
+    },{passive:false});
+    function finishBrowserTouch(event){
+      if(!browserTouch)return;
+      const dx=event.changedTouches[0].clientX-browserTouch.x;
+      categoryOverview.style.scrollSnapType='';
+      if(browserDragging){
+        const threshold=Math.min(55,categoryOverview.clientWidth*.16);
+        goToBrowser(Math.abs(dx)>threshold?browserTouch.page+(dx<0?1:-1):browserTouch.page);
+      }
+      browserTouch=null;
+      browserDragging=false;
+    }
+    categoryOverview.addEventListener('touchend',finishBrowserTouch,{passive:true});
+    categoryOverview.addEventListener('touchcancel',finishBrowserTouch,{passive:true});
+    window.addEventListener('resize',()=>categoryOverview.scrollTo({left:browserPosition(browserPage),behavior:'instant'}));
+    updateBrowser(0);
     const benefitButton=document.querySelector('#open-benefits');
     const benefitDetails=document.querySelector('#tumbler-details');
     benefitButton.onclick=()=>{
