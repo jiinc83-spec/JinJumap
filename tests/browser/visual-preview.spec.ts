@@ -1,0 +1,23 @@
+import {test,expect} from '@playwright/test';
+test('attachment-based visual UI filters, opens details and stays self-contained',async({page})=>{
+ const external:string[]=[];
+ page.on('request',r=>{if(!new URL(r.url()).hostname.match(/^(127\.0\.0\.1|localhost)$/))external.push(new URL(r.url()).hostname);});
+ await page.goto('/?preview=visual');
+ await expect(page.getByRole('heading',{name:/진주에서/})).toBeVisible();
+ await expect(page.locator('.benefit-card')).toHaveCount(6);
+ await expect(page.locator('.practice-store')).toHaveCount(6);
+ await page.getByRole('button',{name:'즉시 할인',exact:true}).click();await expect(page.locator('.benefit-card')).toHaveCount(2);
+ await page.getByRole('button',{name:'포인트 적립',exact:true}).click();await expect(page.locator('.benefit-card')).toHaveCount(2);
+ await page.getByRole('button',{name:'전체',exact:true}).click();
+ await page.locator('.benefit-card').first().click();
+ await expect(page.getByRole('dialog')).toContainText('스타벅스 진주평거점');
+ await expect(page.getByRole('dialog')).toContainText('400원 할인');
+ await page.keyboard.press('Escape');
+ await page.getByRole('button',{name:'지도 보기',exact:true}).click();
+ await expect(page.locator('.preview-schematic')).toContainText('실제 지리·매장 위치를 나타내지 않습니다');
+ await page.getByRole('button',{name:'지도 접기',exact:true}).click();
+ await page.getByLabel('매장명 또는 주소 검색').fill('없는매장');await expect(page.getByText('검색 결과가 없어요')).toBeVisible();
+ await page.getByRole('button',{name:'필터 초기화'}).click();await expect(page.locator('.benefit-card')).toHaveCount(6);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ expect(external).toEqual([]);
+});
