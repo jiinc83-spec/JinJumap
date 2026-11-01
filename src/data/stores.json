@@ -1,0 +1,292 @@
+[
+  {
+    "id": "dessert39",
+    "page": 3,
+    "name": "디저트39 진주평거점",
+    "address": "경남 진주시 평거로 11",
+    "tags": [
+      "cup"
+    ],
+    "activity": "개인컵 할인 · 리유저블컵",
+    "status": "브랜드 정책 확인 / 지점 확인 필요",
+    "points": "보고서에서 탄소중립포인트 참여 여부는 확인되지 않았습니다.",
+    "facts": "디저트39는 공식 홈페이지에서 개인컵 지참 시 음료 할인을 안내한다. 브랜드는 리유저블컵 이용과 다회용 텀블러 재사용 캠페인을 운영한다고 소개한다. 평거점의 현재 할인 품목·금액·적용 조건 및 컵 재사용 실태는 별도 확인이 필요하다.",
+    "participation": [
+      "개인 텀블러 지참 후 할인 적용 여부 문의",
+      "리유저블컵 재사용 조건 및 세척·회수 방식 확인"
+    ],
+    "sources": [
+      "https://home.dessert39.com/main.php"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "starbucks",
+    "page": 4,
+    "name": "스타벅스 진주평거점",
+    "address": "경남 진주시 진양호로 206",
+    "tags": [
+      "cup",
+      "points"
+    ],
+    "activity": "개인컵 할인 · 탄소중립포인트",
+    "status": "공식 제도 확인 / 이용 조건 확인 필요",
+    "points": "전국 지점 텀블러 이용이 참여기업 자료에 포함됩니다. 가입·주문·결제 요건과 현재 적립 단가를 확인하세요. 개인컵 400원 할인 또는 에코별은 브랜드 혜택이며 탄소중립포인트와 구분됩니다.",
+    "facts": "스타벅스는 개인컵 이용 고객에게 400원 할인 또는 에코별 적립 혜택을 안내해 왔다. 한국환경공단 탄소중립포인트 참여기업 자료에 스타벅스 전국 지점의 텀블러 이용이 포함된다. 포인트 적립은 가입과 주문·결제 방식 등 정해진 요건을 충족해야 한다.",
+    "participation": [
+      "텀블러 주문과 적립 조건 확인",
+      "매장 내 머그컵 제공·일회용품 선택 방식 점검"
+    ],
+    "sources": [
+      "https://www.newsis.com/view/NISX20260903_0003774490",
+      "https://www.cpoint.or.kr/netzero/fdl/resources/cmsResourceView.do?resrceId=RESRCE_000000000000022"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "mega",
+    "page": 5,
+    "name": "메가MGC커피 진주평거10호광장점",
+    "address": "경남 진주시 남강로309번길 42-14",
+    "tags": [
+      "cup",
+      "points"
+    ],
+    "activity": "텀블러 · 탄소중립포인트",
+    "status": "전국 지점 대상 제도 확인 / 실사용 확인 필요",
+    "points": "전국 지점 텀블러·다회용컵 이용 참여처로 기재되어 있습니다. 메가MGC커피 앱·본인인증·주문 조건과 적립 방법은 지점 확인이 필요합니다.",
+    "facts": "한국환경공단 참여기업 안내에서 메가MGC커피의 전국 지점을 텀블러·다회용컵 이용 참여처로 기재한다. 공식 자료에는 메가MGC커피 앱 이용 조건이 안내된다. 지점에서 실제 주문할 때의 개인컵 옵션·본인인증·포인트 반영 방법은 확인이 필요하다.",
+    "participation": [
+      "앱에서 개인컵 선택 항목 확인",
+      "직원에게 포인트 적립의 실제 적용 조건 확인"
+    ],
+    "sources": [
+      "https://www.cpoint.or.kr/netzero/entGuide/nv_entGuideList.do",
+      "https://www.cpoint.or.kr/netzero/fdl/resources/cmsResourceView.do?resrceId=RESRCE_000000000000022"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "tenpercent",
+    "page": 6,
+    "name": "텐퍼센트커피 진주평거점",
+    "address": "경남 진주시 진양호로 222",
+    "tags": [
+      "plastic"
+    ],
+    "activity": "2026 탈플라스틱 협약",
+    "status": "브랜드 협약 확인 / 매장 이행 미확인",
+    "points": "보고서에서 탄소중립포인트 참여 여부는 확인되지 않았습니다.",
+    "facts": "텐퍼센트커피는 2026년 7월 기후에너지환경부의 탈플라스틱 실천 협약 참여 브랜드다. 협약은 매장 내 다회용컵, 개인컵 사용 할인, 불필요한 일회용품 축소 등을 지향한다. 협약 참여 사실은 평거점에서 개별 항목을 이미 시행한다는 증거는 아니다.",
+    "participation": [
+      "개인컵 할인표지 확인",
+      "빨대·컵홀더 제공 방식 관찰"
+    ],
+    "sources": [
+      "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156770639&pWise=mSub&pWiseSub=C2"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "hasamdong",
+    "page": 7,
+    "name": "하삼동커피 진주평거휴먼시아점",
+    "address": "경남 진주시 새평거로 75 (휴먼시아 상가)",
+    "tags": [
+      "plastic"
+    ],
+    "activity": "2026 탈플라스틱 협약",
+    "status": "브랜드 협약 확인 / 매장 이행 미확인",
+    "points": "보고서에서 탄소중립포인트 참여 여부는 확인되지 않았습니다.",
+    "facts": "하삼동커피는 2026년 7월 탈플라스틱 실천 협약에 참여했다. 협약에는 개인컵 할인, 매장용 다회용컵 사용, 일회용 빨대 제공 축소 노력이 포함된다. 아파트 생활권 지점의 실제 참여 혜택과 운영 방식은 현장 확인이 필요하다.",
+    "participation": [
+      "개인컵 사용 가능 여부 문의",
+      "주민 대상 홍보물 또는 안내문 존재 확인"
+    ],
+    "sources": [
+      "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156770639&pWise=mSub&pWiseSub=C2"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "ediya",
+    "page": 8,
+    "name": "이디야커피 진주평거동점",
+    "address": "경남 진주시 평거로 14",
+    "tags": [
+      "plastic"
+    ],
+    "activity": "2026 탈플라스틱 협약",
+    "status": "브랜드 협약 확인 / 매장 이행 미확인",
+    "points": "보고서에서 탄소중립포인트 참여 여부는 확인되지 않았습니다.",
+    "facts": "이디야는 2026년 7월 기후에너지환경부 탈플라스틱 협약 참여 브랜드다. 정부 자료는 개인컵 이용 할인, 매장 내 다회용컵 사용 및 일회용품 감축 방향을 설명한다. 평거로 14에 위치한 지점의 실제 할인 내용과 예외 품목은 확인되지 않았다.",
+    "participation": [
+      "개인컵 주문 및 할인 조건 문의",
+      "테이크아웃 제공품과 매장용 컵 확인"
+    ],
+    "sources": [
+      "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156770639&pWise=mSub&pWiseSub=C2",
+      "https://www.diningcode.com/profile.php?rid=wp8isBSkwFh2"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "oliveyoung",
+    "page": 9,
+    "name": "올리브영 진주평거점",
+    "address": "경남 진주시 순환로 526",
+    "tags": [
+      "recycle"
+    ],
+    "activity": "뷰티사이클 · 화장품 공병 회수",
+    "status": "전국 매장 공식 제도 확인 / 현장 절차 재확인",
+    "points": "공병 회수 프로그램은 확인되지만, 보고서에 탄소중립포인트 혜택은 제시되지 않았습니다.",
+    "facts": "올리브영 공식 환경 페이지는 전국 매장에서 화장품 공병을 수거하는 뷰티사이클을 설명한다. 소비자는 대상 공병을 세척하고 라벨을 제거한 뒤 매장에 제출할 수 있다. 수거 공병은 선별·세척·분쇄 등의 과정을 거쳐 재활용 원료로 활용된다.",
+    "participation": [
+      "대상 용기·제외 품목과 수거함 위치 확인",
+      "반납 방식과 수거 요일·수량 제한 확인"
+    ],
+    "sources": [
+      "https://corp.oliveyoung.com/ko/sustainability/planet",
+      "https://www.lghnh.com/company/store.jsp?page=726&searchBrand="
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "hansalim",
+    "page": 10,
+    "name": "한살림 진주매장",
+    "address": "경남 진주시 평거로9번길 18",
+    "tags": [
+      "recycle",
+      "shopping",
+      "receipt",
+      "points"
+    ],
+    "activity": "친환경제품 · 병재사용 · 전자영수증",
+    "status": "전국 공식 제도 참여 / 진주점 절차 확인 필요",
+    "points": "보고서의 2026년 기준: 지정 친환경제품 2,000원 이상 구매 시 500원/건, 전자영수증 10원/건. 대상 물품·조합원·설정·실적 조건 및 진주점 적용 여부는 재확인이 필요합니다.",
+    "facts": "한살림은 탄소중립포인트의 친환경제품 구매·전자영수증·고품질 재활용품 배출 참여기업이다. 지정 물품 2,000원 이상 구매 시 2026년 기준 500원/건 적립 대상이다. 병재사용운동은 확인되지만 진주점의 종이팩 수거함·무포장 판매는 추가 확인해야 한다.",
+    "participation": [
+      "공식 11월 적립대상 제품 목록과 실제 판매품 비교",
+      "유리병 반납 요건과 전자영수증 설정 방법 문의"
+    ],
+    "sources": [
+      "https://www.cpoint.or.kr/netzero/entGuide/nv_entGuideList.do",
+      "https://www.cpoint.or.kr/netzero/site/cntnts/CNTNTS_002.do",
+      "https://www.cpoint.or.kr/netzero/bbEnvrprduct/nv_bbEnvrprductList.do"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "natural",
+    "page": 12,
+    "name": "자연드림 진주평거점",
+    "address": "경남 진주시 순환로 561",
+    "tags": [
+      "plastic"
+    ],
+    "activity": "플라스틱 저감 캠페인 · 대체 포장",
+    "status": "브랜드 과거 캠페인 확인 / 매장 실천 미확인",
+    "points": "보고서에서 탄소중립포인트 참여 여부는 확인되지 않았습니다.",
+    "facts": "아이쿱 자연드림은 페트병 사용을 줄이기 위한 NO 플라스틱 캠페인을 추진해 왔다. 브랜드의 종이팩 생수 기픈물은 플라스틱병을 대체하려는 제품 사례다. 유기농 식품 판매만으로 탄소 감축을 입증할 수 없으며 진주평거점의 회수·감축 활동은 별도 확인해야 한다.",
+    "participation": [
+      "종이팩 제품·수거함 및 반납 방식 점검",
+      "재사용 용기 또는 포장 없는 판매 품목 확인"
+    ],
+    "sources": [
+      "https://www.wylie.co.kr/portfolio/view/142",
+      "https://kr.worldorgs.com/%EB%AA%A9%EB%A1%9D/%EC%A7%84%EC%A3%BC%EC%8B%9C/%EC%8B%A0%EC%9A%A9%ED%98%91%EB%8F%99%EC%A1%B0%ED%95%A9/%EC%9E%90%EC%97%B0%EB%93%9C%EB%A6%BC-%EC%A7%84%EC%A3%BC%ED%8F%89%EA%B1%B0%EC%A0%90"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "biketani",
+    "page": 13,
+    "name": "바이크타니",
+    "address": "경남 진주시 진양호로 175",
+    "tags": [
+      "repair",
+      "mobility"
+    ],
+    "activity": "자전거 정비 · 오래 쓰기",
+    "status": "정비 서비스 확인 / 별도 환경캠페인은 미확인",
+    "points": "보고서에서 탄소중립포인트 참여 여부는 확인되지 않았습니다.",
+    "facts": "평거동의 자전거 판매·정비 업체로 지역 업체 소개에 로드·MTB 취급을 안내한다. 이용 후기에서 오래된 자전거 정비 서비스를 받았다는 사례가 확인된다. 이는 수리·사용기간 연장과 연결되지만 업체의 탄소 감축 실적이나 친환경 인증은 확인되지 않았다.",
+    "participation": [
+      "생활자전거·오래된 자전거 정비 가능 범위 문의",
+      "펑크·체인·브레이크 등 주요 수리 항목 확인"
+    ],
+    "sources": [
+      "https://www.daangn.com/kr/local-profile/bike-tani-%EB%B0%94%EC%9D%B4%ED%81%AC-%ED%83%80%EB%8B%88-wzzyo3r27n2u/"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "samchuly",
+    "page": 14,
+    "name": "삼천리자전거 서진주점",
+    "address": "경남 진주시 진양호로 263",
+    "tags": [
+      "repair",
+      "mobility"
+    ],
+    "activity": "자전거 수리 · 교통수단 유지",
+    "status": "자전거 매장 확인 / 수리 품목 및 캠페인 확인 필요",
+    "points": "보고서에서 탄소중립포인트 참여 여부는 확인되지 않았습니다.",
+    "facts": "진양호로 263의 삼천리자전거 서진주점이 지역 매장 정보에서 확인된다. 자전거 점검·부품 교체를 통해 제품을 오래 쓰고 자전거 이용을 이어가는 실천과 연결 가능하다. 정비 서비스 세부항목과 독립적인 탄소중립 캠페인은 별도 확인이 필요하다.",
+    "participation": [
+      "자전거 정비 및 소모품 교체 가능 여부 문의",
+      "기존 자전거 관리 방법을 소개받아 지도에 기재"
+    ],
+    "sources": [
+      "https://dreamermemory.tistory.com/1091"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  },
+  {
+    "id": "alteration",
+    "page": 15,
+    "name": "장인옷수선",
+    "address": "경남 진주시 진양호로125번길 4",
+    "tags": [
+      "repair"
+    ],
+    "activity": "의류 수선 · 제품 수명 연장",
+    "status": "업종·위치 확인 / 실서비스·운영 재확인",
+    "points": "보고서에서 탄소중립포인트 참여 여부는 확인되지 않았습니다.",
+    "facts": "평거동 의류·이불 수선업으로 등록된 사업체이며 주소가 확인된다. 옷 수선은 기존 제품을 버리지 않고 오래 입는 선택과 연결될 수 있다. 직접적인 탄소 감축 성과와 친환경 캠페인 참여 사실은 확인되지 않았다.",
+    "participation": [
+      "바지·재킷·지퍼 등 실제 수선 가능 범위 확인",
+      "수선 품목과 접수 방법 안내받기"
+    ],
+    "sources": [
+      "https://mtv.purpleo.kr/article/2355"
+    ],
+    "coordinates": null,
+    "coordinateSource": null,
+    "verified": false
+  }
+]
