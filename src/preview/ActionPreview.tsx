@@ -7,7 +7,7 @@ import './actions.css';
 import './fresh.css';
 
 const actions=[
- {id:'cup',title:'내 컵으로 주문하기',short:'텀블러',description:'일회용컵 대신, 내 컵을 챙겨요',icon:Coffee,kind:'mint'},
+ {id:'cup',title:'텀블러 할인점 찾기',short:'텀블러 할인점 찾기',description:'일회용컵 대신, 내 컵을 챙겨요',icon:Coffee,kind:'mint'},
  {id:'recycle',title:'빈 용기 반납하기',short:'자원순환',description:'다 쓴 용기의 다음 쓰임을 찾아요',icon:Recycle,kind:'blue'},
  {id:'bike',title:'자전거 고쳐 타기',short:'자전거',description:'새로 사기 전에 점검과 수리부터',icon:Bike,kind:'yellow'},
  {id:'repair',title:'옷 고쳐 다시 입기',short:'옷 수선',description:'고쳐 입으면 더 오래 함께해요',icon:Scissors,kind:'rose'},
@@ -16,7 +16,7 @@ type ActionId='all'|typeof actions[number]['id'];
 function group(s:Store):ActionId {return cafeIds.includes(s.id)?'cup':s.tags.includes('mobility')?'bike':s.id==='alteration'?'repair':s.id==='oliveyoung'||s.id==='hansalim'?'recycle':'all';}
 function info(s:Store) {
  const id=group(s);const action=actions.find(a=>a.id===id);
- if(id==='cup')return {action,headline:s.tags.includes('plastic')?'개인컵 사용 조건 확인하기':'내 컵으로 주문하기',prepare:'개인 텀블러',step:'주문 전 개인컵 사용 가능 여부와 적용 조건을 문의해요.',benefit:benefitFor(s).title};
+ if(id==='cup')return {action,headline:s.tags.includes('plastic')?'개인컵 사용 조건 확인하기':'텀블러 할인점 찾기',prepare:'개인 텀블러',step:'주문 전 개인컵 사용 가능 여부와 적용 조건을 문의해요.',benefit:benefitFor(s).title};
  if(id==='recycle')return {action,headline:'빈 용기 반납 조건 확인하기',prepare:s.id==='oliveyoung'?'세척한 대상 화장품 공병':'반납 가능한 유리병 확인',step:'받는 용기 종류와 세척·라벨 제거 기준을 먼저 확인해요.',benefit:s.id==='hansalim'?'포인트 조건 확인 필요':'포인트 혜택 미확인'};
  if(id==='bike')return {action,headline:'자전거 고쳐 오래 타기',prepare:'점검할 자전거',step:'수리 가능한 항목과 비용을 먼저 문의해요.',benefit:'별도 포인트 혜택 미확인'};
  if(id==='repair')return {action,headline:'옷 고쳐 다시 입기',prepare:'수선할 옷',step:'수선 가능한 품목과 접수 방법을 문의해요.',benefit:'별도 포인트 혜택 미확인'};
