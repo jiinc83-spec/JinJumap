@@ -1,0 +1,24 @@
+import {test,expect} from '@playwright/test';
+test('action-first UI filters by behavior, opens sourced details and makes no external requests',async({page})=>{
+ const external:string[]=[];
+ page.on('request',r=>{if(!['localhost','127.0.0.1'].includes(new URL(r.url()).hostname))external.push(new URL(r.url()).hostname);});
+ await page.goto('/?preview=actions');
+ await expect(page.getByRole('heading',{name:/오늘은 어떤/})).toBeVisible();
+ await expect(page.locator('.action-tile')).toHaveCount(4);
+ await expect(page.locator('.action-store-card')).toHaveCount(12);
+ await page.getByRole('button',{name:'자원순환',exact:true}).click();
+ await expect(page.locator('.action-store-card')).toHaveCount(2);
+ await page.locator('.action-store-card').first().click();
+ await expect(page.getByRole('dialog')).toContainText('빈 용기 반납 조건 확인하기');
+ await expect(page.getByRole('dialog')).toContainText('올리브영 진주평거점');
+ await expect(page.getByRole('dialog')).toContainText('현장 확인 전');
+ await page.keyboard.press('Escape');
+ await page.getByRole('button',{name:'옷 수선',exact:true}).click();
+ await expect(page.locator('.action-store-card')).toHaveCount(1);
+ await page.getByLabel('매장명 또는 주소 검색').fill('없는매장');
+ await expect(page.getByText('조건에 맞는 조사 후보가 없어요')).toBeVisible();
+ await page.getByRole('button',{name:'전체 다시 보기'}).click();
+ await expect(page.locator('.action-store-card')).toHaveCount(12);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ expect(external).toEqual([]);
+});
