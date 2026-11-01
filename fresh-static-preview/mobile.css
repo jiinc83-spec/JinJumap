@@ -1,0 +1,49 @@
+/* The mobile page keeps its own layout at every browser width. */
+html:has(body.mobile-layout){background:#edf2ed}
+body.mobile-layout{max-width:430px;min-height:100vh;margin:0 auto;padding-bottom:72px;background:#fff;box-shadow:0 12px 40px #24402b12;overflow-x:hidden}
+body.mobile-layout .top{height:64px;padding:0 16px;gap:6px}
+body.mobile-layout .brand{font-size:14px}
+body.mobile-layout .brand-mark{width:29px;height:29px}
+body.mobile-layout .place{margin-left:auto;padding:6px 8px;font-size:9px}
+body.mobile-layout .top-link{display:none}
+body.mobile-layout .top-info{padding:10px 16px 0;gap:16px;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
+body.mobile-layout .top-info::-webkit-scrollbar{display:none}
+body.mobile-layout .top-info a{padding:7px 0;font-size:9px;white-space:nowrap}
+body.mobile-layout main{display:block;max-width:none;padding:0 16px}
+body.mobile-layout .hero{height:310px;min-height:0;aspect-ratio:auto;margin:14px 0 28px;align-items:flex-end;background-image:linear-gradient(0deg,rgba(6,25,17,.88),rgba(6,25,17,.32) 55%,transparent 85%),url('assets/hero-bicycle.png');background-position:35% bottom}
+body.mobile-layout .hero-copy{flex:1;max-width:100%;padding:22px}
+body.mobile-layout .hero h1{font-size:26px;line-height:1.35;letter-spacing:-1px;margin:10px 0}
+body.mobile-layout .hero p:not(.eyebrow){font-size:10px;line-height:1.6;margin-bottom:0}
+body.mobile-layout .eyebrow{font-size:8px}
+body.mobile-layout .category-overview{display:block;overflow:visible;padding:0}
+body.mobile-layout .category-overview>.category-section{display:block;min-width:0;margin:0 0 30px;scroll-snap-align:none}
+body.mobile-layout .category-overview>.category-section>.category-heading{height:auto;min-height:0;gap:10px;align-items:center;margin:0 0 12px;transform:none}
+body.mobile-layout .category-overview>.category-section>.category-heading h2{font-size:18px;line-height:1.3}
+body.mobile-layout .category-overview>.category-section>.category-heading p{font-size:10px;line-height:1.4}
+body.mobile-layout .category-overview>.category-section>.category-heading>a{display:none}
+body.mobile-layout .category-overview .tumbler-entry,body.mobile-layout .category-overview .feature-empty,body.mobile-layout .category-overview #bicycle .card{width:100%;height:auto;min-height:0;aspect-ratio:auto;display:flex;flex-direction:column;border-radius:15px;overflow:hidden}
+body.mobile-layout .category-overview .tumbler-entry .cup-icon,body.mobile-layout .category-overview .feature-empty .feature-visual,body.mobile-layout .category-overview #bicycle .card-art{width:100%;height:88px;min-height:88px;align-self:stretch;margin:0;border-radius:0;font-size:36px}
+body.mobile-layout .category-overview .tumbler-entry>div:not(.tumbler-actions),body.mobile-layout .category-overview .feature-empty>div:last-child{padding:15px 16px}
+body.mobile-layout .category-overview .tumbler-entry strong,body.mobile-layout .category-overview .feature-empty strong{font-size:14px}
+body.mobile-layout .category-overview .tumbler-entry p,body.mobile-layout .category-overview .feature-empty p{font-size:11px;line-height:1.5;margin-top:5px}
+body.mobile-layout .category-overview .tumbler-actions{width:100%;margin:0;padding:0 16px 16px;display:flex;flex-direction:row;align-items:center;gap:12px}
+body.mobile-layout .category-overview .tumbler-actions button{width:auto;flex:1;padding:10px 12px;font-size:10px}
+body.mobile-layout .category-overview .tumbler-map-link{font-size:10px}
+body.mobile-layout .category-overview #bicycle .grid{grid-template-columns:1fr;gap:10px}
+body.mobile-layout .category-overview #bicycle .card-body{display:flex;flex-direction:column;gap:4px;padding:13px 16px;min-height:0}
+body.mobile-layout .category-overview #bicycle .card h3{font-size:14px}
+body.mobile-layout .category-overview #bicycle .name,body.mobile-layout .category-overview #bicycle .address{font-size:10px}
+body.mobile-layout .category-overview #bicycle .prep{font-size:10px;padding:7px;margin-top:4px}
+body.mobile-layout .category-overview #bicycle .card-foot{margin-top:7px;padding-top:7px}
+body.mobile-layout .category-overview #bicycle .card-foot button{font-size:10px;padding:9px}
+body.mobile-layout #tumbler-details .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+body.mobile-layout #tumbler-details .category-heading h2{font-size:18px}
+body.mobile-layout .location-panel:not([hidden]){grid-template-columns:1fr}
+body.mobile-layout .how{margin:24px 0;padding:16px}
+body.mobile-layout .map-section{margin:28px 0}
+body.mobile-layout .map-shell{height:340px}
+body.mobile-layout footer{padding:18px 16px;font-size:10px}
+body.mobile-layout footer a{display:block;margin-top:8px;color:#55765a;font-weight:700}
+body.mobile-layout .bottom{display:flex;position:fixed;left:50%;right:auto;bottom:0;width:min(430px,100%);transform:translateX(-50%);z-index:10;padding:7px 10px max(8px,env(safe-area-inset-bottom));background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid #e8eee3}
+body.mobile-layout .bottom a{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:#718773;font-size:9px}
+body.mobile-layout .bottom span{font-size:20px}
