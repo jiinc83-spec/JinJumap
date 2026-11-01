@@ -21,11 +21,15 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm test
-      - name: Build standalone visual website
-        run: npm run build -- --base=/${{ github.event.repository.name }}/
+      - name: Prepare static preview
+        run: |
+          mkdir -p dist
+          cp fresh-static-preview/index.html dist/index.html
+          cp -R fresh-static-preview/pages fresh-static-preview/assets dist/
+          node --input-type=module -e "import { writeFileSync } from 'node:fs'; writeFileSync('dist/kakao-config.js', 'window.KAKAO_MAP_APP_KEY = ' + JSON.stringify(process.env.KAKAO_MAP_APP_KEY || '') + ';');"
         env:
-          VITE_UI_MODE: visual
-          VITE_KAKAO_MAP_APP_KEY: ''
+          KAKAO_MAP_APP_KEY: ${{ vars.KAKAO_MAP_APP_KEY }}
+      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
