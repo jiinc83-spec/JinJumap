@@ -164,39 +164,34 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
 @media(max-width:800px){.category-overview .tumbler-entry .cup-icon,.category-overview .feature-empty .feature-visual,.category-overview .feature-empty.blue .feature-visual,.category-overview #bicycle .card-art{height:64px;min-height:64px;font-size:28px}}
 </style><link rel="stylesheet" href="mobile.css?v=cards-2"><link rel="stylesheet" href="hero-carousel.css?v=swipe-2"><style>
   body.mobile-layout.splash-active{overflow:hidden}
-  .entry-splash{position:fixed;inset:0 auto 0 50%;z-index:100;width:min(430px,100%);height:100vh;height:100dvh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;padding:calc(42px + env(safe-area-inset-top)) 28px calc(30px + env(safe-area-inset-bottom));overflow:hidden;transform:translateX(-50%);background:radial-gradient(circle at 78% 22%,#438b60 0,transparent 36%),radial-gradient(circle at 12% 82%,#285c45 0,transparent 36%),linear-gradient(150deg,#103e30,#09271e 75%);color:#fff;opacity:1;transition:opacity .55s ease,visibility .55s ease}
+  .entry-splash{position:fixed;inset:0 auto 0 50%;z-index:100;width:min(430px,100%);height:100vh;height:100dvh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;padding:calc(38px + env(safe-area-inset-top)) 28px calc(34px + env(safe-area-inset-bottom));overflow:hidden;transform:translateX(-50%);background:#fff;color:#1b2d21;opacity:1;transition:opacity .45s ease,visibility .45s ease}
   .entry-splash.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
-  .entry-splash::before,.entry-splash::after{content:"";position:absolute;width:290px;height:290px;border:1px solid #ffffff25;border-radius:50%;pointer-events:none}
-  .entry-splash::before{top:17%;right:-170px}.entry-splash::after{bottom:12%;left:-190px}
-  .entry-splash-brand{position:relative;z-index:1;display:flex;align-items:center;gap:9px;font-size:14px;font-weight:800;letter-spacing:.2px}
-  .entry-splash-brand svg{width:27px;height:27px;color:#bce38b}
-  .entry-splash-brand b{color:#c8e69c}
-  .entry-splash-center{position:relative;z-index:1;margin:auto 0;max-width:330px}
-  .entry-splash-mark{width:76px;height:76px;display:grid;place-items:center;margin-bottom:27px;border:1px solid #ffffff40;border-radius:23px;background:#ffffff16;box-shadow:0 18px 44px #00170d40;backdrop-filter:blur(8px)}
-  .entry-splash-mark svg{width:46px;height:46px}
-  .entry-splash-kicker{margin:0 0 12px;color:#c7e6a5;font-size:10px;font-weight:800;letter-spacing:2.6px}
-  .entry-splash h1{margin:0;color:#fff;font-size:clamp(27px,7.3vw,34px);line-height:1.37;letter-spacing:-1.6px;word-break:keep-all}
-  .entry-splash h1 em{font-style:normal;color:#c5e895}
-  .entry-splash-message{margin:19px 0 0;color:#e0eee1;font-size:13px;line-height:1.8;word-break:keep-all}
-  .entry-splash-bottom{position:relative;z-index:1}
-  .entry-splash-progress{height:3px;overflow:hidden;border-radius:99px;background:#ffffff36}
-  .entry-splash-progress span{display:block;width:0;height:100%;border-radius:inherit;background:#c7eb8c;animation:entry-splash-load 3.2s linear forwards}
-  .entry-splash-bottom p{margin:11px 0 20px;color:#c9d9cc;font-size:10px}
-  .entry-splash-skip{width:100%;padding:14px 18px;border:1px solid #ffffff8a;border-radius:12px;background:#ffffff15;color:#fff;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
-  .entry-splash-skip:focus-visible{outline:3px solid #d4f3a8;outline-offset:3px}
+  .entry-splash-brand{display:flex;align-items:center;gap:8px;color:#244c31;font-size:13px;font-weight:750;letter-spacing:.1px}
+  .entry-splash-brand svg{width:25px;height:25px;color:#599662}
+  .entry-splash-brand b{color:#5c9361}
+  .entry-splash-center{margin:auto 0;max-width:340px}
+  .entry-splash-kicker{margin:0 0 15px;color:#6b9870;font-size:11px;font-weight:700;letter-spacing:.1px}
+  .entry-splash h1{margin:0;color:#1d3022;font-size:clamp(27px,7.3vw,34px);font-weight:800;line-height:1.43;letter-spacing:-1.5px;word-break:keep-all}
+  .entry-splash h1 em{font-style:normal;color:#507c55}
+  .entry-splash-message{margin:19px 0 0;color:#69796d;font-size:13px;line-height:1.8;word-break:keep-all}
+  .entry-splash-progress{height:2px;overflow:hidden;border-radius:99px;background:#e9eee9}
+  .entry-splash-progress span{display:block;width:0;height:100%;border-radius:inherit;background:#7aaa78;animation:entry-splash-load 3.2s linear forwards}
+  .entry-splash-bottom p{margin:12px 0 18px;color:#8b978d;font-size:11px}
+  .entry-splash-skip{display:block;width:auto;margin-left:auto;padding:7px 0;border:0;background:transparent;color:#477951;font:inherit;font-size:13px;font-weight:750;cursor:pointer}
+  .entry-splash-skip:focus-visible{outline:2px solid #6eaa74;outline-offset:4px}
   @keyframes entry-splash-load{to{width:100%}}
   @media(prefers-reduced-motion:reduce){.entry-splash,.entry-splash-progress span{transition:none;animation:none}.entry-splash-progress span{width:100%}}
 </style></head>
 <body id="home" class="mobile-layout">
   <div id="entry-splash" class="entry-splash" role="dialog" aria-modal="true" aria-labelledby="entry-splash-title">
     <div class="entry-splash-brand"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M25 6C14 6 7 11 7 19c0 4 3 7 7 7 8 0 12-8 11-20Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7 26c4-6 8-10 15-15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>남강 <b>GREEN MAP</b></span></div>
-    <div class="entry-splash-center"><div class="entry-splash-mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M48 11C27 12 15 22 15 39c0 8 6 14 14 14 17 0 25-16 19-42Z" stroke="#D9F3A8" stroke-width="2.5"/><path d="M17 53c10-15 17-24 28-34M27 39l-2-12m10 2 10-2" stroke="#D9F3A8" stroke-width="2.5" stroke-linecap="round"/></svg></div><p class="entry-splash-kicker">CARBON NEUTRAL JINJU</p><h1 id="entry-splash-title">탄소중립은<br><em>우리 동네에서 시작돼요.</em></h1><p class="entry-splash-message">텀블러 한 잔, 자전거 한 걸음.<br>작은 선택이 남강의 내일을 바꿉니다.</p></div>
+    <div class="entry-splash-center"><p class="entry-splash-kicker">작은 실천, 초록의 시작</p><h1 id="entry-splash-title">탄소중립은<br><em>우리 동네에서 시작돼요.</em></h1><p class="entry-splash-message">텀블러 한 잔, 자전거 한 걸음.<br>작은 선택이 남강의 내일을 바꿉니다.</p></div>
     <div class="entry-splash-bottom"><div class="entry-splash-progress" aria-hidden="true"><span></span></div><p>잠시 후 초록 생활 지도가 열립니다</p><button class="entry-splash-skip" id="entry-splash-skip" type="button">지금 시작하기 ↗</button></div>
   </div>
   <script>
     (()=>{
       const splash=document.querySelector('#entry-splash');
-      const key='namgang-entry-splash-v1';
+      const key='namgang-entry-splash-v2';
       try{if(sessionStorage.getItem(key)==='seen'){splash.remove();return}}catch{}
       document.body.classList.add('splash-active');
       let closed=false;
