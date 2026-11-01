@@ -1,0 +1,82 @@
+[
+  {
+    "brand": "스타벅스",
+    "note": "400원 할인 또는 에코별",
+    "check": "브랜드 안내 링크 포함 · 지점 적용 재확인",
+    "link": "https://www.starbucks.co.kr/responsibility/environment.do",
+    "source": "남강 주변.hwpx",
+    "branch": null
+  },
+  {
+    "brand": "공차",
+    "note": "400원 할인",
+    "check": "조사메모 기재 · 현행 조건 재확인",
+    "link": null,
+    "source": "남강 주변.hwpx",
+    "branch": null
+  },
+  {
+    "brand": "투썸플레이스",
+    "note": "300원 할인",
+    "check": "원문 표기: 투썸 · 지점 조건 재확인",
+    "link": null,
+    "source": "남강 주변.hwpx",
+    "branch": null
+  },
+  {
+    "brand": "이디야",
+    "note": "200원 할인",
+    "check": "자료에 매장마다 다름 명시",
+    "link": null,
+    "source": "남강 주변.hwpx",
+    "branch": null
+  },
+  {
+    "brand": "메가커피",
+    "note": "자사 앱 주문 시 텀블러 할인",
+    "check": "금액·적용 지점·주문 조건 미기재",
+    "link": null,
+    "source": "남강 주변.hwpx",
+    "branch": null
+  },
+  {
+    "brand": "컴포즈",
+    "note": "자사 앱 주문 시 텀블러 할인",
+    "check": "금액·적용 지점·주문 조건 미기재",
+    "link": null,
+    "source": "남강 주변.hwpx",
+    "branch": null
+  },
+  {
+    "brand": "더벤티",
+    "note": "자사 앱 주문 시 텀블러 할인",
+    "check": "금액·적용 지점·주문 조건 미기재",
+    "link": null,
+    "source": "남강 주변.hwpx",
+    "branch": null
+  },
+  {
+    "brand": "텐퍼센트",
+    "note": "자사 앱 주문 시 텀블러 할인",
+    "check": "금액·적용 지점·주문 조건 미기재",
+    "link": null,
+    "source": "남강 주변.hwpx",
+    "branch": null
+  },
+  {
+    "brand": "빽다방",
+    "note": "100원 할인",
+    "check": "조사메모 기재 · 현행 조건 재확인",
+    "link": null,
+    "source": "남강 주변.hwpx",
+    "branch": null
+  },
+  {
+    "brand": "천씨씨",
+    "note": "쿠폰 도장 2개",
+    "check": "브랜드 리워드 · 적립 조건 재확인",
+    "link": null,
+    "source": "남강 주변.hwpx",
+    "branch": null
+  }
+]

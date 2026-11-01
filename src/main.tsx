@@ -49,5 +49,6 @@ function StoreDetail({store:s,onClose}:{store:Store;onClose:()=>void}) {
 }
 const VisualPreview = React.lazy(() => import('./preview/VisualPreview'));
 const ActionPreview = React.lazy(() => import('./preview/ActionPreview'));
+const ResearchShowcase = React.lazy(() => import('./research/ResearchShowcase'));
 const params = new URLSearchParams(location.search);
-createRoot(document.getElementById('root')!).render(<React.StrictMode><React.Suspense fallback={<p>화면을 준비하고 있어요.</p>}>{params.get('preview')==='fresh'?<ActionPreview fresh/>:params.get('preview')==='actions'?<ActionPreview/>:(params.get('preview')==='visual'||import.meta.env.VITE_UI_MODE==='visual')?<VisualPreview/>:params.get('tool')==='coordinates'?<CoordinateLookup/>:<App/>}</React.Suspense></React.StrictMode>);
+createRoot(document.getElementById('root')!).render(<React.StrictMode><React.Suspense fallback={<p>화면을 준비하고 있어요.</p>}>{params.get('preview')==='research'?<ResearchShowcase/>:params.get('preview')==='fresh'?<ActionPreview fresh/>:params.get('preview')==='actions'?<ActionPreview/>:(params.get('preview')==='visual'||import.meta.env.VITE_UI_MODE==='visual')?<VisualPreview/>:params.get('tool')==='coordinates'?<CoordinateLookup/>:<App/>}</React.Suspense></React.StrictMode>);
