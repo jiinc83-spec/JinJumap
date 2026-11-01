@@ -22,6 +22,8 @@ http.createServer(async (request, response) => {
     '/mobile-preview.html': 'text/html; charset=utf-8',
     '/mobile.html': 'text/html; charset=utf-8',
     '/mobile.css': 'text/css; charset=utf-8',
+    '/hero-carousel.css': 'text/css; charset=utf-8',
+    '/hero-carousel.js': 'application/javascript; charset=utf-8',
   };
   if (pathname in pages) {
     try {
@@ -43,6 +45,7 @@ http.createServer(async (request, response) => {
     '/assets/mega-mgc.png': 'image/png',
     '/assets/hero-coast.png': 'image/png',
     '/assets/hero-bicycle.png': 'image/png',
+    '/assets/hero-tumbler.png': 'image/png',
     '/assets/dessert39-pyeonggeo.webp': 'image/webp',
     '/assets/compose-jinju.jpg': 'image/jpeg',
   };

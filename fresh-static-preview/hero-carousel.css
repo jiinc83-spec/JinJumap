@@ -1,0 +1,11 @@
+.hero-carousel-controls{position:absolute;top:14px;right:14px;z-index:3;display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:999px;background:rgba(12,32,23,.68);color:#fff;backdrop-filter:blur(8px)}
+.hero-carousel-controls button{display:grid;place-items:center;border:0;background:transparent;color:inherit;cursor:pointer}
+.hero-carousel-arrow{width:25px;height:25px;padding:0;font-size:21px;line-height:1}
+.hero-carousel-arrow:hover,.hero-carousel-arrow:focus-visible{background:rgba(255,255,255,.18);border-radius:50%}
+.hero-carousel-dots{display:flex;align-items:center;gap:5px;padding:0 3px}
+.hero-carousel-dots button{width:7px;height:7px;padding:0;border-radius:50%;background:rgba(255,255,255,.55)}
+.hero-carousel-dots button[aria-current="true"]{width:18px;border-radius:7px;background:#fff}
+.hero-carousel-count{min-width:27px;text-align:center;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
+body.mobile-layout .hero-carousel-controls{top:10px;right:10px;gap:5px;padding:5px 7px}
+body.mobile-layout .hero-carousel-arrow{width:26px;height:26px}
+@media(prefers-reduced-motion:reduce){.hero-carousel-controls *{transition:none!important}}

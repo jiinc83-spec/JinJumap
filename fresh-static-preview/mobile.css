@@ -10,7 +10,7 @@ body.mobile-layout .top-info{padding:10px 16px 0;gap:16px;overflow-x:auto;justif
 body.mobile-layout .top-info::-webkit-scrollbar{display:none}
 body.mobile-layout .top-info a{padding:7px 0;font-size:9px;white-space:nowrap}
 body.mobile-layout main{display:block;max-width:none;padding:0 16px}
-body.mobile-layout .hero{height:310px;min-height:0;aspect-ratio:auto;margin:14px 0 28px;align-items:flex-end;background-image:linear-gradient(0deg,rgba(6,25,17,.88),rgba(6,25,17,.32) 55%,transparent 85%),url('assets/hero-bicycle.png');background-position:35% bottom}
+body.mobile-layout .hero{height:310px;min-height:0;aspect-ratio:auto;margin:14px 0 28px;align-items:flex-end;background-image:linear-gradient(0deg,rgba(6,25,17,.88),rgba(6,25,17,.32) 55%,transparent 85%),var(--hero-image,url('assets/hero-bicycle.png'));background-position:35% bottom}
 body.mobile-layout .hero-copy{flex:1;max-width:100%;padding:22px}
 body.mobile-layout .hero h1{font-size:26px;line-height:1.35;letter-spacing:-1px;margin:10px 0}
 body.mobile-layout .hero p:not(.eyebrow){font-size:10px;line-height:1.6;margin-bottom:0}
