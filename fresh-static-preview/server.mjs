@@ -15,6 +15,15 @@ http.createServer(async (request, response) => {
     response.end(`window.KAKAO_MAP_APP_KEY = ${JSON.stringify(key)};`);
     return;
   }
+  if (pathname === '/data/environment-days.json') {
+    try {
+      const data = await readFile(new URL('./data/environment-days.json', import.meta.url));
+      response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }).end(data);
+    } catch {
+      response.writeHead(404).end('Calendar data unavailable');
+    }
+    return;
+  }
   const pages = {
     '/pages/center.html': 'text/html; charset=utf-8',
     '/pages/location.html': 'text/html; charset=utf-8',

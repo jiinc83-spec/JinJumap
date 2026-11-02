@@ -30,7 +30,7 @@ jobs:
           cp fresh-static-preview/hero-carousel.css dist/hero-carousel.css
           cp fresh-static-preview/hero-carousel.js dist/hero-carousel.js
           cp fresh-static-preview/mobile-preview.html dist/mobile-preview.html
-          cp -R fresh-static-preview/pages fresh-static-preview/assets dist/
+          cp -R fresh-static-preview/pages fresh-static-preview/assets fresh-static-preview/data dist/
           node --input-type=module -e "import { writeFileSync } from 'node:fs'; writeFileSync('dist/kakao-config.js', 'window.KAKAO_MAP_APP_KEY = ' + JSON.stringify(process.env.KAKAO_MAP_APP_KEY || '') + ';');"
         env:
           KAKAO_MAP_APP_KEY: ${{ vars.KAKAO_MAP_APP_KEY }}
