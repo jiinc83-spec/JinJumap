@@ -76,7 +76,7 @@
   function showSlide(index) {
     const next = (index + slides.length) % slides.length;
     if (mobileTrack) {
-      settleTrack?.(next);
+      settleTrack?.(next, 0, false);
       return;
     }
     if (activeImage && next === current) return;
@@ -113,7 +113,7 @@
     let dragging = false;
     let settling = false;
     let animationFrame = null;
-    settleTrack = (index, velocity = 0) => {
+    settleTrack = (index, velocity = 0, isGesture = true) => {
       if (animationFrame !== null) cancelAnimationFrame(animationFrame);
       animationFrame = null;
       const target = index * mobileTrack.clientWidth;
@@ -134,11 +134,15 @@
       }
       mobileTrack.style.scrollSnapType = 'none';
       settling = true;
-      const duration = Math.max(260, Math.min(470, 430 - Math.abs(velocity) * 160));
+      const duration = isGesture ? Math.max(280, Math.min(470, 430 - Math.abs(velocity) * 130)) : 620;
       const began = performance.now();
       const animate = now => {
         const progress = Math.min(1, (now - began) / duration);
-        const eased = 1 - Math.pow(1 - progress, 4);
+        const eased = isGesture
+          ? 1 - Math.pow(1 - progress, 4)
+          : progress < .5
+            ? 4 * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
         mobileTrack.scrollLeft = start + distance * eased;
         if (progress < 1) animationFrame = requestAnimationFrame(animate);
         else {
@@ -194,7 +198,7 @@
         const threshold = Math.min(48, mobileTrack.clientWidth * .13);
         const shouldAdvance = Math.abs(dx) > threshold || Math.abs(velocity) > .38;
         const direction = dx === 0 ? Math.sign(velocity) : -Math.sign(dx);
-        settleTrack(Math.max(0, Math.min(slides.length - 1, shouldAdvance ? startIndex + direction : startIndex)), velocity);
+        settleTrack(Math.max(0, Math.min(slides.length - 1, shouldAdvance ? startIndex + direction : startIndex)), velocity, true);
       } else {
         mobileTrack.style.scrollSnapType = '';
       }
