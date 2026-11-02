@@ -49,13 +49,27 @@
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.setAttribute('aria-label', `${index + 1}번 사진: ${slide.label}`);
-    dot.addEventListener('click', () => showSlide(index));
+    dot.addEventListener('click', () => { showSlide(index); restartAutoplay(); });
     dots.append(dot);
   });
 
   let current = 0;
   let activeImage = null;
   let settleTrack = null;
+  let autoplayTimer = null;
+  function stopAutoplay() {
+    if (autoplayTimer !== null) window.clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  }
+  function startAutoplay() {
+    stopAutoplay();
+    if (document.hidden || reducedMotion.matches) return;
+    autoplayTimer = window.setInterval(() => showSlide(current + 1), 4000);
+  }
+  function restartAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
   function updateSlide(index) {
     if (hero.dataset.slide === String(index + 1)) return;
     current = index;
@@ -99,12 +113,20 @@
     updateSlide(next);
   }
 
-  controls.querySelectorAll('.hero-carousel-arrow')[0].addEventListener('click', () => showSlide(current - 1));
-  controls.querySelectorAll('.hero-carousel-arrow')[1].addEventListener('click', () => showSlide(current + 1));
+  controls.querySelectorAll('.hero-carousel-arrow')[0].addEventListener('click', () => { showSlide(current - 1); restartAutoplay(); });
+  controls.querySelectorAll('.hero-carousel-arrow')[1].addEventListener('click', () => { showSlide(current + 1); restartAutoplay(); });
   hero.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') { event.preventDefault(); showSlide(current - 1); }
-    if (event.key === 'ArrowRight') { event.preventDefault(); showSlide(current + 1); }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); showSlide(current - 1); restartAutoplay(); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); showSlide(current + 1); restartAutoplay(); }
   });
+  hero.addEventListener('pointerenter', stopAutoplay);
+  hero.addEventListener('pointerleave', startAutoplay);
+  hero.addEventListener('focusin', stopAutoplay);
+  hero.addEventListener('focusout', () => { if (!hero.contains(document.activeElement)) startAutoplay(); });
+  document.addEventListener('visibilitychange', () => document.hidden ? stopAutoplay() : startAutoplay());
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => entries[0].isIntersecting ? startAutoplay() : stopAutoplay(), { threshold: .25 }).observe(hero);
+  }
 
   if (mobileTrack) {
     hero.classList.add('hero-carousel-ready');
@@ -163,6 +185,7 @@
       }, 120);
     }, { passive: true });
     mobileTrack.addEventListener('touchstart', event => {
+      stopAutoplay();
       clearTimeout(scrollTimer);
       if (animationFrame !== null) cancelAnimationFrame(animationFrame);
       animationFrame = null;
@@ -204,6 +227,7 @@
       }
       touchStart = null;
       dragging = false;
+      restartAutoplay();
     }
     mobileTrack.addEventListener('touchend', finishTouch, { passive: true });
     mobileTrack.addEventListener('touchcancel', finishTouch, { passive: true });
@@ -218,6 +242,7 @@
   } else {
     let touchStart = null;
     hero.addEventListener('touchstart', event => {
+      stopAutoplay();
       const touch = event.changedTouches[0];
       touchStart = { x: touch.clientX, y: touch.clientY };
     }, { passive: true });
@@ -228,9 +253,19 @@
       const dy = touch.clientY - touchStart.y;
       if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) showSlide(current + (dx < 0 ? 1 : -1));
       touchStart = null;
+      restartAutoplay();
     }, { passive: true });
   }
 
   slides.slice(1).forEach(slide => { const image = new Image(); image.src = slide.image; });
   showSlide(0);
+  if (document.body.classList.contains('splash-active')) {
+    const splashObserver = new MutationObserver(() => {
+      if (!document.body.classList.contains('splash-active')) {
+        splashObserver.disconnect();
+        window.setTimeout(startAutoplay, 500);
+      }
+    });
+    splashObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  } else startAutoplay();
 })();
