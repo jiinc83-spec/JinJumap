@@ -156,15 +156,11 @@
       }
       mobileTrack.style.scrollSnapType = 'none';
       settling = true;
-      const duration = isGesture ? Math.max(280, Math.min(470, 430 - Math.abs(velocity) * 130)) : 620;
+      const duration = isGesture ? Math.max(340, Math.min(520, 470 - Math.abs(velocity) * 110)) : 720;
       const began = performance.now();
       const animate = now => {
         const progress = Math.min(1, (now - began) / duration);
-        const eased = isGesture
-          ? 1 - Math.pow(1 - progress, 4)
-          : progress < .5
-            ? 4 * progress * progress * progress
-            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+        const eased = 1 - Math.pow(1 - progress, 4);
         mobileTrack.scrollLeft = start + distance * eased;
         if (progress < 1) animationFrame = requestAnimationFrame(animate);
         else {
