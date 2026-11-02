@@ -349,11 +349,13 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           const probicycleMarker=new window.kakao.maps.Marker({map:mainMap,position:probicyclePosition,title:'진주프로바이클'});
           const bounds=new window.kakao.maps.LatLngBounds();bounds.extend(center);bounds.extend(storePosition);bounds.extend(zeroWastePosition);bounds.extend(seongbukPosition);bounds.extend(enaMallPosition);bounds.extend(centralMarketPosition);bounds.extend(hansalimPosition);bounds.extend(pyeonggeoCenterPosition);bounds.extend(beautifulPyeonggeoPosition);bounds.extend(netzeroCenterPosition);bounds.extend(bikeRentalPosition);bounds.extend(chilamOfficePosition);bounds.extend(probicyclePosition);mainMap.setBounds(bounds,45);
           let activeMapInfoWindow=null;
+          const dismissActiveMapInfoWindow=()=>{if(activeMapInfoWindow){activeMapInfoWindow.close();activeMapInfoWindow=null}};
           const toggleMapInfoWindow=(infoWindow,marker)=>{
-            if(activeMapInfoWindow===infoWindow){infoWindow.close();activeMapInfoWindow=null;return}
-            if(activeMapInfoWindow)activeMapInfoWindow.close();
-            activeMapInfoWindow=infoWindow;infoWindow.open(mainMap,marker);
+            if(activeMapInfoWindow===infoWindow){dismissActiveMapInfoWindow();return}
+            dismissActiveMapInfoWindow();activeMapInfoWindow=infoWindow;infoWindow.open(mainMap,marker);
           };
+          window.kakao.maps.event.addListener(mainMap,'click',dismissActiveMapInfoWindow);
+          document.addEventListener('click',event=>{if(event.target instanceof Element&&event.target.closest('.map-store-info'))dismissActiveMapInfoWindow()});
           const storeInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>아름다운가게 진주평안점</strong>경남 진주시 진주대로 1081</div>'});
           window.kakao.maps.event.addListener(storeMarker,'click',()=>toggleMapInfoWindow(storeInfoWindow,storeMarker));
           const zeroWasteInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>진주제로웨이스트온</strong>경남 진주시 비봉로 6, 2층 일부</div>'});
