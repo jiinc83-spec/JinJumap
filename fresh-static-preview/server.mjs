@@ -46,6 +46,7 @@ http.createServer(async (request, response) => {
     '/assets/hero-coast.png': 'image/png',
     '/assets/hero-bicycle.png': 'image/png',
     '/assets/hero-tumbler.png': 'image/png',
+    '/assets/tumbler-woman.png': 'image/png',
     '/assets/dessert39-pyeonggeo.webp': 'image/webp',
     '/assets/compose-jinju.jpg': 'image/jpeg',
   };
