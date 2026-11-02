@@ -489,16 +489,11 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           const geocoder=new window.kakao.maps.services.Geocoder();
           document.querySelectorAll('[data-map-district]').forEach(button=>button.addEventListener('click',()=>{
             const district=button.dataset.mapDistrict;
-            document.querySelectorAll('[data-map-district]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));document.querySelectorAll('[data-header-region]').forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.headerRegion===district)));
-            document.querySelectorAll('.map-place-card').forEach(card=>card.hidden=district!=='진주시'&&card.dataset.mapArea!==district);
             const address=district==='진주시'?'경상남도 진주시':'경상남도 진주시 '+district;
             geocoder.addressSearch(address,(results,status)=>{
               if(status!==window.kakao.maps.services.Status.OK||!results.length)return;
               mainMap.setLevel(district==='진주시'?7:4);
               mainMap.panTo(new window.kakao.maps.LatLng(results[0].y,results[0].x));
-              const label=district==='진주시'?'진주시 전체':'진주시 '+district;
-              document.querySelector('#map-region-label').textContent='⌖ '+label;
-              document.querySelector('#map-region-caption').textContent='지도 중심: '+label;
             });
           }));
           document.querySelector('#map-focus-store').addEventListener('click',()=>{mainMap.setLevel(3);mainMap.panTo(storePosition);storeInfoWindow.open(mainMap,storeMarker)});
@@ -519,6 +514,9 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
       };
       document.head.append(script);
     })();
+  </script>
+  <script>
+    (()=>{const districtButtons=[...document.querySelectorAll('[data-map-district]')],headerButtons=[...document.querySelectorAll('[data-header-region]')],cards=[...document.querySelectorAll('.map-place-card')],label=document.querySelector('#map-region-label'),caption=document.querySelector('#map-region-caption');districtButtons.forEach(button=>button.addEventListener('click',()=>{const district=button.dataset.mapDistrict;districtButtons.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));headerButtons.forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.headerRegion===district)));cards.forEach(card=>card.hidden=district!=='진주시'&&card.dataset.mapArea!==district);const place=district==='진주시'?'진주시 전체':'진주시 '+district;if(label)label.textContent='⌖ '+place;if(caption)caption.textContent='지도 중심: '+place}));})();
   </script>
   <script>
     (()=>{const toggle=document.querySelector('#place-menu-toggle'),menu=document.querySelector('#place-menu-options');if(!toggle||!menu)return;const close=()=>{menu.hidden=true;toggle.setAttribute('aria-expanded','false')};toggle.addEventListener('click',()=>{menu.hidden=!menu.hidden;toggle.setAttribute('aria-expanded',String(!menu.hidden))});menu.querySelectorAll('[data-header-region]').forEach(item=>item.addEventListener('click',()=>{const mapButton=document.querySelector('[data-map-district="'+item.dataset.headerRegion+'"]');close();if(mapButton){mapButton.click();document.querySelector('#map').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'})}}));document.addEventListener('click',event=>{if(!event.target.closest('.place-menu'))close()});document.addEventListener('keydown',event=>{if(event.key==='Escape')close()})})();
