@@ -24,6 +24,13 @@ body.mobile-layout .mobile-category-tabs button{flex:none;padding:8px 0 10px;bor
 body.mobile-layout .mobile-category-tabs button.is-active{border-bottom-color:#75b83e;color:#263d2a;font-weight:800}
 body.mobile-layout .mobile-search-status{margin:7px 0 0;color:#6f7b70;font-size:10px}
 body.mobile-layout .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+body.mobile-layout .mobile-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:-10px 0 24px}
+body.mobile-layout .mobile-shortcuts a{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0;padding:4px 2px;color:#34483a;text-decoration:none}
+body.mobile-layout .shortcut-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:#f1f6ee;color:#5d8562}
+body.mobile-layout .shortcut-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+body.mobile-layout .center-icon{background:#edf5ef;color:#548469}
+body.mobile-layout .news-icon{background:#f2f5ed;color:#66844e}
+body.mobile-layout .mobile-shortcuts strong{overflow:hidden;max-width:100%;font-size:10px;font-weight:750;text-overflow:ellipsis;white-space:nowrap}
 body.mobile-layout main{display:block;max-width:none;padding:0 16px}
 body.mobile-layout .hero{height:310px;min-height:0;aspect-ratio:auto;margin:14px 0 28px;align-items:flex-end;background-image:linear-gradient(0deg,rgba(6,25,17,.88),rgba(6,25,17,.32) 55%,transparent 85%),var(--hero-image,url('assets/hero-bicycle.png'));background-position:35% bottom}
 body.mobile-layout .hero-copy{flex:1;max-width:100%;padding:22px}
