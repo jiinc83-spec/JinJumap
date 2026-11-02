@@ -9,7 +9,7 @@ body.mobile-layout .brand-mark{width:29px;height:29px}
 body.mobile-layout .brand-mark{background:transparent;border-radius:0;color:#5d8f61}
 body.mobile-layout .place{margin-left:auto;padding:6px 8px;font-size:9px}
 body.mobile-layout .top-link{display:none}
-body.mobile-layout .top-info{padding:10px 16px 0;gap:16px;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
+body.mobile-layout .top-info{display:none}
 body.mobile-layout .top-info::-webkit-scrollbar{display:none}
 body.mobile-layout .top-info a{padding:7px 0;font-size:9px;white-space:nowrap}
 body.mobile-layout main{display:block;max-width:none;padding:0 16px}
