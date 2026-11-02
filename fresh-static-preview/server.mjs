@@ -58,6 +58,7 @@ http.createServer(async (request, response) => {
     '/assets/tumbler-woman.png': 'image/png',
     '/assets/dessert39-pyeonggeo.webp': 'image/webp',
     '/assets/compose-jinju.jpg': 'image/jpeg',
+    '/assets/reuse-store.png': 'image/png',
   };
   if (pathname in assets) {
     try {
