@@ -74,6 +74,18 @@ body.mobile-layout #tumbler-details .category-heading h2{font-size:18px}
 body.mobile-layout .location-panel:not([hidden]){grid-template-columns:1fr}
 body.mobile-layout .how{margin:24px 0;padding:16px}
 body.mobile-layout .map-section{margin:28px 0}
+/* Keep map place cards in the compact mobile layout even when Android requests a desktop viewport. */
+body.mobile-layout .map-place-card{grid-template-columns:56px minmax(0,1fr);gap:10px;padding:12px}
+body.mobile-layout .map-place-category-icon{width:48px;height:48px;border-radius:13px}
+body.mobile-layout .map-place-category-icon svg{width:24px;height:24px}
+body.mobile-layout .map-place-logo{height:48px}
+body.mobile-layout .map-place-copy{min-width:0}
+body.mobile-layout .map-place-copy strong,body.mobile-layout .map-place-copy p{word-break:keep-all;overflow-wrap:break-word}
+body.mobile-layout .map-place-copy strong{font-size:12px}
+body.mobile-layout .map-place-copy p{font-size:10px}
+body.mobile-layout .map-place-tag{font-size:9px}
+body.mobile-layout .map-place-actions{grid-column:1/-1;justify-content:stretch}
+body.mobile-layout .map-place-actions button,body.mobile-layout .map-place-actions a{flex:1;min-width:0;padding:0 8px;font-size:10px}
 body.mobile-layout .map-shell{height:340px}
 body.mobile-layout footer{padding:18px 16px;font-size:10px}
 body.mobile-layout footer a{display:block;margin-top:8px;color:#55765a;font-weight:700}
