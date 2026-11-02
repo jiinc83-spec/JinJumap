@@ -59,6 +59,7 @@ http.createServer(async (request, response) => {
     '/assets/dessert39-pyeonggeo.webp': 'image/webp',
     '/assets/compose-jinju.jpg': 'image/jpeg',
     '/assets/reuse-store.png': 'image/png',
+    '/assets/beautiful-store-logo.png': 'image/png',
   };
   if (pathname in assets) {
     try {
