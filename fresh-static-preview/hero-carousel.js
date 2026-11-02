@@ -57,6 +57,27 @@
   let activeImage = null;
   let settleTrack = null;
   let autoplayTimer = null;
+  let suppressHeroClick = false;
+  let suppressHeroClickTimer = null;
+  const markHeroSwipe = () => {
+    suppressHeroClick = true;
+    window.clearTimeout(suppressHeroClickTimer);
+    suppressHeroClickTimer = window.setTimeout(() => { suppressHeroClick = false; }, 700);
+  };
+  const openActivitiesPage = () => { window.location.href = 'pages/activities.html'; };
+  hero.setAttribute('role', 'link');
+  hero.setAttribute('aria-label', '탄소중립 실천 활동 찾아보기 페이지 열기');
+  hero.tabIndex = 0;
+  hero.addEventListener('click', event => {
+    if (event.target instanceof Element && event.target.closest('.hero-carousel-controls')) return;
+    if (suppressHeroClick) { suppressHeroClick = false; window.clearTimeout(suppressHeroClickTimer); return; }
+    openActivitiesPage();
+  });
+  hero.addEventListener('keydown', event => {
+    if (event.target !== hero || (event.key !== 'Enter' && event.key !== ' ')) return;
+    event.preventDefault();
+    openActivitiesPage();
+  });
   function stopAutoplay() {
     if (autoplayTimer !== null) window.clearInterval(autoplayTimer);
     autoplayTimer = null;
@@ -197,6 +218,7 @@
       const dy = touch.clientY - touchStart.y;
       if (!dragging && (Math.abs(dx) < 8 || Math.abs(dx) <= Math.abs(dy))) return;
       dragging = true;
+      markHeroSwipe();
       event.preventDefault();
       mobileTrack.style.scrollSnapType = 'none';
       mobileTrack.scrollLeft = Math.max(0, Math.min(mobileTrack.scrollWidth - mobileTrack.clientWidth, touchStart.left - dx));
@@ -247,7 +269,7 @@
       const touch = event.changedTouches[0];
       const dx = touch.clientX - touchStart.x;
       const dy = touch.clientY - touchStart.y;
-      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) showSlide(current + (dx < 0 ? 1 : -1));
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { markHeroSwipe(); showSlide(current + (dx < 0 ? 1 : -1)); }
       touchStart = null;
       restartAutoplay();
     }, { passive: true });

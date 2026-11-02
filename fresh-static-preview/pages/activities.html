@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#fafaf7">
+  <title>탄소중립 실천 활동 찾아보기 | 남강 GREEN MAP</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <style>
+    :root{color-scheme:light;--ink:#25342a;--muted:#748174;--sage:#8fae91;--deep:#355b47;--line:#e6ebe3;--paper:#fafaf7;--white:#fff}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"Pretendard Variable",Pretendard,sans-serif}
+    a{color:inherit}
+    .top{height:68px;background:var(--white);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100vw - 1100px)/2));font-weight:750}
+    .brand{text-decoration:none;letter-spacing:-.3px}.brand b{color:var(--deep);margin-left:5px}
+    .home-link{font-size:13px;color:var(--deep);text-decoration:none}
+    main{max-width:1100px;margin:0 auto;padding:70px 24px 86px}
+    .eyebrow{color:#748f74;font-size:11px;font-weight:800;letter-spacing:1.5px}
+    h1{font-size:clamp(30px,5vw,48px);letter-spacing:-1.8px;line-height:1.2;margin:14px 0}
+    .lead{max-width:600px;margin:0;color:var(--muted);font-size:15px;line-height:1.85}
+    .activity-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:38px}
+    .activity-card{min-height:210px;background:var(--white);border:1px solid var(--line);border-radius:18px;padding:23px;box-shadow:0 8px 25px #263d1007}
+    .activity-number{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:12px;background:#eff4ed;color:var(--deep);font-size:12px;font-weight:800}
+    .activity-card h2{font-size:19px;letter-spacing:-.5px;margin:18px 0 8px}
+    .activity-card p{font-size:13px;line-height:1.8;color:var(--muted);margin:0}
+    .map-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:24px;padding:26px 28px;border-radius:18px;background:#edf3ea}
+    .map-cta h2{margin:0 0 7px;font-size:18px}.map-cta p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+    .map-button{flex:none;padding:13px 18px;border-radius:11px;background:var(--deep);color:#fff;text-decoration:none;font-size:13px;font-weight:750}
+    .map-button:focus-visible,.home-link:focus-visible{outline:3px solid #8fae91;outline-offset:3px}
+    @media(max-width:760px){main{padding:48px 18px 64px}.activity-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.activity-card{padding:18px;min-height:190px}.map-cta{align-items:flex-start;flex-direction:column;padding:22px}}
+    @media(max-width:420px){.activity-grid{grid-template-columns:1fr}.activity-card{min-height:unset}.top{height:60px}}
+    @media(prefers-reduced-motion:no-preference){body{animation:enter .45s ease-out both}@keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+  </style>
+</head>
+<body>
+  <header class="top"><a class="brand" href="../index.html">남강 <b>GREEN MAP</b></a><a class="home-link" href="../index.html">메인으로 돌아가기</a></header>
+  <main>
+    <p class="eyebrow">SMALL ACTIONS, GREENER JINJU</p>
+    <h1>탄소중립 실천 활동<br>찾아보기</h1>
+    <p class="lead">일상에서 시작할 수 있는 작은 선택을 살펴보세요. 가까운 실천 장소는 지도에서 확인할 수 있습니다.</p>
+    <section class="activity-grid" aria-label="탄소중립 실천 활동">
+      <article class="activity-card"><span class="activity-number">01</span><h2>걷기와 자전거 타기</h2><p>가까운 거리는 걷거나 자전거를 이용해 이동 중 배출을 줄여 보세요.</p></article>
+      <article class="activity-card"><span class="activity-number">02</span><h2>대중교통 이용하기</h2><p>대중교통으로 이동하고, 여건이 된다면 이동 경로를 함께 계획해 보세요.</p></article>
+      <article class="activity-card"><span class="activity-number">03</span><h2>개인컵과 장바구니</h2><p>외출할 때 다회용 컵과 장바구니를 챙겨 일회용품 사용을 줄여 보세요.</p></article>
+      <article class="activity-card"><span class="activity-number">04</span><h2>다시 쓰고 나누기</h2><p>필요한 물건을 오래 사용하고, 사용하지 않는 물건은 수리하거나 나눠 보세요.</p></article>
+      <article class="activity-card"><span class="activity-number">05</span><h2>올바르게 분리배출</h2><p>재질별 배출 방법을 확인하고, 깨끗하게 비워 분리배출해 보세요.</p></article>
+      <article class="activity-card"><span class="activity-number">06</span><h2>에너지와 물 아끼기</h2><p>사용하지 않는 조명과 전원을 끄고, 물을 필요한 만큼 사용해 보세요.</p></article>
+    </section>
+    <section class="map-cta" aria-label="진주 실천 장소 찾기">
+      <div><h2>진주의 실천 장소 둘러보기</h2><p>지도에 등록된 장소와 지역 정보를 확인할 수 있습니다.</p></div>
+      <a class="map-button" href="../index.html#map">지도에서 장소 찾기 <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+</body>
+</html>
