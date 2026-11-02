@@ -7,7 +7,7 @@
       image: 'assets/hero-bicycle.png',
       label: '자전거와 숲길',
       title: '한 잔부터 한 걸음까지,<br><em>우리 동네 초록 생활.</em>',
-      description: '텀블러 혜택 가게부터 업사이클링 판매처,<br>자전거와 분리수거 시설까지 아래로 둘러보세요.'
+      description: '텀블러 혜택 가게부터 재사용·자원순환 매장,<br>자전거와 분리수거 시설까지 아래로 둘러보세요.'
     },
     {
       image: 'assets/hero-coast.png',
