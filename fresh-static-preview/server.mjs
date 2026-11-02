@@ -71,6 +71,18 @@ http.createServer(async (request, response) => {
     }
     return;
   }
+  const eventMedia = pathname.match(/^\/assets\/environment-days\/([A-Za-z0-9_-][A-Za-z0-9._-]*)\.(png|jpe?g|webp|gif|mp4|webm)$/i);
+  if (eventMedia) {
+    const mediaTypes = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif', mp4: 'video/mp4', webm: 'video/webm' };
+    const filename = `${eventMedia[1]}.${eventMedia[2].toLowerCase()}`;
+    try {
+      const media = await readFile(new URL(`./assets/environment-days/${filename}`, import.meta.url));
+      response.writeHead(200, { 'Content-Type': mediaTypes[eventMedia[2].toLowerCase()], 'Cache-Control': 'public, max-age=3600' }).end(media);
+    } catch {
+      response.writeHead(404).end('Calendar media unavailable');
+    }
+    return;
+  }
   if (pathname !== '/' && pathname !== '/index.html') {
     response.writeHead(404).end('Not found');
     return;
