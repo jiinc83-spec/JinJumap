@@ -55,6 +55,7 @@
 
   let current = 0;
   let activeImage = null;
+  let settleTrack = null;
   function updateSlide(index) {
     if (hero.dataset.slide === String(index + 1)) return;
     current = index;
@@ -75,8 +76,7 @@
   function showSlide(index) {
     const next = (index + slides.length) % slides.length;
     if (mobileTrack) {
-      mobileTrack.scrollTo({ left: next * mobileTrack.clientWidth, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
-      updateSlide(next);
+      settleTrack?.(next);
       return;
     }
     if (activeImage && next === current) return;
@@ -111,8 +111,48 @@
     let scrollTimer;
     let touchStart = null;
     let dragging = false;
+    let settling = false;
+    let animationFrame = null;
+    settleTrack = (index, velocity = 0) => {
+      if (animationFrame !== null) cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+      const target = index * mobileTrack.clientWidth;
+      updateSlide(index);
+      if (reducedMotion.matches) {
+        mobileTrack.scrollLeft = target;
+        mobileTrack.style.scrollSnapType = '';
+        settling = false;
+        return;
+      }
+      const start = mobileTrack.scrollLeft;
+      const distance = target - start;
+      if (Math.abs(distance) < 1) {
+        mobileTrack.scrollLeft = target;
+        mobileTrack.style.scrollSnapType = '';
+        settling = false;
+        return;
+      }
+      mobileTrack.style.scrollSnapType = 'none';
+      settling = true;
+      const duration = Math.max(260, Math.min(470, 430 - Math.abs(velocity) * 160));
+      const began = performance.now();
+      const animate = now => {
+        const progress = Math.min(1, (now - began) / duration);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        mobileTrack.scrollLeft = start + distance * eased;
+        if (progress < 1) animationFrame = requestAnimationFrame(animate);
+        else {
+          mobileTrack.scrollLeft = target;
+          mobileTrack.style.scrollSnapType = '';
+          settling = false;
+          animationFrame = null;
+          updateSlide(index);
+        }
+      };
+      animationFrame = requestAnimationFrame(animate);
+    };
     mobileTrack.addEventListener('scroll', () => {
-      if (dragging) return;
+      if (dragging || settling) return;
       clearTimeout(scrollTimer);
       scrollTimer = window.setTimeout(() => {
         updateSlide(Math.max(0, Math.min(slides.length - 1, Math.round(mobileTrack.scrollLeft / mobileTrack.clientWidth))));
@@ -120,8 +160,11 @@
     }, { passive: true });
     mobileTrack.addEventListener('touchstart', event => {
       clearTimeout(scrollTimer);
+      if (animationFrame !== null) cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+      settling = false;
       const touch = event.changedTouches[0];
-      touchStart = { x: touch.clientX, y: touch.clientY, left: mobileTrack.scrollLeft };
+      touchStart = { x: touch.clientX, y: touch.clientY, left: mobileTrack.scrollLeft, samples: [{ x: touch.clientX, time: performance.now() }] };
       dragging = false;
     }, { passive: true });
     mobileTrack.addEventListener('touchmove', event => {
@@ -134,16 +177,26 @@
       event.preventDefault();
       mobileTrack.style.scrollSnapType = 'none';
       mobileTrack.scrollLeft = Math.max(0, Math.min(mobileTrack.scrollWidth - mobileTrack.clientWidth, touchStart.left - dx));
+      const now = performance.now();
+      touchStart.samples.push({ x: touch.clientX, time: now });
+      touchStart.samples = touchStart.samples.filter(sample => now - sample.time <= 110);
     }, { passive: false });
     function finishTouch(event) {
       if (!touchStart) return;
       const touch = event.changedTouches[0];
       const dx = touch.clientX - touchStart.x;
       const startIndex = Math.round(touchStart.left / mobileTrack.clientWidth);
-      mobileTrack.style.scrollSnapType = '';
       if (dragging) {
-        const threshold = Math.min(55, mobileTrack.clientWidth * .16);
-        showSlide(Math.abs(dx) > threshold ? startIndex + (dx < 0 ? 1 : -1) : startIndex);
+        const samples = touchStart.samples;
+        const first = samples[0];
+        const last = samples[samples.length - 1];
+        const velocity = first && last && last.time > first.time ? -(last.x - first.x) / (last.time - first.time) : 0;
+        const threshold = Math.min(48, mobileTrack.clientWidth * .13);
+        const shouldAdvance = Math.abs(dx) > threshold || Math.abs(velocity) > .38;
+        const direction = dx === 0 ? Math.sign(velocity) : -Math.sign(dx);
+        settleTrack(Math.max(0, Math.min(slides.length - 1, shouldAdvance ? startIndex + direction : startIndex)), velocity);
+      } else {
+        mobileTrack.style.scrollSnapType = '';
       }
       touchStart = null;
       dragging = false;
@@ -151,7 +204,12 @@
     mobileTrack.addEventListener('touchend', finishTouch, { passive: true });
     mobileTrack.addEventListener('touchcancel', finishTouch, { passive: true });
     window.addEventListener('resize', () => {
-      mobileTrack.scrollTo({ left: current * mobileTrack.clientWidth, behavior: 'instant' });
+      if (animationFrame !== null) cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+      settling = false;
+      mobileTrack.style.scrollSnapType = 'none';
+      mobileTrack.scrollLeft = current * mobileTrack.clientWidth;
+      requestAnimationFrame(() => { mobileTrack.style.scrollSnapType = ''; });
     });
   } else {
     let touchStart = null;

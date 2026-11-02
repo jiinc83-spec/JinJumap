@@ -7,7 +7,7 @@
 body.mobile-layout .hero-carousel-image{background-image:linear-gradient(0deg,rgba(6,25,17,.88),rgba(6,25,17,.32) 55%,transparent 85%),var(--slide-image);background-position:35% bottom}
 body.mobile-layout .hero.hero-carousel-ready{background-image:none}
 body.mobile-layout .hero-copy{pointer-events:none}
-.hero-carousel-track{position:absolute;inset:0;z-index:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+.hero-carousel-track{position:absolute;inset:0;z-index:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-y}
 .hero-carousel-track::-webkit-scrollbar{display:none}
 .hero-carousel-panel{flex:0 0 100%;height:100%;scroll-snap-align:start;scroll-snap-stop:always;background-image:linear-gradient(0deg,rgba(6,25,17,.88),rgba(6,25,17,.32) 55%,transparent 85%),var(--slide-image);background-position:35% bottom;background-size:cover;background-repeat:no-repeat}
 .hero-carousel-controls{position:absolute;top:14px;right:14px;z-index:3;display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:999px;background:rgba(12,32,23,.68);color:#fff;backdrop-filter:blur(8px)}
