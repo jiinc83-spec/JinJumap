@@ -519,7 +519,7 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           const geocoder=new window.kakao.maps.services.Geocoder();
           document.querySelectorAll('[data-map-district]').forEach(button=>button.addEventListener('click',()=>{
             const district=button.dataset.mapDistrict;
-            if(district==='진주시'){mainMap.setBounds(bounds,45);return}
+            if(district==='진주시'){mainMap.relayout();mainMap.setBounds(bounds,45);return}
             const address=district==='진주시'?'경상남도 진주시':'경상남도 진주시 '+district;
             geocoder.addressSearch(address,(results,status)=>{
               if(status!==window.kakao.maps.services.Status.OK||!results.length)return;
