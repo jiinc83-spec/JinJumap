@@ -487,8 +487,9 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           let activeMapInfoWindow=null;
           const dismissActiveMapInfoWindow=()=>{if(activeMapInfoWindow){activeMapInfoWindow.close();activeMapInfoWindow=null}};
           const toggleMapInfoWindow=(infoWindow,marker)=>{
-            if(activeMapInfoWindow===infoWindow){dismissActiveMapInfoWindow();return}
-            dismissActiveMapInfoWindow();activeMapInfoWindow=infoWindow;infoWindow.open(mainMap,marker);
+            if(activeMapInfoWindow===infoWindow){dismissActiveMapInfoWindow()}else{dismissActiveMapInfoWindow();activeMapInfoWindow=infoWindow;infoWindow.open(mainMap,marker)}
+            const position=marker.getPosition(),card=placeCards.find(item=>Number(item.dataset.lat)===position.getLat()&&Number(item.dataset.lng)===position.getLng());
+            if(card){card.hidden=false;if(card.getAttribute('aria-expanded')!=='true')togglePlaceCard(card);requestAnimationFrame(()=>card.scrollIntoView({behavior:reducePlaceMotion?'auto':'smooth',block:'nearest'}))}
           };
           window.kakao.maps.event.addListener(mainMap,'click',dismissActiveMapInfoWindow);
           document.addEventListener('click',event=>{if(event.target instanceof Element&&event.target.closest('.map-store-info'))dismissActiveMapInfoWindow()});
