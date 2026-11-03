@@ -37,31 +37,50 @@
         </div>
         <section class="detail-card" id="environment-detail" aria-live="polite" aria-label="선택한 날짜의 환경 기념일"></section>
       </div>
-      <section class="agenda" aria-label="개인 실천 일정">
-        <div class="agenda-head"><h3 id="selected-date"></h3></div>
-        <form class="event-form" id="event-form"><input id="event-input" maxlength="60" placeholder="나만의 환경 실천 일정 추가" aria-label="환경 실천 일정"><button type="submit">일정 추가</button></form>
-        <ul class="event-list" id="event-list"></ul>
-      </section>
     </section>
     <section class="panel"><h2>오늘부터 할 수 있는 실천</h2><p>개인 컵 사용하기, 가까운 거리는 걷거나 자전거 이용하기, 재활용품을 깨끗하게 분리배출하기처럼 생활 속 행동이 탄소를 줄이는 데 도움이 됩니다.</p><div class="actions"><div>개인 컵으로 음료 주문하기</div><div>가까운 거리는 자전거 타기</div><div>재활용품 분리배출하기</div></div></section>
     <a class="back" href="../index.html">← GREEN MAP으로 돌아가기</a>
   </main>
   <script>
     (()=>{
-      const storageKey='jinju-carbon-calendar-v1';let personalEvents={};
-      try{personalEvents=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch{}
       const now=()=>new Date();let current=now();let year=current.getFullYear(),month=current.getMonth();
       const dateKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
       let selected=dateKey(current),environmentDays=[];
-      const grid=document.querySelector('#days'),label=document.querySelector('#month-label'),selectedLabel=document.querySelector('#selected-date'),list=document.querySelector('#event-list'),detail=document.querySelector('#environment-detail');
+      const grid=document.querySelector('#days'),label=document.querySelector('#month-label'),detail=document.querySelector('#environment-detail');
       const safe=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
       function occasionDate(event,eventYear){if(event.dateMode==='annual-rule'){const annual=event.annualDates?.[String(eventYear)];if(annual){const [m,d]=annual.split('-').map(Number);return new Date(eventYear,m-1,d)}if(event.id==='earth-hour'){const last=new Date(eventYear,3,0);const shift=last.getDay()===6?0:last.getDay()+1;return new Date(eventYear,2,last.getDate()-shift)}}if(event.date){const [m,d]=event.date.split('-').map(Number);return new Date(eventYear,m-1,d)}return null}
       function occasionsAt(key){const [y,m,d]=key.split('-').map(Number);return environmentDays.filter(event=>{const date=occasionDate(event,y);return date&&date.getMonth()+1===m&&date.getDate()===d})}
       function renderMedia(event){const wrap=safe('div','occasion-media'),frame=safe('div','occasion-media-frame'),media=event.media;if(media&&media.src){if(media.type==='video'){const video=document.createElement('video');video.controls=true;video.playsInline=true;video.preload='metadata';if(media.poster)video.poster=media.poster;const source=document.createElement('source');source.src=media.src;if(media.mimeType)source.type=media.mimeType;video.append(source);frame.append(video)}else{const image=document.createElement('img');image.src=media.src;image.alt=media.alt||event.nameKo;image.loading='lazy';image.decoding='async';frame.append(image)}}else{frame.classList.add('is-empty');const placeholder=safe('div','occasion-media-empty');placeholder.append(safe('span','','PHOTO / VIDEO'),safe('p','','기념일 사진이나 영상을 표시할 공간입니다.'));frame.append(placeholder)}wrap.append(frame);if(media?.caption)wrap.append(safe('p','occasion-media-caption',media.caption));return wrap}
       function renderDetail(){detail.replaceChildren();const occasions=occasionsAt(selected),[yy,mm,dd]=selected.split('-').map(Number);if(!occasions.length){detail.hidden=true;detail.closest('.calendar-layout').classList.add('has-no-detail');return}detail.hidden=false;detail.closest('.calendar-layout').classList.remove('has-no-detail');detail.classList.remove('empty-detail');detail.append(safe('div','detail-kicker','ENVIRONMENTAL DAY'));detail.append(safe('p','detail-date',`${yy}년 ${mm}월 ${dd}일 · ${occasions.length}개 기념일`));occasions.forEach(event=>{const article=safe('article','occasion');article.append(safe('h3','detail-title',event.nameKo),safe('p','detail-en',event.nameEn),safe('p','detail-meaning',event.meaning),safe('p','detail-impact',event.impact));if(event.dateRule){const dateNote=event.dateRule+(event.dateMode==='annual-rule'&&!event.annualDates?.[String(yy)]?' · 연도별 일정 확인':'');article.append(safe('span','detail-rule',dateNote))}const meta=safe('div','event-tags');meta.append(safe('span','event-tag',event.category),safe('span','event-type',event.classification));article.append(meta);article.append(renderMedia(event));if(event.sourceUrl){const sources=safe('div','sources'),link=safe('a','source-link','참고 출처');link.href=event.sourceUrl;link.target='_blank';link.rel='noopener noreferrer';link.append(Object.assign(document.createElementNS('http://www.w3.org/2000/svg','svg'),{innerHTML:'<path d="M14 3h7v7M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'}));sources.append(link);if(event.verificationStatus==='확인 필요')sources.append(safe('small','review-note','명칭 또는 날짜의 공식성은 추가 확인이 필요합니다.'));article.append(sources)}detail.append(article)})}
-      function render(){current=now();label.textContent=`${year}년 ${month+1}월`;grid.replaceChildren();const offset=new Date(year,month,1).getDay(),count=new Date(year,month+1,0).getDate(),previousCount=new Date(year,month,0).getDate();for(let i=0;i<42;i++){let day,cellMonth=month,cellYear=year;if(i<offset){day=previousCount-offset+i+1;if(--cellMonth<0){cellMonth=11;cellYear--}}else if(i>=offset+count){day=i-offset-count+1;if(++cellMonth>11){cellMonth=0;cellYear++}}else day=i-offset+1;const date=new Date(cellYear,cellMonth,day),key=dateKey(date),button=safe('button','day');button.type='button';if(cellMonth!==month)button.classList.add('other');if(key===selected)button.classList.add('selected');if(key===dateKey(current)){button.classList.add('today');button.setAttribute('aria-current','date')}const celebrations=occasionsAt(key),hasPersonal=Boolean(personalEvents[key]?.length);button.append(safe('span','day-number',day));if(celebrations.length){button.classList.add('has-events');button.append(safe('i','day-dot'));celebrations.forEach(event=>{const caption=safe('span','day-event-name',event.nameKo);caption.title=event.nameKo;button.append(caption)})}if(hasPersonal&&!celebrations.length)button.append(safe('span','personal-mark','•'));button.tabIndex=key===selected?0:-1;button.setAttribute('aria-pressed',key===selected?'true':'false');const names=celebrations.map(e=>e.nameKo).join(', ');button.setAttribute('aria-label',`${cellYear}년 ${cellMonth+1}월 ${day}일${names?`, ${names}`:''}${hasPersonal?', 개인 일정 있음':''}`);button.onclick=()=>selectDate(key,cellYear,cellMonth);grid.append(button)}renderDetail();const [yy,mm,dd]=selected.split('-').map(Number);selectedLabel.textContent=`${mm}월 ${dd}일 개인 실천 일정`;list.replaceChildren();const personal=personalEvents[selected]||[];if(!personal.length)list.append(safe('li','empty','등록된 개인 일정이 없습니다.'));personal.forEach((text,index)=>{const li=safe('li'),content=safe('span','',text),remove=safe('button','delete-event','×');remove.type='button';remove.setAttribute('aria-label',`${text} 일정 삭제`);remove.onclick=()=>{personalEvents[selected].splice(index,1);if(!personalEvents[selected].length)delete personalEvents[selected];save();render()};li.append(content,remove);list.append(li)})}
+      function render(){
+        current=now();
+        label.textContent=new Intl.DateTimeFormat('ko-KR',{year:'numeric',month:'long'}).format(new Date(year,month,1));
+        grid.replaceChildren();
+        const offset=new Date(year,month,1).getDay(),count=new Date(year,month+1,0).getDate(),previousCount=new Date(year,month,0).getDate();
+        for(let i=0;i<42;i++){
+          let day,cellMonth=month,cellYear=year;
+          if(i<offset){day=previousCount-offset+i+1;if(--cellMonth<0){cellMonth=11;cellYear--}}
+          else if(i>=offset+count){day=i-offset-count+1;if(++cellMonth>11){cellMonth=0;cellYear++}}
+          else day=i-offset+1;
+          const date=new Date(cellYear,cellMonth,day),key=dateKey(date),button=safe('button','day');
+          button.type='button';
+          if(cellMonth!==month)button.classList.add('other');
+          if(key===selected)button.classList.add('selected');
+          if(key===dateKey(current)){button.classList.add('today');button.setAttribute('aria-current','date')}
+          const celebrations=occasionsAt(key);
+          button.append(safe('span','day-number',day));
+          if(celebrations.length){button.classList.add('has-events');button.append(safe('i','day-dot'));celebrations.forEach(event=>{const caption=safe('span','day-event-name',event.nameKo);caption.title=event.nameKo;button.append(caption)})}
+          button.tabIndex=key===selected?0:-1;
+          button.setAttribute('aria-pressed',key===selected?'true':'false');
+          const names=celebrations.map(event=>event.nameKo).join(', ');
+          const dateLabel=new Intl.DateTimeFormat('ko-KR',{dateStyle:'full'}).format(date);
+          button.setAttribute('aria-label',names?dateLabel+', '+names:dateLabel);
+          button.onclick=()=>selectDate(key,cellYear,cellMonth);
+          grid.append(button);
+        }
+        renderDetail();
+      }
       function selectDate(key,cellYear,cellMonth){selected=key;if(cellMonth!==undefined){month=cellMonth;year=cellYear}render()}
-      function save(){try{localStorage.setItem(storageKey,JSON.stringify(personalEvents))}catch{}}
       const swipeArea=document.querySelector('.calendar-main'),swipeViewport=document.querySelector('.calendar-layout');
       let touchStart=null,dragging=false,swipeAnimating=false,suppressCalendarClickUntil=0;
       function clearSwipeStyles(){swipeArea.style.transform='';swipeArea.style.opacity='';swipeArea.classList.remove('is-dragging');swipeViewport.classList.remove('is-swiping')}
@@ -75,7 +94,6 @@
       function moveMonth(amount){const next=new Date(year,month+amount,1);year=next.getFullYear();month=next.getMonth();const day=Math.min(Number(selected.slice(-2)),new Date(year,month+1,0).getDate());selected=dateKey(new Date(year,month,day));render()}
       document.querySelector('#prev').onclick=()=>moveMonth(-1);document.querySelector('#next').onclick=()=>moveMonth(1);document.querySelector('#today').onclick=()=>{current=now();year=current.getFullYear();month=current.getMonth();selected=dateKey(current);render()};
       grid.addEventListener('keydown',event=>{const delta={ArrowLeft:-1,ArrowRight:1,ArrowUp:-7,ArrowDown:7}[event.key];if(delta){event.preventDefault();const date=new Date(`${selected}T12:00:00`);date.setDate(date.getDate()+delta);const key=dateKey(date);selectDate(key,date.getFullYear(),date.getMonth());grid.querySelector('.selected')?.focus()}});
-      document.querySelector('#event-form').onsubmit=e=>{e.preventDefault();const input=document.querySelector('#event-input'),value=input.value.trim();if(!value)return;(personalEvents[selected]||=[]).push(value);save();input.value='';render()};
       document.addEventListener('visibilitychange',()=>{if(!document.hidden){const fresh=now();if(dateKey(fresh)!==dateKey(current)){current=fresh;render()}}});
       fetch('../data/environment-days.json').then(response=>{if(!response.ok)throw new Error('Calendar data unavailable');return response.json()}).then(data=>{environmentDays=data;render()}).catch(()=>{environmentDays=[];render()});render();
     })();
