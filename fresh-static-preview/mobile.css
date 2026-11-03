@@ -141,18 +141,23 @@ html.map-page body.mobile-layout #map .map-type-tabs button[aria-pressed="true"]
 html.map-page body.mobile-layout #map .map-place-list-status{margin:13px 2px 3px;color:#78887b;font-size:11px}
 html.map-page body.mobile-layout #map .map-place-card[aria-current="true"]{border-color:#91ae93;box-shadow:0 0 0 2px #91ae9320}
 html.map-page body.mobile-layout .map-place-sheet[hidden]{display:none}
-html.map-page body.mobile-layout .map-place-sheet{position:fixed;z-index:40;left:50%;bottom:max(10px,env(safe-area-inset-bottom));display:flex;width:min(calc(100% - 20px),410px);max-height:min(46vh,390px);flex-direction:column;overflow:hidden;transform:translateX(-50%);border:1px solid #dfe9df;border-radius:18px;background:#fff;box-shadow:0 14px 48px #18331f30}
+html.map-page body.mobile-layout .map-place-sheet{position:fixed;z-index:40;left:50%;bottom:max(10px,env(safe-area-inset-bottom));display:flex;width:min(calc(100% - 20px),410px);max-height:min(54vh,440px);flex-direction:column;overflow:hidden;transform:translateX(-50%);border:1px solid #dfe9df;border-radius:18px;background:#fff;box-shadow:0 14px 48px #18331f30}
 html.map-page body.mobile-layout .map-place-sheet-handle{width:34px;height:4px;flex:none;margin:8px auto 3px;border-radius:5px;background:#d7e0d7}
 html.map-page body.mobile-layout .map-place-sheet-header{display:flex;align-items:flex-start;gap:12px;padding:7px 15px 0}
 html.map-page body.mobile-layout .map-place-sheet-heading{min-width:0;flex:1}
 html.map-page body.mobile-layout .map-place-sheet-type{display:block;margin-bottom:3px;color:#6d8d72;font-size:10px}
 html.map-page body.mobile-layout .map-place-sheet h2{margin:0;color:#263d2e;font-size:15px;line-height:1.4;letter-spacing:-.02em}
 html.map-page body.mobile-layout .map-place-sheet-close{width:30px;height:30px;flex:none;border:0;border-radius:50%;background:#f2f6f1;color:#66796b;font-size:21px;line-height:1;cursor:pointer}
-html.map-page body.mobile-layout .map-place-sheet-action{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;margin:7px 15px 0;color:#65776a;font-size:11px;line-height:1.5}
-html.map-page body.mobile-layout .map-place-sheet-facts{display:grid;gap:0;margin:7px 15px 0;padding:0}
-html.map-page body.mobile-layout .map-place-sheet-facts>div{display:grid;grid-template-columns:64px minmax(0,1fr);gap:8px;padding:5px 0;border-top:1px solid #eff2ee}
-html.map-page body.mobile-layout .map-place-sheet-facts dt{color:#8a968d;font-size:10px}
-html.map-page body.mobile-layout .map-place-sheet-facts dd{margin:0;color:#4d5f52;font-size:10px;line-height:1.45;overflow-wrap:anywhere}
+html.map-page body.mobile-layout .map-place-sheet-action-block{margin-top:7px;padding:0 15px 9px;border-bottom:1px solid #e8eee7}
+html.map-page body.mobile-layout .map-place-sheet-action-block h3{margin:0 0 4px;color:#2d4032;font-size:12px;font-weight:700}
+html.map-page body.mobile-layout .map-place-sheet-action{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;margin:0;color:#65776a;font-size:11px;line-height:1.5}
+html.map-page body.mobile-layout .map-place-sheet-facts{display:grid;gap:0;max-height:min(28vh,210px);overflow-y:auto;margin:0 15px;padding:0;overscroll-behavior:contain;scrollbar-width:thin}
+html.map-page body.mobile-layout .map-place-sheet-facts>div{display:grid;grid-template-columns:16px 76px minmax(0,1fr);align-items:start;gap:8px;padding:7px 0;border-top:1px solid #eff2ee}
+html.map-page body.mobile-layout .map-place-sheet-facts>div:first-child{border-top:0}
+html.map-page body.mobile-layout .map-place-fact-icon{display:block;width:15px;height:15px;color:#728178}
+html.map-page body.mobile-layout .map-place-fact-icon svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html.map-page body.mobile-layout .map-place-sheet-facts dt{color:#78857c;font-size:10px;line-height:1.45}
+html.map-page body.mobile-layout .map-place-sheet-facts dd{margin:0;color:#45564a;font-size:10px;line-height:1.45;overflow-wrap:anywhere}
 html.map-page body.mobile-layout .map-place-sheet-actions{display:flex;gap:8px;padding:9px 15px 13px}
 html.map-page body.mobile-layout .map-place-sheet-actions a,html.map-page body.mobile-layout .map-place-sheet-actions button{display:flex;min-height:36px;flex:1;align-items:center;justify-content:center;padding:0 10px;border:1px solid #e0e8df;border-radius:9px;background:#f5f8f4;color:#4e6d54;font:inherit;font-size:11px;font-weight:650;text-decoration:none;cursor:pointer}
 html.map-page body.mobile-layout .map-place-sheet-actions .map-place-directions{border-color:#355b47;background:#355b47;color:#fff}
