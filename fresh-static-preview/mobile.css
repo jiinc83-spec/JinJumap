@@ -115,3 +115,22 @@ body.mobile-layout .mobile-search-empty{display:grid;gap:5px;padding:18px 14px 1
 body.mobile-layout .mobile-search-empty strong{font-size:12px}
 body.mobile-layout .mobile-search-empty span{color:#869287;font-size:10px;line-height:1.6}
 body.mobile-layout .mobile-search-all{margin:0 13px 13px;padding:9px 12px;border:1px solid #dfe9dc;border-radius:9px;background:#f3f7f1;color:#456b4b;font:inherit;font-size:10px;font-weight:700;cursor:pointer}
+body.mobile-layout .mobile-map-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 28px;padding:16px;border:1px solid #e2ebe0;border-radius:17px;background:linear-gradient(135deg,#fff 0%,#f3f8f1 100%);box-shadow:0 5px 18px #28422d0a}
+body.mobile-layout .mobile-map-entry-copy{min-width:0}
+body.mobile-layout .mobile-map-entry-copy>span{color:#7c9a7b;font-size:8px;font-weight:750;letter-spacing:1.2px}
+body.mobile-layout .mobile-map-entry-copy h2{margin:5px 0 4px;color:#2e4935;font-size:14px;letter-spacing:-.3px}
+body.mobile-layout .mobile-map-entry-copy p{margin:0;color:#859086;font-size:9px;line-height:1.6}
+body.mobile-layout .mobile-map-entry-button{flex:none;display:flex;align-items:center;gap:6px;padding:10px 11px;border:1px solid #dce8da;border-radius:11px;background:#fff;color:#416949;font-size:10px;font-weight:700;white-space:nowrap}
+body.mobile-layout .mobile-map-entry-button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+body.mobile-layout .mobile-map-entry-button .entry-arrow{width:13px;height:13px;color:#91a394}
+body.mobile-layout #map{display:none!important}
+html.map-page body.mobile-layout{min-height:100vh;padding-bottom:0;background:#f5f7f4}
+html.map-page body.mobile-layout>.top,html.map-page body.mobile-layout>.top-info,html.map-page body.mobile-layout>.mobile-discovery,html.map-page body.mobile-layout>footer{display:none!important}
+html.map-page body.mobile-layout main{width:100%;max-width:none;margin:0;padding:0}
+html.map-page body.mobile-layout main>*:not(#map){display:none!important}
+html.map-page body.mobile-layout #map{display:block!important;margin:0;padding:12px 14px 28px;scroll-margin-top:0}
+html.map-page body.mobile-layout .map-page-back{display:inline-flex;align-items:center;gap:5px;margin:0 0 9px;color:#5c765f;font-size:11px;font-weight:650}
+html.map-page body.mobile-layout .map-page-back svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+html.map-page body.mobile-layout #map .category-heading{margin-bottom:12px}
+html.map-page body.mobile-layout #map .map-shell{height:50vh;min-height:320px;max-height:560px}
+html.map-page body.mobile-layout #map .map-place-card{margin-top:10px}
