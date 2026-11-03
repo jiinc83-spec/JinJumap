@@ -157,3 +157,5 @@ body.mobile-layout .nature-graphic{width:100%;height:100%;overflow:visible}
 body.mobile-layout .nature-graphic .leaf-line{fill:#d8eecf;stroke:#96b991}
 body.mobile-layout .nature-graphic .vein,body.mobile-layout .nature-graphic .wave{stroke:#9ab69a}
 body.mobile-layout .nature-graphic .leaf-dot{fill:#83ae7d}
+body.mobile-layout .hero-copy h1,body.mobile-layout .hero-copy h1 em{color:#fff!important;text-shadow:0 2px 8px #10251c8c}
+body.mobile-layout .hero-copy p:not(.eyebrow){color:#fff!important;text-shadow:0 1px 6px #10251c99}
