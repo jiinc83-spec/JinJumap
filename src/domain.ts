@@ -13,6 +13,7 @@ export interface Store {
  sources: string[];
  coordinates: [number, number] | null;
  coordinateSource: string | null;
+ coordinateNote?: string;
  verified: boolean;
 }
 export const stores: Store[] = raw as Store[];

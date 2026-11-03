@@ -23,7 +23,12 @@ export default function NeighborhoodMap({ stores, onSelect }: { stores: Store[];
       const instance = new maps.Map(element, { center: point, level: 5 });
       instance.addControl(new maps.ZoomControl(), maps.ControlPosition.RIGHT);
       sdk.current = maps; map.current = instance;
-      observer = new ResizeObserver(() => { instance.relayout(); });
+      observer = new ResizeObserver(() => {
+        if (element.clientWidth === 0 || element.clientHeight === 0) return;
+        const currentCenter = instance.getCenter?.();
+        instance.relayout();
+        if (currentCenter) instance.setCenter(currentCenter);
+      });
       observer.observe(element);
       setState('ready');
     }).catch(() => { if (!cancelled) setState('error'); });
@@ -42,9 +47,9 @@ export default function NeighborhoodMap({ stores, onSelect }: { stores: Store[];
   }, [stores, onSelect, state, attempt]);
   const located = stores.filter(hasCoordinates).length;
   const title = state === 'unconfigured' ? '지도 연결을 준비하고 있어요' : state === 'error' ? '카카오맵을 불러오지 못했어요' : state === 'loading' ? '카카오맵을 불러오는 중이에요' : !stores.length ? '이 조건에 등록된 매장이 없어요' : '확인된 위치만 지도에 표시해요';
-  const description = state === 'unconfigured' || state === 'error' ? '매장 목록과 상세 정보는 이용할 수 있어요. 상세에서 카카오맵으로 연결해 주세요.' : state === 'loading' ? '잠시만 기다려 주세요. 매장 목록은 바로 확인할 수 있어요.' : `검색 결과 ${stores.length}곳 중 좌표 출처가 확인된 ${located}곳을 표시합니다. 좌표가 없는 매장은 목록에서 확인해 주세요.`;
+  const description = state === 'unconfigured' || state === 'error' ? '매장 목록과 상세 정보는 이용할 수 있어요. 상세에서 카카오맵으로 연결해 주세요.' : state === 'loading' ? '잠시만 기다려 주세요. 매장 목록은 바로 확인할 수 있어요.' : `검색 결과 ${stores.length}곳 중 좌표 출처가 확인된 ${located}곳을 표시합니다. 지도를 드래그하거나 확대하고, 핀을 누르면 매장 정보를 볼 수 있어요. 좌표가 없는 매장은 목록에서 확인해 주세요.`;
   return <section className="map-panel" aria-label="진주시 평거동 카카오 지도">
-    <div className="map-canvas" ref={container}/>
+    <div className="map-canvas" ref={container} role="region" aria-label="카카오맵 · 지도를 드래그하거나 확대하고 매장 핀을 선택하세요"/>
     {state !== 'ready' && <div className="map-placeholder" aria-hidden="true"><MapPin size={42}/><span>남강 GREEN MAP</span><small>우리 동네, 더 푸르게</small></div>}
     <div className="map-location"><MapPin size={15}/> 경상남도 진주시 평거동 <span>카카오맵</span></div>
     {state === 'ready' && <button className="map-reset" aria-label="평거동 중심으로 지도 이동" onClick={() => map.current?.setCenter(new sdk.current!.LatLng(...center))}><LocateFixed size={20}/></button>}

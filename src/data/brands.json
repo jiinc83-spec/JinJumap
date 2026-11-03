@@ -1,0 +1,37 @@
+{
+  "mega": {
+    "src": "/brands/mega.png",
+    "source": "https://img.mega-mgccoffee.com/megahp/common/img/new_logo_b.png",
+    "website": "https://www.mega-mgccoffee.com"
+  },
+  "tenpercent": {
+    "src": "/brands/tenpercent.svg",
+    "source": "https://www.tenpercentcoffee.com/images/logo_b.svg",
+    "website": "https://www.tenpercentcoffee.com"
+  },
+  "ediya": {
+    "src": "/brands/ediya.gif",
+    "source": "https://ediya.com/images/common/top_logo_240822.gif",
+    "website": "https://ediya.com"
+  },
+  "oliveyoung": {
+    "src": "/brands/oliveyoung.svg",
+    "source": "https://corp.oliveyoung.com/img/common/logo/logo-493996034cacc186f5e6965f8d5b876f.svg",
+    "website": "https://corp.oliveyoung.com/ko"
+  },
+  "starbucks": {
+    "src": "/brands/starbucks.png",
+    "source": "https://www.starbucks.co.kr/common/img/common/logo.png",
+    "website": "https://www.starbucks.co.kr"
+  },
+  "dessert39": {
+    "src": "/brands/dessert39.png",
+    "source": "https://cdn.dessert39.com/www/img/common/dessert39_logo.png",
+    "website": "https://home.dessert39.com/main.php"
+  },
+  "samchuly": {
+    "src": "/brands/samchuly.svg",
+    "source": "https://www.samchuly.co.kr/resource/ko/v2/images/ico/logo_3000.svg",
+    "website": "https://www.samchuly.co.kr"
+  }
+}

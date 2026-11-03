@@ -18,8 +18,11 @@
     "sources": [
       "https://home.dessert39.com/main.php"
     ],
-    "coordinates": null,
-    "coordinateSource": null,
+    "coordinates": [
+      35.171971,
+      128.062783
+    ],
+    "coordinateSource": "사용자 제공 · 전국 경양식 지도",
     "verified": false
   },
   {
@@ -43,8 +46,11 @@
       "https://www.newsis.com/view/NISX20260903_0003774490",
       "https://www.cpoint.or.kr/netzero/fdl/resources/cmsResourceView.do?resrceId=RESRCE_000000000000022"
     ],
-    "coordinates": null,
-    "coordinateSource": null,
+    "coordinates": [
+      35.172666,
+      128.059942
+    ],
+    "coordinateSource": "사용자 제공 · 주소영문변환 주소가",
     "verified": false
   },
   {
@@ -68,8 +74,11 @@
       "https://www.cpoint.or.kr/netzero/entGuide/nv_entGuideList.do",
       "https://www.cpoint.or.kr/netzero/fdl/resources/cmsResourceView.do?resrceId=RESRCE_000000000000022"
     ],
-    "coordinates": null,
-    "coordinateSource": null,
+    "coordinates": [
+      35.171925,
+      128.060841
+    ],
+    "coordinateSource": "사용자 제공 · 전국 건강보험심사평가원_요양기관 개설 현황 지도",
     "verified": false
   },
   {
@@ -91,8 +100,11 @@
     "sources": [
       "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156770639&pWise=mSub&pWiseSub=C2"
     ],
-    "coordinates": null,
-    "coordinateSource": null,
+    "coordinates": [
+      35.173852,
+      128.061062
+    ],
+    "coordinateSource": "사용자 제공 · 전국 김밥/만두/분식 지도",
     "verified": false
   },
   {
@@ -114,9 +126,13 @@
     "sources": [
       "https://m.korea.kr/briefing/pressReleaseView.do?newsId=156770639&pWise=mSub&pWiseSub=C2"
     ],
-    "coordinates": null,
-    "coordinateSource": null,
-    "verified": false
+    "coordinates": [
+      35.167373,
+      128.055881
+    ],
+    "coordinateSource": "사용자 제공 · 주소영문변환 주소가",
+    "verified": false,
+    "coordinateNote": "새평거로 75에 해당하는 평거휴먼시아4단지 대표 좌표입니다. 실제 매장 출입구 위치와 차이가 있을 수 있습니다."
   },
   {
     "id": "ediya",
@@ -162,8 +178,11 @@
       "https://corp.oliveyoung.com/ko/sustainability/planet",
       "https://www.lghnh.com/company/store.jsp?page=726&searchBrand="
     ],
-    "coordinates": null,
-    "coordinateSource": null,
+    "coordinates": [
+      35.17158,
+      128.06212
+    ],
+    "coordinateSource": "사용자 제공 · 전국 치킨 지도",
     "verified": false
   },
   {
@@ -190,8 +209,11 @@
       "https://www.cpoint.or.kr/netzero/site/cntnts/CNTNTS_002.do",
       "https://www.cpoint.or.kr/netzero/bbEnvrprduct/nv_bbEnvrprductList.do"
     ],
-    "coordinates": null,
-    "coordinateSource": null,
+    "coordinates": [
+      35.173115,
+      128.061799
+    ],
+    "coordinateSource": "사용자 제공 · 전국 레크리에이션 교육기관 지도",
     "verified": false
   },
   {
@@ -238,8 +260,11 @@
     "sources": [
       "https://www.daangn.com/kr/local-profile/bike-tani-%EB%B0%94%EC%9D%B4%ED%81%AC-%ED%83%80%EB%8B%88-wzzyo3r27n2u/"
     ],
-    "coordinates": null,
-    "coordinateSource": null,
+    "coordinates": [
+      35.170778,
+      128.057727
+    ],
+    "coordinateSource": "사용자 제공 · 주소영문변환 주소가",
     "verified": false
   },
   {
@@ -262,8 +287,11 @@
     "sources": [
       "https://dreamermemory.tistory.com/1091"
     ],
-    "coordinates": null,
-    "coordinateSource": null,
+    "coordinates": [
+      35.177305,
+      128.063006
+    ],
+    "coordinateSource": "사용자 제공 · 전국 자전거 소매업 지도",
     "verified": false
   },
   {
@@ -285,8 +313,11 @@
     "sources": [
       "https://mtv.purpleo.kr/article/2355"
     ],
-    "coordinates": null,
-    "coordinateSource": null,
+    "coordinates": [
+      35.168537,
+      128.053486
+    ],
+    "coordinateSource": "사용자 제공 · 전국 의류/이불 수선업 지도",
     "verified": false
   }
 ]
