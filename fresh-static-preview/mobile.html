@@ -199,6 +199,11 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
 #tumbler-cards .brand-copy>span{color:#909a91;font-size:10px;line-height:1.4}
 #tumbler-cards .brand-logo-box{width:44px;height:44px;flex:0 0 44px;box-sizing:border-box;padding:6px;display:grid;place-items:center;overflow:hidden;border-radius:12px;background:#F7F9F6}
 #tumbler-cards .brand-logo{display:block;width:100%;height:100%;max-width:none!important;max-height:none!important;object-fit:contain}
+#tumbler-cards .brand-logo-box{border:1px solid #edf1eb;box-shadow:0 2px 6px #233b1008}
+#tumbler-cards .brand-logo-box:has(.brand-logo.mega){background:#ffd900;border-color:#f3d000}
+#tumbler-cards .brand-logo.mega{object-fit:cover;object-position:center;width:32px;height:32px;border-radius:50%}
+#tumbler-cards .brand-logo-fallback{width:100%;height:100%;display:grid;place-items:center;border-radius:8px;background:#eff4ec;color:#355b47;font-size:16px;font-weight:800;letter-spacing:-.06em}
+#tumbler-cards .brand-logo-fallback[hidden]{display:none}
 #tumbler-cards .brand-trailing{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:1px;flex:none}
 #tumbler-cards .brand-amount{color:#52795b;font-size:13px;line-height:1.4;font-weight:700;white-space:nowrap}
 #tumbler-cards .brand-expand{width:20px;height:18px;padding:0;border:0;background:transparent;color:#9aa49a;font:inherit;font-size:17px;line-height:1;cursor:pointer}
@@ -267,12 +272,12 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
   <script>
     const groups={
       tumbler:[
-        {name:'스타벅스',wordmark:'STARBUCKS',logoClass:'starbucks',logoSrc:'assets/starbucks.png',benefit:'400원 할인',benefitKind:'개인 텀블러 이용',condition:'매장 또는 앱 주문 시 적용 조건 확인',note:'매장별 적용 여부를 확인해 주세요',source:'https://www.starbucks.co.kr/responsibility/environment.do'},
-        {name:'공차',wordmark:'GONG CHA',logoClass:'gongcha',logoSrc:'assets/gongcha-logo.svg',benefit:'400원 할인',benefitKind:'개인 텀블러 이용',condition:'매장별 적용 조건 확인',note:'매장별 적용 여부를 확인해 주세요'},
-        {name:'투썸플레이스',wordmark:'A TWOSOME PLACE',logoClass:'twosome',logoSrc:'assets/twosome-logo.svg',benefit:'300원 할인',benefitKind:'개인 텀블러 이용',condition:'개인컵 지참 시',note:'매장별 적용 여부를 확인해 주세요'},
-        {name:'이디야커피',wordmark:'EDIYA COFFEE',logoClass:'ediya',logoSrc:'assets/ediya-logo.gif',benefit:'200원 할인',benefitKind:'개인 텀블러 이용',condition:'할인 금액이 매장마다 다를 수 있어요',note:'방문 매장에서 할인액을 확인해 주세요'},
-        {name:'메가MGC커피',wordmark:'MEGA MGC COFFEE',logoClass:'mega',logoSrc:'assets/mega-mgc.png',benefit:'앱 할인',benefitKind:'자사앱 주문 시 텀블러 혜택',condition:'할인 금액은 앱 주문 화면에서 확인',note:'주문 전 앱에서 적용 여부를 확인해 주세요'},
-        {name:'컴포즈커피',wordmark:'COMPOSE COFFEE',logoClass:'compose',logoSrc:'assets/compose-logo.svg',benefit:'앱 할인',benefitKind:'자사앱 주문 시 텀블러 혜택',condition:'할인 금액은 앱 주문 화면에서 확인',note:'주문 전 앱에서 적용 여부를 확인해 주세요'},
+        {name:'스타벅스',wordmark:'STARBUCKS',logoMark:'S',logoClass:'starbucks',logoSrc:'assets/starbucks.png',benefit:'400원 할인',benefitKind:'개인 텀블러 이용',condition:'매장 또는 앱 주문 시 적용 조건 확인',note:'매장별 적용 여부를 확인해 주세요',source:'https://www.starbucks.co.kr/responsibility/environment.do'},
+        {name:'공차',wordmark:'GONG CHA',logoMark:'G',logoClass:'gongcha',logoSrc:'assets/gongcha-logo.svg',benefit:'400원 할인',benefitKind:'개인 텀블러 이용',condition:'매장별 적용 조건 확인',note:'매장별 적용 여부를 확인해 주세요'},
+        {name:'투썸플레이스',wordmark:'A TWOSOME PLACE',logoMark:'A',logoClass:'twosome',logoSrc:'assets/twosome-logo.svg',benefit:'300원 할인',benefitKind:'개인 텀블러 이용',condition:'개인컵 지참 시',note:'매장별 적용 여부를 확인해 주세요'},
+        {name:'이디야커피',wordmark:'EDIYA COFFEE',logoMark:'E',logoClass:'ediya',logoSrc:'assets/ediya-logo.gif',benefit:'200원 할인',benefitKind:'개인 텀블러 이용',condition:'할인 금액이 매장마다 다를 수 있어요',note:'방문 매장에서 할인액을 확인해 주세요'},
+        {name:'메가MGC커피',wordmark:'MEGA MGC COFFEE',logoMark:'M',logoClass:'mega',logoSrc:'assets/mega-mgc.png',benefit:'앱 할인',benefitKind:'자사앱 주문 시 텀블러 혜택',condition:'할인 금액은 앱 주문 화면에서 확인',note:'주문 전 앱에서 적용 여부를 확인해 주세요'},
+        {name:'컴포즈커피',wordmark:'COMPOSE COFFEE',logoMark:'C',logoClass:'compose',logoSrc:'assets/compose-logo.svg',benefit:'앱 할인',benefitKind:'자사앱 주문 시 텀블러 혜택',condition:'할인 금액은 앱 주문 화면에서 확인',note:'주문 전 앱에서 적용 여부를 확인해 주세요'},
         {name:'더벤티',wordmark:'THE VENTI',logoClass:'venti',logoSrc:'assets/theventi-logo.png',benefit:'앱 할인',benefitKind:'자사앱 주문 시 텀블러 혜택',condition:'할인 금액은 앱 주문 화면에서 확인',note:'주문 전 앱에서 적용 여부를 확인해 주세요'},
         {name:'텐퍼센트커피',wordmark:'10% COFFEE',logoClass:'tenpercent',logoSrc:'assets/tenpercent-logo.png',benefit:'앱 할인',benefitKind:'자사앱 주문 시 텀블러 혜택',condition:'할인 금액은 앱 주문 화면에서 확인',note:'주문 전 앱에서 적용 여부를 확인해 주세요'},
         {name:'빽다방',wordmark:'PAIK’S COFFEE',logoClass:'paik',logoSrc:'assets/paikdabang-logo.png',benefit:'100원 할인',benefitKind:'개인 텀블러 이용',condition:'매장별 적용 조건 확인',note:'방문 매장에서 할인 적용을 확인해 주세요'},
@@ -289,7 +294,7 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
       items.forEach(item=>{
         const card=document.createElement('article');card.className=`card${item.wordmark?' brand-card':''}`;
         if(item.wordmark){
-          card.innerHTML=`<div class="brand-row"><div class="brand-heading"><span class="brand-logo-box"><img class="brand-logo ${item.logoClass}" src="${item.logoSrc}" alt="${item.name} 공식 로고"></span><div class="brand-copy"><h3>${item.name}</h3><span>${item.benefitKind}</span></div></div><div class="brand-trailing"><strong class="brand-amount">${item.benefit}</strong><button type="button" class="brand-expand" aria-label="${item.name} 혜택 자세히 보기" aria-expanded="false"><span>›</span></button></div></div><div class="inline-details brand-details" hidden><p>${item.condition}</p><small>${item.note}</small>${item.source?`<a class="brand-source" href="${item.source}" target="_blank" rel="noreferrer">혜택 공식 안내 ↗</a>`:''}</div>`;
+          card.innerHTML=`<div class="brand-row"><div class="brand-heading"><span class="brand-logo-box"><img class="brand-logo ${item.logoClass}" src="${item.logoSrc}" alt="${item.name} 공식 로고" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="brand-logo-fallback" hidden aria-hidden="true">${item.logoMark||item.name.slice(0,1)}</span></span><div class="brand-copy"><h3>${item.name}</h3><span>${item.benefitKind}</span></div></div><div class="brand-trailing"><strong class="brand-amount">${item.benefit}</strong><button type="button" class="brand-expand" aria-label="${item.name} 혜택 자세히 보기" aria-expanded="false"><span>›</span></button></div></div><div class="inline-details brand-details" hidden><p>${item.condition}</p><small>${item.note}</small>${item.source?`<a class="brand-source" href="${item.source}" target="_blank" rel="noreferrer">혜택 공식 안내 ↗</a>`:''}</div>`;
         }else{
           card.innerHTML=`<div class="card-art"><span class="badge">조사 후보</span><span>${item.icon}</span></div><div class="card-body"><h3>${item.title}</h3><div class="name">${item.name}</div><div class="address">⌖ 진주 지역 · 방문 전 확인</div><div class="prep">준비하기 <b>${item.prepare}</b></div><div class="inline-details" hidden>${item.note}</div><div class="card-foot"><small>${item.note}</small><button type="button" aria-expanded="false">장소 자세히 보기 <span>↓</span></button></div></div>`;
         }
