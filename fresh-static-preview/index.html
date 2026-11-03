@@ -351,37 +351,37 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           const bounds=new window.kakao.maps.LatLngBounds();bounds.extend(center);bounds.extend(storePosition);bounds.extend(zeroWastePosition);bounds.extend(seongbukPosition);bounds.extend(enaMallPosition);bounds.extend(centralMarketPosition);bounds.extend(hansalimPosition);bounds.extend(pyeonggeoCenterPosition);bounds.extend(beautifulPyeonggeoPosition);bounds.extend(netzeroCenterPosition);bounds.extend(bikeRentalPosition);bounds.extend(chilamOfficePosition);bounds.extend(probicyclePosition);mainMap.setBounds(bounds,45);
           let activeMapInfoWindow=null;
           const dismissActiveMapInfoWindow=()=>{if(activeMapInfoWindow){activeMapInfoWindow.close();activeMapInfoWindow=null}};
-          const toggleMapInfoWindow=(infoWindow,marker)=>{
+          const toggleMapInfoWindow=(infoWindow,marker,cardId)=>{
             if(activeMapInfoWindow===infoWindow){dismissActiveMapInfoWindow()}else{dismissActiveMapInfoWindow();activeMapInfoWindow=infoWindow;infoWindow.open(mainMap,marker)}
-            const position=marker.getPosition(),card=placeCards.find(item=>Number(item.dataset.lat)===position.getLat()&&Number(item.dataset.lng)===position.getLng());
+            const card=document.getElementById(cardId);
             if(card){card.hidden=false;if(card.getAttribute('aria-expanded')!=='true')togglePlaceCard(card);requestAnimationFrame(()=>card.scrollIntoView({behavior:reducePlaceMotion?'auto':'smooth',block:'nearest'}))}
           };
           window.kakao.maps.event.addListener(mainMap,'click',dismissActiveMapInfoWindow);
           document.addEventListener('click',event=>{if(event.target instanceof Element&&event.target.closest('.map-store-info'))dismissActiveMapInfoWindow()});
           const storeInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>아름다운가게 진주평안점</strong>경남 진주시 진주대로 1081</div>'});
-          window.kakao.maps.event.addListener(storeMarker,'click',()=>toggleMapInfoWindow(storeInfoWindow,storeMarker));
+          window.kakao.maps.event.addListener(storeMarker,'click',()=>toggleMapInfoWindow(storeInfoWindow,storeMarker,'map-beautiful-store-card'));
           const zeroWasteInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>진주제로웨이스트온</strong>경남 진주시 비봉로 6, 2층 일부</div>'});
-          window.kakao.maps.event.addListener(zeroWasteMarker,'click',()=>toggleMapInfoWindow(zeroWasteInfoWindow,zeroWasteMarker));
+          window.kakao.maps.event.addListener(zeroWasteMarker,'click',()=>toggleMapInfoWindow(zeroWasteInfoWindow,zeroWasteMarker,'map-zero-waste-card'));
           const seongbukInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>성북동 행정복지센터</strong>진주시 진주성로35번길 10</div>'});
-          window.kakao.maps.event.addListener(seongbukMarker,'click',()=>toggleMapInfoWindow(seongbukInfoWindow,seongbukMarker));
+          window.kakao.maps.event.addListener(seongbukMarker,'click',()=>toggleMapInfoWindow(seongbukInfoWindow,seongbukMarker,'map-seongbuk-card'));
           const enaMallInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>중앙지하도상가 에나몰</strong>진주시 진주대로 지하 1035</div>'});
-          window.kakao.maps.event.addListener(enaMallMarker,'click',()=>toggleMapInfoWindow(enaMallInfoWindow,enaMallMarker));
+          window.kakao.maps.event.addListener(enaMallMarker,'click',()=>toggleMapInfoWindow(enaMallInfoWindow,enaMallMarker,'map-enamall-card'));
           const centralMarketInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>진주중앙시장</strong>진주시 진양호로547번길 8-1</div>'});
-          window.kakao.maps.event.addListener(centralMarketMarker,'click',()=>toggleMapInfoWindow(centralMarketInfoWindow,centralMarketMarker));
+          window.kakao.maps.event.addListener(centralMarketMarker,'click',()=>toggleMapInfoWindow(centralMarketInfoWindow,centralMarketMarker,'map-market-card'));
           const hansalimInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>한살림 진주매장</strong>평거동 · 생활협동조합 매장</div>'});
-          window.kakao.maps.event.addListener(hansalimMarker,'click',()=>toggleMapInfoWindow(hansalimInfoWindow,hansalimMarker));
+          window.kakao.maps.event.addListener(hansalimMarker,'click',()=>toggleMapInfoWindow(hansalimInfoWindow,hansalimMarker,'map-hansalim-card'));
           const pyeonggeoCenterInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>평거동 행정복지센터</strong>공공기관</div>'});
-          window.kakao.maps.event.addListener(pyeonggeoCenterMarker,'click',()=>toggleMapInfoWindow(pyeonggeoCenterInfoWindow,pyeonggeoCenterMarker));
+          window.kakao.maps.event.addListener(pyeonggeoCenterMarker,'click',()=>toggleMapInfoWindow(pyeonggeoCenterInfoWindow,pyeonggeoCenterMarker,'map-pyeonggeo-center-card'));
           const beautifulPyeonggeoInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>아름다운가게 평거동 등록 지점</strong>재사용·자원순환 매장</div>'});
-          window.kakao.maps.event.addListener(beautifulPyeonggeoMarker,'click',()=>toggleMapInfoWindow(beautifulPyeonggeoInfoWindow,beautifulPyeonggeoMarker));
+          window.kakao.maps.event.addListener(beautifulPyeonggeoMarker,'click',()=>toggleMapInfoWindow(beautifulPyeonggeoInfoWindow,beautifulPyeonggeoMarker,'map-beautiful-pyeonggeo-card'));
           const netzeroCenterInfo=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>진주시 탄소중립지원센터</strong>칠암캠퍼스 대표 건물 좌표 · 15동 정확한 위치 미확인</div>'});
-          window.kakao.maps.event.addListener(netzeroCenterMarker,'click',()=>toggleMapInfoWindow(netzeroCenterInfo,netzeroCenterMarker));
+          window.kakao.maps.event.addListener(netzeroCenterMarker,'click',()=>toggleMapInfoWindow(netzeroCenterInfo,netzeroCenterMarker,'map-netzero-center-card'));
           const bikeRentalInfo=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>칠암동 공영자전거 무료대여소</strong>인근 버스정류장 좌표 기준 · 대여소 위치 미검증</div>'});
-          window.kakao.maps.event.addListener(bikeRentalMarker,'click',()=>toggleMapInfoWindow(bikeRentalInfo,bikeRentalMarker));
+          window.kakao.maps.event.addListener(bikeRentalMarker,'click',()=>toggleMapInfoWindow(bikeRentalInfo,bikeRentalMarker,'map-bike-rental-card'));
           const chilamOfficeInfo=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>칠암현장민원실</strong>진주시 강남로177번길 30-7</div>'});
-          window.kakao.maps.event.addListener(chilamOfficeMarker,'click',()=>toggleMapInfoWindow(chilamOfficeInfo,chilamOfficeMarker));
+          window.kakao.maps.event.addListener(chilamOfficeMarker,'click',()=>toggleMapInfoWindow(chilamOfficeInfo,chilamOfficeMarker,'map-chilam-office-card'));
           const probicycleInfo=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>진주프로바이클</strong>진주시 강남로 245 (칠암동 499-1)</div>'});
-          window.kakao.maps.event.addListener(probicycleMarker,'click',()=>toggleMapInfoWindow(probicycleInfo,probicycleMarker));
+          window.kakao.maps.event.addListener(probicycleMarker,'click',()=>toggleMapInfoWindow(probicycleInfo,probicycleMarker,'map-probicycle-card'));
           const geocoder=new window.kakao.maps.services.Geocoder();
           document.querySelectorAll('[data-map-district]').forEach(button=>button.addEventListener('click',()=>{
             const district=button.dataset.mapDistrict;
