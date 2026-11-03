@@ -2,80 +2,94 @@
   const mapSection = document.querySelector('#map');
   if (!mapSection) return;
 
-  const definitions = {
+  const placeFacts = {
     'map-beautiful-store-card': {
-      type: 'circular',
-      action: '기증 가능한 물품을 확인하고 중고 물품 재사용에 참여해 보세요.',
-      method: '기증 품목과 접수 가능 여부를 매장에 문의한 뒤 방문해 주세요.',
-      condition: '접수 가능 품목과 방법은 방문 전에 매장에 확인해 주세요.'
+      type: 'circular', displayType: '자원순환', address: '경남 진주시 진주대로 1081, 성모의원 1층',
+      action: '사용하지 않는 의류와 생활용품 등 재사용 가능한 물품을 기증하거나 중고 물품을 구매할 수 있는 자원순환 매장입니다. 물품의 재사용을 통해 자원 소비와 폐기물 발생을 줄이는 실천에 참여할 수 있습니다.',
+      method: '재사용 가능한 의류와 생활용품 등을 기증하거나 중고 물품을 구매할 수 있습니다.',
+      condition: '기증 가능 품목과 접수시간은 방문 전 확인을 권장합니다.',
+      hours: '월~토 10:30~18:00', holidays: '일요일·공휴일 휴무', phone: '055-741-8845'
     },
     'map-zero-waste-card': {
-      type: 'circular',
-      action: '포장재를 줄일 수 있는 상품이나 리필 취급 여부를 매장에 확인해 보세요.',
-      method: '다회용 용기 사용이나 포장 최소화가 가능한지 매장에 문의해 주세요.',
-      condition: '상품 구성과 이용 조건은 방문 전에 매장에 확인해 주세요.'
+      type: 'environment', displayType: '정보 확인 필요', address: '경남 진주시 비봉로 6, 2층 일부',
+      action: '제로웨이스트·자원순환 관련 장소로 등록되어 있습니다. 현재 구체적인 친환경 제품 판매 여부와 실천 프로그램은 확인되지 않아 추가 조사가 필요합니다.',
+      method: '현재 운영 여부와 실제 제공 서비스 확인 후 이용해 주세요.',
+      condition: '현재 운영 여부와 구체적인 실천 활동 확인 후 공개를 권장합니다.',
+      hours: '미확인', holidays: '미확인', phone: '미확인'
     },
     'map-seongbuk-card': {
-      type: 'environment',
-      action: '탄소중립 관련 업무나 프로그램 운영 여부를 방문 전에 문의해 보세요.',
-      method: '일반 민원 업무와 탄소중립 사업 운영은 다를 수 있으니 담당 부서에 확인해 주세요.',
-      condition: '탄소중립 관련 프로그램 운영은 프로젝트 자료에서 확인되지 않았습니다.'
+      type: 'environment', displayType: '공공기관', address: '경남 진주시 진주성로35번길 10',
+      action: '종이팩 및 폐건전지 등 재활용 자원 교환사업과 관련한 정보를 문의할 수 있는 행정기관입니다. 실제 수거·교환 가능 품목과 운영 여부는 확인이 필요합니다.',
+      method: '재활용 자원 교환사업의 운영 여부와 교환 가능한 품목을 문의해 주세요.',
+      condition: '재활용 자원 교환사업 운영 여부 및 교환 기준 확인이 필요합니다.',
+      hours: '평일 09:00~18:00 (민원실 기준)', holidays: '토요일·일요일·공휴일', phone: '055-749-4041'
     },
     'map-enamall-card': {
-      type: 'other',
-      action: '방문 시 가까운 거리는 도보나 대중교통 이용을 고려해 보세요.',
-      method: '방문 전에 상가 이용 정보와 대중교통 접근 방법을 확인해 주세요.',
-      condition: '상가의 탄소중립 프로그램은 프로젝트 자료에서 확인되지 않았습니다.'
+      type: 'recycling', displayType: '분리배출 확인 필요', address: '경남 진주시 진주대로 지하 1035',
+      action: '상가 내 분리배출 시설을 활용한 재활용 실천 장소로 검토 중입니다. 분리배출함의 정확한 위치와 수거 품목은 확인되지 않았습니다.',
+      method: '분리배출함 설치 여부와 위치, 수거 품목이 확인된 뒤 이용해 주세요.',
+      condition: '2026년 현재 개방시간 및 분리배출함 설치 여부 재확인이 필요합니다. 개별 점포 운영시간은 서로 다를 수 있습니다.',
+      hours: '08:00~23:00 (기존 공개 자료 기준)', holidays: '매월 마지막 주 일요일 (기존 공개 자료 기준)', phone: '미확인',
+      extraFacts: [['개별 점포', '운영시간 상이']]
     },
     'map-market-card': {
-      type: 'other',
-      action: '방문 시 장바구니를 챙기고 가까운 거리는 도보·대중교통을 고려해 보세요.',
-      method: '포장 방식이나 다회용 장바구니 이용 조건은 점포에 확인해 주세요.',
-      condition: '시장 차원의 탄소중립 프로그램은 프로젝트 자료에서 확인되지 않았습니다.'
+      type: 'other', displayType: '친환경 소비', address: '경남 진주시 진양호로547번길 8-1 일대',
+      action: '시장 방문 시 개인 장바구니나 다회용기를 사용하여 일회용 포장재 소비를 줄일 수 있습니다. 이는 방문자에게 권장하는 실천 행동이며, 모든 점포가 다회용기 사용을 지원한다는 의미는 아닙니다.',
+      method: '방문할 점포에 다회용기 사용과 포장 방법을 확인해 주세요.',
+      condition: '개별 점포의 이용 조건과 분리배출 시설 여부를 별도로 확인해 주세요.',
+      hours: '점포별 상이', holidays: '점포별 상이', phone: '055-741-2151', contactLabel: '문의'
     },
     'map-hansalim-card': {
-      type: 'other',
-      action: '장바구니나 다회용 용기 사용이 가능한지 매장에 확인해 보세요.',
-      method: '상품 판매 사실만으로 탄소배출 감축 효과를 단정할 수 없습니다. 포장·용기 사용 조건을 매장에 확인해 주세요.',
-      condition: '매장 이용 조건과 포장 정책은 프로젝트 자료에서 확인되지 않았습니다.'
+      type: 'other', displayType: '친환경 소비', address: '매장 주소 확인 필요',
+      action: '유기농·무농약 등 친환경 인증 농산물과 가공식품을 구매할 수 있는 생활협동조합 매장입니다. 개인 장바구니 사용으로 일회용 봉투 소비를 줄일 수 있습니다.',
+      method: '개인 장바구니를 사용해 일회용 봉투 소비를 줄일 수 있습니다. 친환경 인증을 탄소 감축량의 직접 증거로 해석하지 않습니다.',
+      condition: '재사용병 및 공급 상자 회수 활동의 진주매장 적용 여부, 매장 주소와 운영시간, 회수 가능 품목 확인이 필요합니다.',
+      hours: '미확인', holidays: '미확인', phone: '1661-0800 (한살림 대표 상담번호)', contactLabel: '상담전화'
     },
     'map-pyeonggeo-center-card': {
-      type: 'environment',
-      action: '탄소중립 관련 업무나 프로그램 운영 여부를 방문 전에 문의해 보세요.',
-      method: '일반 민원 업무와 환경 프로그램 운영 여부를 구분해 담당 부서에 확인해 주세요.',
-      condition: '탄소중립 관련 프로그램 운영은 프로젝트 자료에서 확인되지 않았습니다.'
+      type: 'environment', displayType: '공공기관', address: '경남 진주시 평거로40번길 5',
+      action: '가정의 전기·수도·가스 사용량 절감과 관련한 탄소중립포인트 제도 정보를 알아보고, 재활용 자원 교환사업의 참여 가능 여부를 문의할 수 있는 공공기관입니다.',
+      method: '탄소중립포인트 현장 신청 지원 여부와 종이팩·폐건전지 교환 가능 여부를 문의해 주세요.',
+      condition: '현장 신청 지원 및 재활용 자원 교환 여부 확인이 필요합니다.',
+      hours: '평일 09:00~18:00 (민원실 기준)', holidays: '토요일·일요일·공휴일', phone: '미확인'
     },
     'map-beautiful-pyeonggeo-card': {
-      type: 'circular',
-      action: '재사용 매장 이용 전 해당 지점의 운영 여부와 기증 가능 품목을 확인해 주세요.',
-      method: '프로젝트에는 등록 지점으로 기록되어 있습니다. 방문 전에 현재 운영 여부와 접수 방법을 확인해 주세요.',
-      condition: '현재 운영 여부와 주소 정보는 추가 확인이 필요합니다.'
+      type: 'circular', displayType: '위치 미검증', address: '실제 지점 주소 확인 필요',
+      action: '아름다운가게의 일반적인 실천 활동은 중고 물품 기증과 재사용 소비입니다. 다만 평거동 등록 지점이 실제 운영 중인 별도 매장인지는 확인되지 않았습니다.',
+      method: '실제 지점과 운영 여부 확인 전에는 방문을 안내하지 않습니다.',
+      condition: '실제 지점 확인 전에는 방문 안내 및 지도 마커 공개를 보류하는 것이 좋습니다.',
+      hours: '미확인', holidays: '미확인', phone: '미확인', verifiedLocation: false,
+      extraFacts: [['등록 좌표', '35.1698294, 128.0530571 (위치 미검증)']]
     },
     'map-netzero-center-card': {
-      type: 'environment',
-      action: '탄소중립 교육·지원 사업의 운영 여부와 참여 방법을 센터에 문의해 보세요.',
-      method: '프로젝트 자료에는 센터 주소와 캠퍼스 대표 좌표가 있습니다. 15동의 정확한 위치는 확인되지 않았습니다.',
-      condition: '특정 사업이나 프로그램의 운영 시간은 센터에 확인해 주세요.',
-      verifiedLocation: false
+      type: 'environment', displayType: '환경정보·교육', address: '경남 진주시 동진로 33, 경상국립대학교 칠암캠퍼스 15동',
+      action: '지역 탄소중립 정책과 온실가스 감축 활동을 지원하는 전문기관입니다. 탄소중립 사업 안내, 교육, 간담회, 기업 대상 역량 강화 컨설팅 등을 추진합니다.',
+      method: '일반인 대상 상설 체험시설이 아닌 정보·교육 지원기관으로 이용 목적과 프로그램을 사전에 문의해 주세요.',
+      condition: '방문 가능시간과 특정 프로그램의 운영시간은 확인이 필요합니다. 기존 좌표는 캠퍼스 대표 건물 기준이며 15동의 정확한 위치는 확인되지 않았습니다.',
+      hoursLabel: '방문 가능시간', hours: '미확인', holidays: '미확인', phone: '055-772-3555~3556', verifiedLocation: false
     },
     'map-bike-rental-card': {
-      type: 'transport',
-      action: '자전거 대여 위치와 운영 여부를 확인한 뒤 이동에 활용해 보세요.',
-      method: '프로젝트 자료의 좌표는 인근 버스정류장을 기준으로 했으며 대여소 위치가 검증되지 않았습니다.',
-      condition: '대여소 위치·운영 여부와 이용 조건을 확인할 수 있는 자료가 없습니다.',
-      verifiedLocation: false
+      type: 'transport', displayType: '녹색교통', address: '경남 진주시 강남로 188',
+      action: '공영자전거를 무료로 대여해 가까운 거리를 자동차 대신 자전거로 이동할 수 있습니다. 일상 이동에서 자동차 이용을 줄이는 녹색교통 실천에 참여할 수 있습니다.',
+      method: '현재 대여소 운영 여부와 정확한 입구 위치를 확인한 뒤 이용해 주세요.',
+      condition: '현재 운영 여부와 정확한 대여소 입구 위치 확인이 필요합니다.',
+      hours: '09:00~17:00 (기존 공공데이터 기준)', holidays: '1월 1일, 설·추석 연휴', phone: '미확인',
+      extraFacts: [['이용요금', '무료']], verifiedLocation: false
     },
     'map-chilam-office-card': {
-      type: 'environment',
-      action: '탄소중립 관련 업무나 프로그램 운영 여부를 방문 전에 문의해 보세요.',
-      method: '일반 민원 시설의 운영 정보와 탄소중립 사업 운영 정보를 구분해 확인해 주세요.',
-      condition: '탄소중립 관련 프로그램 운영은 프로젝트 자료에서 확인되지 않았습니다.'
+      type: 'environment', displayType: '실천 내용 확인 필요', address: '경남 진주시 강남로177번길 30-7',
+      action: '종이팩·폐건전지 등 재활용 자원 수거 및 교환사업 운영 여부를 확인해야 하는 공공기관입니다. 현재 구체적인 탄소중립 프로그램은 확인되지 않았습니다.',
+      method: '재활용 자원 수거·교환사업의 운영 여부와 이용 방법을 문의해 주세요.',
+      condition: '무인민원발급기 이용시간과 탄소중립 실천사업 운영시간은 별도로 확인해야 합니다.',
+      hoursLabel: '민원실 운영시간', hours: '평일 09:00~18:00 (일반 민원실 기준, 지점별 확인 필요)', holidays: '토요일·일요일·공휴일 원칙', phone: '미확인',
+      extraFacts: [['무인민원발급기', '24시간 운영으로 등록된 자료 있음']]
     },
     'map-probicycle-card': {
-      type: 'transport',
-      action: '자전거 수리·정비가 가능한지 문의해 자전거를 오래 이용해 보세요.',
-      method: '수리 가능 항목과 비용은 방문 전에 매장에 확인해 주세요.',
-      condition: '정비 서비스의 종류와 이용 조건은 프로젝트 자료에서 확인되지 않았습니다.'
+      type: 'transport', displayType: '녹색교통', address: '경남 진주시 강남로 245',
+      action: '자전거 판매 매장으로, 자전거를 교통수단으로 이용하려는 방문자가 관련 제품과 정보를 알아볼 수 있습니다. 이를 통해 자동차 이용을 줄이는 친환경 이동 방식을 실천할 수 있습니다.',
+      method: '자전거를 이동 수단으로 활용할 때 자동차 이용을 줄이는 데 참여할 수 있습니다.',
+      condition: '자전거 수리·정비 가능 여부는 별도로 확인해 주세요.',
+      hours: '미확인', holidays: '미확인', phone: '055-758-1189'
     }
   };
   const typeLabels = {
@@ -94,8 +108,9 @@
       return false;
     }
     seenIds.add(card.id);
-    const data = definitions[card.id] || {};
+    const data = placeFacts[card.id] || {};
     card.dataset.mapType = data.type || 'other';
+    card.dataset.mapSearch = [data.displayType, data.address, data.action, data.method].filter(Boolean).join(' ');
     if (data.verifiedLocation === false) card.dataset.locationVerified = 'false';
     return true;
   });
@@ -140,10 +155,10 @@
     const query = normalize(search.value);
     const visible = [];
     places.forEach(card => {
-      const data = definitions[card.id] || {};
+      const data = placeFacts[card.id] || {};
       const areaMatch = (card.dataset.mapAreas || '').split(/\s+/).includes(district);
       const typeMatch = selectedType === 'all' || data.type === selectedType;
-      const textMatch = !query || normalize(card.textContent + ' ' + (card.dataset.mapAreas || '') + ' ' + (typeLabels[data.type] || '')).includes(query);
+      const textMatch = !query || normalize(card.textContent + ' ' + (card.dataset.mapAreas || '') + ' ' + (typeLabels[data.type] || '') + ' ' + card.dataset.mapSearch).includes(query);
       card.hidden = !(areaMatch && typeMatch && textMatch);
       if (!card.hidden) visible.push(card);
     });
@@ -182,20 +197,22 @@
     selectedCard = card;
     places.forEach(place => place.removeAttribute('aria-current'));
     card.setAttribute('aria-current', 'true');
-    const data = definitions[card.id] || {};
+    const info = placeFacts[card.id] || {};
     const title = card.querySelector('.map-place-copy strong')?.textContent.trim() || card.getAttribute('aria-label') || '장소 정보';
-    const type = typeLabels[data.type] || typeLabels.other;
-    const address = card.querySelector('.map-place-expanded-copy p, .map-place-copy p')?.textContent.trim() || '주소 확인 필요';
-    const action = data.action || '방문 전 이용 가능 여부와 환경 실천 정보를 확인해 주세요.';
-    const method = data.method || action;
-    const condition = data.condition || '이용 조건 확인 필요';
+    const type = info.displayType || typeLabels[info.type] || typeLabels.other;
+    const address = info.address || card.querySelector('.map-place-expanded-copy p, .map-place-copy p')?.textContent.trim() || '주소 확인 필요';
+    const action = info.action || '방문 전 이용 가능 여부와 환경 실천 정보를 확인해 주세요.';
+    const method = info.method || action;
+    const condition = info.condition || '이용 조건 확인 필요';
     nameNode.textContent = title;
     typeNode.textContent = type;
     actionNode.textContent = action;
     factsNode.replaceChildren();
-    addFact('운영시간', '운영시간 확인 필요');
-    addFact('휴무일', '휴무일 확인 필요');
+    addFact(info.hoursLabel || '운영시간', info.hours || '운영시간 확인 필요');
+    addFact(info.holidayLabel || '휴무일', info.holidays || '휴무일 확인 필요');
     addFact('주소', address);
+    if (info.verifiedLocation === false) addFact('위치 상태', '정확한 위치 확인 필요 · 지도 마커 미표시');
+    if (info.extraFacts) info.extraFacts.forEach(([label, value]) => addFact(label, value));
     const directions = sheet.querySelector('.map-place-directions');
     directions.href = `https://map.kakao.com/link/search/${encodeURIComponent(title)}`;
     detailsNode.replaceChildren();
@@ -210,8 +227,9 @@
     };
     appendDetail('실천 방법', method);
     appendDetail('이용 조건 및 주의사항', condition);
-    appendDetail('연락처', '연락처 확인 필요');
-    appendDetail('정보 확인일', '확인일 기록 없음');
+    appendDetail(info.contactLabel || '연락처', info.phone || '연락처 확인 필요');
+    appendDetail('정보 확인일', '공식 확인일 기록 없음');
+    appendDetail('정보 출처', '제공 자료 기준 · 공식 출처 확인 필요');
     const sources = sourceLinks(card);
     const sourceGroup = document.createElement('section');
     const sourceTitle = document.createElement('h3');

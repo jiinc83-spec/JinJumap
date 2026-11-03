@@ -148,7 +148,7 @@ html.map-page body.mobile-layout .map-place-sheet-heading{min-width:0;flex:1}
 html.map-page body.mobile-layout .map-place-sheet-type{display:block;margin-bottom:3px;color:#6d8d72;font-size:10px}
 html.map-page body.mobile-layout .map-place-sheet h2{margin:0;color:#263d2e;font-size:15px;line-height:1.4;letter-spacing:-.02em}
 html.map-page body.mobile-layout .map-place-sheet-close{width:30px;height:30px;flex:none;border:0;border-radius:50%;background:#f2f6f1;color:#66796b;font-size:21px;line-height:1;cursor:pointer}
-html.map-page body.mobile-layout .map-place-sheet-action{margin:7px 15px 0;color:#65776a;font-size:11px;line-height:1.5}
+html.map-page body.mobile-layout .map-place-sheet-action{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;margin:7px 15px 0;color:#65776a;font-size:11px;line-height:1.5}
 html.map-page body.mobile-layout .map-place-sheet-facts{display:grid;gap:0;margin:7px 15px 0;padding:0}
 html.map-page body.mobile-layout .map-place-sheet-facts>div{display:grid;grid-template-columns:64px minmax(0,1fr);gap:8px;padding:5px 0;border-top:1px solid #eff2ee}
 html.map-page body.mobile-layout .map-place-sheet-facts dt{color:#8a968d;font-size:10px}
