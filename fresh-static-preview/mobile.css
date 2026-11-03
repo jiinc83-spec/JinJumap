@@ -179,7 +179,7 @@ html.map-page body.mobile-layout .map-place-sheet-details a{display:block;margin
 html.map-page body.mobile-layout .map-place-directions:focus-visible,html.map-page body.mobile-layout .map-place-more:focus-visible,html.map-page body.mobile-layout .map-place-sheet-close:focus-visible{outline:3px solid #8fae9170;outline-offset:2px}
 @media(prefers-reduced-motion:reduce){html.map-page body.mobile-layout .map-type-tabs button{transition:none}}
 body.mobile-layout .mobile-discovery{margin:0 0 20px;padding:0;background:transparent;border:0}
-body.mobile-layout .mobile-map-entry{justify-content:flex-start;gap:13px;margin:12px 0 17px;padding:11px 13px;border:0;border-radius:15px;background:#eaf4eb;box-shadow:none}
+body.mobile-layout .mobile-map-entry{justify-content:flex-start;gap:13px;margin:12px 0 17px;padding:11px 13px;border:1px solid #d5e3d3;border-radius:15px;background:#fff;box-shadow:0 3px 12px #28422d08}
 body.mobile-layout .mobile-map-entry-icon{width:54px;height:54px;flex:none;display:grid;place-items:center;border-radius:13px;background:#f4f8f2;color:#39734e}
 body.mobile-layout .mobile-map-entry-icon svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 body.mobile-layout .mobile-map-entry-copy{flex:1}
