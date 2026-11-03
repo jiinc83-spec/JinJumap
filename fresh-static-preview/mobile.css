@@ -161,3 +161,10 @@ body.mobile-layout .hero-copy h1,body.mobile-layout .hero-copy h1 em{color:#fff!
 body.mobile-layout .hero-copy p:not(.eyebrow){color:#fff!important;text-shadow:0 1px 6px #10251c99}
 
 body.mobile-layout .mobile-map-entry{cursor:pointer;text-decoration:none}body.mobile-layout .mobile-map-entry:focus-visible{outline:3px solid #89aa8b;outline-offset:3px}body.mobile-layout .mobile-map-entry-copy strong{display:block;color:#2e4935;font-size:14px;font-weight:750}body.mobile-layout .mobile-map-entry-copy>span{display:block;color:#859086;font-size:10px}
+
+body.mobile-layout .hero-carousel-controls{position:absolute;inset:0;top:0;right:auto;z-index:4;display:block;padding:0;border-radius:0;background:none;backdrop-filter:none;pointer-events:none}
+body.mobile-layout .hero-carousel-controls .hero-carousel-dots,body.mobile-layout .hero-carousel-controls .hero-carousel-count{display:none}
+body.mobile-layout .hero-carousel-controls .hero-carousel-arrow{position:absolute;top:50%;display:grid;width:32px;height:32px;place-items:center;padding:0;border:1px solid rgba(255,255,255,.55);border-radius:50%;background:rgba(22,58,42,.68);color:#fff;font-size:24px;line-height:1;transform:translateY(-50%);pointer-events:auto;backdrop-filter:blur(5px);transition:background-color .2s ease,transform .2s ease}
+body.mobile-layout .hero-carousel-controls .hero-carousel-arrow:first-child{left:10px}
+body.mobile-layout .hero-carousel-controls .hero-carousel-arrow:last-child{right:10px}
+body.mobile-layout .hero-carousel-controls .hero-carousel-arrow:hover,body.mobile-layout .hero-carousel-controls .hero-carousel-arrow:focus-visible{border-radius:50%;background:rgba(22,58,42,.88);transform:translateY(-50%) scale(1.05)}
