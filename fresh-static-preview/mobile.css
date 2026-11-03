@@ -99,11 +99,6 @@ body.mobile-layout .mobile-search input{height:100%;padding:0 2px;font-size:16px
 body.mobile-layout .mobile-search input::placeholder{color:#91a095}
 body.mobile-layout .mobile-search button{width:30px;height:32px;flex:none;border-radius:9px;background:transparent;color:#6f8c73}
 body.mobile-layout .mobile-search button svg{width:18px;height:18px}
-body.mobile-layout .mobile-search-suggestions{display:flex;align-items:center;gap:7px;margin:9px 0 12px;overflow-x:auto;scrollbar-width:none}
-body.mobile-layout .mobile-search-suggestions::-webkit-scrollbar{display:none}
-body.mobile-layout .mobile-search-suggestions[hidden]{display:flex!important;visibility:hidden}
-body.mobile-layout .mobile-search-suggestions button{flex:none;padding:6px 11px;border:1px solid #e4ebe2;border-radius:999px;background:#f7f9f5;color:#637867;font:inherit;font-size:10px;white-space:nowrap;cursor:pointer}
-body.mobile-layout .mobile-search-suggestions button:active{background:#eaf2e8;border-color:#cbdcc8}
 body.mobile-layout .mobile-search-results[hidden]{display:none!important}
 body.mobile-layout .mobile-search-results{position:absolute;z-index:100;top:49px;left:16px;right:16px;max-height:min(58vh,440px);overflow:auto;border:1px solid #e1e9df;border-radius:15px;background:#fff;box-shadow:0 12px 32px #203b2424;overscroll-behavior:contain}
 body.mobile-layout .mobile-search-results-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid #edf1eb;background:#fff;color:#3d5842;font-size:11px}
