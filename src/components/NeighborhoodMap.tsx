@@ -41,8 +41,8 @@ export default function NeighborhoodMap({ stores, onSelect }: { stores: Store[];
     return () => { markers.forEach(({marker,click}) => {maps.event.removeListener(marker,'click',click);marker.setMap(null);}); };
   }, [stores, onSelect, state, attempt]);
   const located = stores.filter(hasCoordinates).length;
-  const title = state === 'unconfigured' ? '지도 연결을 준비하고 있어요' : state === 'error' ? '카카오맵을 불러오지 못했어요' : state === 'loading' ? '카카오맵을 불러오는 중이에요' : !stores.length ? '이 조건에 등록된 매장이 없어요' : '확인된 위치만 지도에 표시해요';
-  const description = state === 'unconfigured' || state === 'error' ? '매장 목록과 상세 정보는 이용할 수 있어요. 상세에서 카카오맵으로 연결해 주세요.' : state === 'loading' ? '잠시만 기다려 주세요. 매장 목록은 바로 확인할 수 있어요.' : `검색 결과 ${stores.length}곳 중 좌표 출처가 확인된 ${located}곳을 표시합니다. 좌표가 없는 매장은 목록에서 확인해 주세요.`;
+  const title = state === 'unconfigured' ? '지도 연결을 준비하고 있어요' : state === 'error' ? '카카오맵을 불러오지 못했어요' : state === 'loading' ? '카카오맵을 불러오는 중이에요' : !stores.length ? '이 조건에 등록된 매장이 없어요' : '등록 좌표가 있는 장소를 표시해요';
+  const description = state === 'unconfigured' || state === 'error' ? '매장 목록과 상세 정보는 이용할 수 있어요. 상세에서 카카오맵으로 연결해 주세요.' : state === 'loading' ? '잠시만 기다려 주세요. 매장 목록은 바로 확인할 수 있어요.' : `검색 결과 ${stores.length}곳 중 기존 프로젝트에 등록된 좌표가 있는 ${located}곳을 표시합니다. 현장 위치 검증을 마친 좌표는 아니며, 좌표가 없는 장소는 목록에서 확인해 주세요.`;
   return <section className="map-panel" aria-label="진주시 평거동 카카오 지도">
     <div className="map-canvas" ref={container}/>
     {state !== 'ready' && <div className="map-placeholder" aria-hidden="true"><MapPin size={42}/><span>남강 GREEN MAP</span><small>우리 동네, 더 푸르게</small></div>}

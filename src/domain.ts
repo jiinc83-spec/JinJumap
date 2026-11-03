@@ -1,12 +1,17 @@
 import raw from './data/stores.json' with { type: 'json' };
 export interface Store {
  id: string;
- page: number;
+ page?: number;
  name: string;
  address: string;
  tags: string[];
+ displayType?: string;
  activity: string;
  status: string;
+ openingHours?: string;
+ closedDays?: string;
+ phone?: string;
+ verification?: string;
  points: string;
  facts: string;
  participation: string[];
@@ -18,15 +23,12 @@ export interface Store {
 export const stores: Store[] = raw as Store[];
 export const categories = [
   { id: 'all', label: '전체', icon: 'leaf' },
-  { id: 'cup', label: '다회용기' , icon: 'cup' },
+  { id: 'cup', label: '텀블러', icon: 'cup' },
   { id: 'recycle', label: '자원순환', icon: 'recycle' },
-  { id: 'refill', label: '제로웨이스트·리필', icon: 'bag' },
-  { id: 'mobility', label: '친환경 교통·에너지', icon: 'bike' },
-  { id: 'plastic', label: '플라스틱 줄이기', icon: 'leaf' },
-  { id: 'shopping', label: '친환경제품', icon: 'bag' },
-  { id: 'receipt', label: '전자영수증', icon: 'receipt' },
-  { id: 'repair', label: '수리·오래 쓰기', icon: 'bike' },
-  { id: 'points', label: '탄소중립포인트', icon: 'points' },
+  { id: 'mobility', label: '녹색교통', icon: 'bike' },
+  { id: 'separation', label: '분리배출', icon: 'recycle' },
+  { id: 'environment', label: '환경정보', icon: 'leaf' },
+  { id: 'shopping', label: '친환경 소비', icon: 'bag' },
 ];
 export function filterStores(category: string, query: string) {
  const q = query.trim().toLocaleLowerCase();
