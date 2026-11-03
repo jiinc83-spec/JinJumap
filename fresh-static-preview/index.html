@@ -297,7 +297,7 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
         locationResults.replaceChildren();const bounds=new window.kakao.maps.LatLngBounds();
         data.slice(0,10).forEach(place=>{
           const position=new window.kakao.maps.LatLng(place.y,place.x),marker=new window.kakao.maps.Marker({map:tumblerMap,position});locationMarkers.push(marker);bounds.extend(position);
-          const item=document.createElement('li');item.className='location-result';const name=document.createElement('strong'),address=document.createElement('span');name.textContent=place.place_name;address.textContent=place.road_address_name||place.address_name||'주소 정보 없음';item.append(name,address);item.onclick=()=>{tumblerMap.panTo(position);const info=document.createElement('div');info.textContent=place.place_name;info.style.cssText='padding:8px 10px;font-size:12px';new window.kakao.maps.InfoWindow({content:info}).open(tumblerMap,marker)};locationResults.append(item)
+          const item=document.createElement('li');item.className='location-result';const name=document.createElement('strong'),address=document.createElement('span');name.textContent=place.place_name;address.textContent=place.road_address_name||place.address_name||'주소 정보 없음';item.append(name,address);item.onclick=()=>{tumblerMap.panTo(position);const info=document.createElement('div');info.textContent=place.place_name;info.style.cssText='padding:8px 10px;font-size:12px';new window.kakao.maps.InfoWindow({disableAutoPan:true,content:info}).open(tumblerMap,marker)};locationResults.append(item)
         });
         if(data.length)tumblerMap.setBounds(bounds);document.querySelector('#location-summary').textContent=`진주 주변 매장 ${data.length}곳`;
       },{location:center,radius:20000});
@@ -352,35 +352,37 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           let activeMapInfoWindow=null;
           const dismissActiveMapInfoWindow=()=>{if(activeMapInfoWindow){activeMapInfoWindow.close();activeMapInfoWindow=null}};
           const toggleMapInfoWindow=(infoWindow,marker,cardId)=>{
+            const pageScrollY=window.scrollY;
             if(activeMapInfoWindow===infoWindow){dismissActiveMapInfoWindow()}else{dismissActiveMapInfoWindow();activeMapInfoWindow=infoWindow;infoWindow.open(mainMap,marker)}
             const card=document.getElementById(cardId);
             if(card){card.hidden=false;if(card.getAttribute('aria-expanded')!=='true')togglePlaceCard(card,false)}
+            requestAnimationFrame(()=>{if(Math.abs(window.scrollY-pageScrollY)>1)window.scrollTo({top:pageScrollY,behavior:'instant'})});
           };
           window.kakao.maps.event.addListener(mainMap,'click',dismissActiveMapInfoWindow);
           document.addEventListener('click',event=>{if(event.target instanceof Element&&event.target.closest('.map-store-info'))dismissActiveMapInfoWindow()});
-          const storeInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>아름다운가게 진주평안점</strong>경남 진주시 진주대로 1081</div>'});
+          const storeInfoWindow=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>아름다운가게 진주평안점</strong>경남 진주시 진주대로 1081</div>'});
           window.kakao.maps.event.addListener(storeMarker,'click',()=>toggleMapInfoWindow(storeInfoWindow,storeMarker,'map-beautiful-store-card'));
-          const zeroWasteInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>진주제로웨이스트온</strong>경남 진주시 비봉로 6, 2층 일부</div>'});
+          const zeroWasteInfoWindow=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>진주제로웨이스트온</strong>경남 진주시 비봉로 6, 2층 일부</div>'});
           window.kakao.maps.event.addListener(zeroWasteMarker,'click',()=>toggleMapInfoWindow(zeroWasteInfoWindow,zeroWasteMarker,'map-zero-waste-card'));
-          const seongbukInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>성북동 행정복지센터</strong>진주시 진주성로35번길 10</div>'});
+          const seongbukInfoWindow=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>성북동 행정복지센터</strong>진주시 진주성로35번길 10</div>'});
           window.kakao.maps.event.addListener(seongbukMarker,'click',()=>toggleMapInfoWindow(seongbukInfoWindow,seongbukMarker,'map-seongbuk-card'));
-          const enaMallInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>중앙지하도상가 에나몰</strong>진주시 진주대로 지하 1035</div>'});
+          const enaMallInfoWindow=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>중앙지하도상가 에나몰</strong>진주시 진주대로 지하 1035</div>'});
           window.kakao.maps.event.addListener(enaMallMarker,'click',()=>toggleMapInfoWindow(enaMallInfoWindow,enaMallMarker,'map-enamall-card'));
-          const centralMarketInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>진주중앙시장</strong>진주시 진양호로547번길 8-1</div>'});
+          const centralMarketInfoWindow=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>진주중앙시장</strong>진주시 진양호로547번길 8-1</div>'});
           window.kakao.maps.event.addListener(centralMarketMarker,'click',()=>toggleMapInfoWindow(centralMarketInfoWindow,centralMarketMarker,'map-market-card'));
-          const hansalimInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>한살림 진주매장</strong>평거동 · 생활협동조합 매장</div>'});
+          const hansalimInfoWindow=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>한살림 진주매장</strong>평거동 · 생활협동조합 매장</div>'});
           window.kakao.maps.event.addListener(hansalimMarker,'click',()=>toggleMapInfoWindow(hansalimInfoWindow,hansalimMarker,'map-hansalim-card'));
-          const pyeonggeoCenterInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>평거동 행정복지센터</strong>공공기관</div>'});
+          const pyeonggeoCenterInfoWindow=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>평거동 행정복지센터</strong>공공기관</div>'});
           window.kakao.maps.event.addListener(pyeonggeoCenterMarker,'click',()=>toggleMapInfoWindow(pyeonggeoCenterInfoWindow,pyeonggeoCenterMarker,'map-pyeonggeo-center-card'));
-          const beautifulPyeonggeoInfoWindow=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>아름다운가게 평거동 등록 지점</strong>재사용·자원순환 매장</div>'});
+          const beautifulPyeonggeoInfoWindow=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>아름다운가게 평거동 등록 지점</strong>재사용·자원순환 매장</div>'});
           window.kakao.maps.event.addListener(beautifulPyeonggeoMarker,'click',()=>toggleMapInfoWindow(beautifulPyeonggeoInfoWindow,beautifulPyeonggeoMarker,'map-beautiful-pyeonggeo-card'));
-          const netzeroCenterInfo=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>진주시 탄소중립지원센터</strong>칠암캠퍼스 대표 건물 좌표 · 15동 정확한 위치 미확인</div>'});
+          const netzeroCenterInfo=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>진주시 탄소중립지원센터</strong>칠암캠퍼스 대표 건물 좌표 · 15동 정확한 위치 미확인</div>'});
           window.kakao.maps.event.addListener(netzeroCenterMarker,'click',()=>toggleMapInfoWindow(netzeroCenterInfo,netzeroCenterMarker,'map-netzero-center-card'));
-          const bikeRentalInfo=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>칠암동 공영자전거 무료대여소</strong>인근 버스정류장 좌표 기준 · 대여소 위치 미검증</div>'});
+          const bikeRentalInfo=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>칠암동 공영자전거 무료대여소</strong>인근 버스정류장 좌표 기준 · 대여소 위치 미검증</div>'});
           window.kakao.maps.event.addListener(bikeRentalMarker,'click',()=>toggleMapInfoWindow(bikeRentalInfo,bikeRentalMarker,'map-bike-rental-card'));
-          const chilamOfficeInfo=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>칠암현장민원실</strong>진주시 강남로177번길 30-7</div>'});
+          const chilamOfficeInfo=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>칠암현장민원실</strong>진주시 강남로177번길 30-7</div>'});
           window.kakao.maps.event.addListener(chilamOfficeMarker,'click',()=>toggleMapInfoWindow(chilamOfficeInfo,chilamOfficeMarker,'map-chilam-office-card'));
-          const probicycleInfo=new window.kakao.maps.InfoWindow({content:'<div class="map-store-info"><strong>진주프로바이클</strong>진주시 강남로 245 (칠암동 499-1)</div>'});
+          const probicycleInfo=new window.kakao.maps.InfoWindow({disableAutoPan:true,content:'<div class="map-store-info"><strong>진주프로바이클</strong>진주시 강남로 245 (칠암동 499-1)</div>'});
           window.kakao.maps.event.addListener(probicycleMarker,'click',()=>toggleMapInfoWindow(probicycleInfo,probicycleMarker,'map-probicycle-card'));
           const geocoder=new window.kakao.maps.services.Geocoder();
           document.querySelectorAll('[data-map-district]').forEach(button=>button.addEventListener('click',()=>{
