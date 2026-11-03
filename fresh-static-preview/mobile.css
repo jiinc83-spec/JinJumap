@@ -64,7 +64,7 @@ body.mobile-layout .category-overview .bicycle .name,body.mobile-layout .categor
 body.mobile-layout .category-overview .bicycle .prep{font-size:10px;padding:7px;margin-top:4px}
 body.mobile-layout .category-overview .bicycle .card-foot{margin:auto 0 0;padding-top:7px}
 body.mobile-layout .category-overview .bicycle .card-foot button{font-size:10px;padding:9px}
-body.mobile-layout .category-browser-controls{display:flex;align-items:center;justify-content:center;gap:15px;margin:10px 0 26px}
+body.mobile-layout .category-browser-controls{display:flex;align-items:center;justify-content:center;gap:15px;margin:10px 0 44px;padding-bottom:8px}
 body.mobile-layout .category-browser-controls>button{display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid #dce8dc;border-radius:50%;background:#fff;color:#4d7554;font-size:22px;cursor:pointer}
 body.mobile-layout .category-browser-dots{display:flex;align-items:center;gap:7px}
 body.mobile-layout .category-browser-dots button{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:#cddbcc;cursor:pointer}
