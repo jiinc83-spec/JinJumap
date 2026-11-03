@@ -159,3 +159,5 @@ body.mobile-layout .nature-graphic .vein,body.mobile-layout .nature-graphic .wav
 body.mobile-layout .nature-graphic .leaf-dot{fill:#83ae7d}
 body.mobile-layout .hero-copy h1,body.mobile-layout .hero-copy h1 em{color:#fff!important;text-shadow:0 2px 8px #10251c8c}
 body.mobile-layout .hero-copy p:not(.eyebrow){color:#fff!important;text-shadow:0 1px 6px #10251c99}
+
+body.mobile-layout .mobile-map-entry{cursor:pointer;text-decoration:none}body.mobile-layout .mobile-map-entry:focus-visible{outline:3px solid #89aa8b;outline-offset:3px}body.mobile-layout .mobile-map-entry-copy strong{display:block;color:#2e4935;font-size:14px;font-weight:750}body.mobile-layout .mobile-map-entry-copy>span{display:block;color:#859086;font-size:10px}
