@@ -33,6 +33,7 @@ http.createServer(async (request, response) => {
     '/mobile.css': 'text/css; charset=utf-8',
     '/hero-carousel.css': 'text/css; charset=utf-8',
     '/hero-carousel.js': 'application/javascript; charset=utf-8',
+    '/map-place-details.js': 'application/javascript; charset=utf-8',
   };
   if (pathname in pages) {
     try {
