@@ -134,3 +134,26 @@ html.map-page body.mobile-layout .map-page-back svg{width:17px;height:17px;fill:
 html.map-page body.mobile-layout #map .category-heading{margin-bottom:12px}
 html.map-page body.mobile-layout #map .map-shell{height:50vh;min-height:320px;max-height:560px}
 html.map-page body.mobile-layout #map .map-place-card{margin-top:10px}
+body.mobile-layout .mobile-discovery{margin:0 0 20px;padding:0;background:transparent;border:0}
+body.mobile-layout .mobile-map-entry{justify-content:flex-start;gap:13px;margin:12px 0 17px;padding:11px 13px;border:0;border-radius:15px;background:#eaf4eb;box-shadow:none}
+body.mobile-layout .mobile-map-entry-icon{width:54px;height:54px;flex:none;display:grid;place-items:center;border-radius:13px;background:#f4f8f2;color:#39734e}
+body.mobile-layout .mobile-map-entry-icon svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+body.mobile-layout .mobile-map-entry-copy{flex:1}
+body.mobile-layout .mobile-map-entry-copy>span{display:none}
+body.mobile-layout .mobile-map-entry-copy h2{margin:0 0 5px;font-size:14px;letter-spacing:-.3px}
+body.mobile-layout .mobile-map-entry-copy p{font-size:10px}
+body.mobile-layout .mobile-map-entry-button{width:35px;height:42px;flex:none;display:grid;place-items:center;padding:0;border:0;background:transparent;color:#214a34}
+body.mobile-layout .mobile-map-entry-button svg{width:23px;height:23px}
+body.mobile-layout .mobile-map-entry-button .entry-arrow{display:none}
+body.mobile-layout .hero{position:relative;height:205px;min-height:0;margin:12px 0 13px;align-items:flex-start;overflow:hidden;border-radius:16px;background:linear-gradient(180deg,#f8faf5 0%,#eef5e9 65%,#dfefda 100%);box-shadow:none}
+body.mobile-layout .hero:after{content:"";position:absolute;left:-8%;right:-8%;bottom:-33px;height:93px;background:radial-gradient(ellipse at 18% 100%,#d1e8c4 0 39%,transparent 40%),radial-gradient(ellipse at 58% 110%,#c1e0b6 0 45%,transparent 46%),radial-gradient(ellipse at 92% 116%,#a9d49e 0 42%,transparent 43%);pointer-events:none}
+body.mobile-layout .hero-copy{position:relative;z-index:2;flex:1;max-width:100%;padding:22px 19px}
+body.mobile-layout .hero .eyebrow{display:none}
+body.mobile-layout .hero h1{max-width:300px;margin:4px 0 9px;color:#204a35;font-size:24px;line-height:1.35;letter-spacing:-.9px}
+body.mobile-layout .hero h1 em{color:#245f42}
+body.mobile-layout .hero p:not(.eyebrow){max-width:260px;margin:0;color:#697c6a;font-size:10px;line-height:1.6}
+body.mobile-layout .hero-art{position:absolute;z-index:1;right:0;bottom:0;width:100%;height:108px;opacity:.62;transform:none}
+body.mobile-layout .nature-graphic{width:100%;height:100%;overflow:visible}
+body.mobile-layout .nature-graphic .leaf-line{fill:#d8eecf;stroke:#96b991}
+body.mobile-layout .nature-graphic .vein,body.mobile-layout .nature-graphic .wave{stroke:#9ab69a}
+body.mobile-layout .nature-graphic .leaf-dot{fill:#83ae7d}
