@@ -168,3 +168,7 @@ body.mobile-layout .hero-carousel-controls .hero-carousel-arrow{position:absolut
 body.mobile-layout .hero-carousel-controls .hero-carousel-arrow:first-child{left:10px}
 body.mobile-layout .hero-carousel-controls .hero-carousel-arrow:last-child{right:10px}
 body.mobile-layout .hero-carousel-controls .hero-carousel-arrow:hover,body.mobile-layout .hero-carousel-controls .hero-carousel-arrow:focus-visible{background:transparent;transform:translateY(-50%) scale(1.08)}
+
+@keyframes mobile-category-enter{from{opacity:.72;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+body.mobile-layout .category-overview>.category-section.is-entering{animation:mobile-category-enter .48s cubic-bezier(.22,1,.36,1) both}
+@media(prefers-reduced-motion:reduce){body.mobile-layout .category-overview>.category-section.is-entering{animation:none}}
