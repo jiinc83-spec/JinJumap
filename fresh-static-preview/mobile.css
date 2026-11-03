@@ -92,3 +92,31 @@ body.mobile-layout footer a{display:block;margin-top:8px;color:#55765a;font-weig
 body.mobile-layout .bottom{display:flex;position:fixed;left:50%;right:auto;bottom:0;width:min(430px,100%);transform:translateX(-50%);z-index:10;padding:7px 10px max(8px,env(safe-area-inset-bottom));background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid #e8eee3}
 body.mobile-layout .bottom a{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:#718773;font-size:9px}
 body.mobile-layout .bottom span{font-size:20px}
+body.mobile-layout .mobile-discovery{position:relative;z-index:40;overflow:visible}
+body.mobile-layout .mobile-search{height:46px;position:relative;gap:10px;padding:0 10px 0 13px;border:1px solid #dce8dc;border-radius:15px;background:#fff;box-shadow:0 3px 12px #27472b0a;transition:border-color .18s,box-shadow .18s}
+body.mobile-layout .mobile-search:focus-within{border-color:#9bb89d;box-shadow:0 0 0 3px #719b6b18}
+body.mobile-layout .mobile-search input{height:100%;padding:0 2px;font-size:16px;color:#263b2d}
+body.mobile-layout .mobile-search input::placeholder{color:#91a095}
+body.mobile-layout .mobile-search button{width:30px;height:32px;flex:none;border-radius:9px;background:transparent;color:#6f8c73}
+body.mobile-layout .mobile-search button svg{width:18px;height:18px}
+body.mobile-layout .mobile-search-suggestions{display:flex;align-items:center;gap:7px;margin:9px 0 12px;overflow-x:auto;scrollbar-width:none}
+body.mobile-layout .mobile-search-suggestions::-webkit-scrollbar{display:none}
+body.mobile-layout .mobile-search-suggestions[hidden]{display:flex!important;visibility:hidden}
+body.mobile-layout .mobile-search-suggestions button{flex:none;padding:6px 11px;border:1px solid #e4ebe2;border-radius:999px;background:#f7f9f5;color:#637867;font:inherit;font-size:10px;white-space:nowrap;cursor:pointer}
+body.mobile-layout .mobile-search-suggestions button:active{background:#eaf2e8;border-color:#cbdcc8}
+body.mobile-layout .mobile-search-results[hidden]{display:none!important}
+body.mobile-layout .mobile-search-results{position:absolute;z-index:100;top:49px;left:16px;right:16px;max-height:min(58vh,440px);overflow:auto;border:1px solid #e1e9df;border-radius:15px;background:#fff;box-shadow:0 12px 32px #203b2424;overscroll-behavior:contain}
+body.mobile-layout .mobile-search-results-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid #edf1eb;background:#fff;color:#3d5842;font-size:11px}
+body.mobile-layout .mobile-search-close{width:27px;height:27px;border:0;border-radius:50%;background:#f2f5f0;color:#718174;font-size:19px;line-height:1;cursor:pointer}
+body.mobile-layout .mobile-search-result-list{display:grid}
+body.mobile-layout .mobile-search-result{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 13px;border:0;border-bottom:1px solid #f0f2ee;background:#fff;text-align:left;color:#2e4033;cursor:pointer}
+body.mobile-layout .mobile-search-result:last-child{border-bottom:0}
+body.mobile-layout .mobile-search-result:active,body.mobile-layout .mobile-search-result:focus-visible{background:#f5f8f3;outline:0}
+body.mobile-layout .mobile-search-result-copy{min-width:0;display:grid;gap:4px}
+body.mobile-layout .mobile-search-result-copy strong{overflow:hidden;color:#304b36;font-size:12px;font-weight:700;text-overflow:ellipsis;white-space:nowrap}
+body.mobile-layout .mobile-search-result-copy>span{overflow:hidden;color:#879387;font-size:9px;text-overflow:ellipsis;white-space:nowrap}
+body.mobile-layout .mobile-search-result-benefit{flex:none;color:#548259;font-size:10px;font-weight:700}
+body.mobile-layout .mobile-search-empty{display:grid;gap:5px;padding:18px 14px 12px;color:#3e5142}
+body.mobile-layout .mobile-search-empty strong{font-size:12px}
+body.mobile-layout .mobile-search-empty span{color:#869287;font-size:10px;line-height:1.6}
+body.mobile-layout .mobile-search-all{margin:0 13px 13px;padding:9px 12px;border:1px solid #dfe9dc;border-radius:9px;background:#f3f7f1;color:#456b4b;font:inherit;font-size:10px;font-weight:700;cursor:pointer}
