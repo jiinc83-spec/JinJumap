@@ -119,6 +119,122 @@
   const search = mapSection.querySelector('#map-place-search');
   if (!districtFilters || !search) return;
 
+  const searchWrap = search.closest('.map-place-search');
+  const suggestionList = document.createElement('div');
+  suggestionList.className = 'map-place-suggestions';
+  suggestionList.id = 'map-place-suggestions';
+  suggestionList.setAttribute('role', 'listbox');
+  suggestionList.setAttribute('aria-label', '장소 추천 검색어');
+  suggestionList.hidden = true;
+  searchWrap?.append(suggestionList);
+  search.setAttribute('role', 'combobox');
+  search.setAttribute('aria-autocomplete', 'list');
+  search.setAttribute('aria-controls', suggestionList.id);
+  search.setAttribute('aria-expanded', 'false');
+
+  const suggestionQuery = value => normalize(value);
+  function editDistanceWithinOne(left, right) {
+    if (Math.abs(left.length - right.length) > 1) return false;
+    let i = 0, j = 0, edits = 0;
+    while (i < left.length && j < right.length) {
+      if (left[i] === right[j]) { i++; j++; continue; }
+      if (++edits > 1) return false;
+      if (left.length > right.length) i++;
+      else if (right.length > left.length) j++;
+      else { i++; j++; }
+    }
+    if (i < left.length || j < right.length) edits++;
+    return edits <= 1;
+  }
+  function updateSuggestions() {
+    const query = suggestionQuery(search.value);
+    suggestionList.replaceChildren();
+    if (!query) {
+      suggestionList.hidden = true;
+      search.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    const district = currentDistrict();
+    const matches = places.map(card => {
+      const data = placeFacts[card.id] || {};
+      const title = card.querySelector('.map-place-copy strong')?.textContent.trim() || card.getAttribute('aria-label') || '';
+      const type = data.displayType || typeLabels[data.type] || typeLabels.other;
+      const fields = [title, type, typeLabels[data.type], data.address, card.dataset.mapAreas, data.action, data.method, data.condition, data.hours, data.holidays, data.phone].filter(Boolean).map(suggestionQuery);
+      const exact = fields.some(field => field.includes(query));
+      const fuzzy = !exact && query.length >= 3 && fields.some(field => field.split(/[^\p{L}\p{N}]+/u).filter(term => term.length >= 3).some(term => editDistanceWithinOne(query, term)));
+      const areaMatch = (card.dataset.mapAreas || '').split(/\s+/).includes(district);
+      const typeMatch = selectedType === 'all' || data.type === selectedType;
+      return { card, title, type, address: data.address || '주소 확인 필요', exact, fuzzy, areaMatch, typeMatch };
+    }).filter(item => (item.exact || item.fuzzy) && item.areaMatch && item.typeMatch)
+      .sort((a, b) => Number(b.exact) - Number(a.exact) || a.title.localeCompare(b.title, 'ko'))
+      .slice(0, 6);
+    if (!matches.length) {
+      suggestionList.hidden = true;
+      search.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    matches.forEach(({ card, title, type, address }, index) => {
+      const option = document.createElement('button');
+      option.type = 'button';
+      option.className = 'map-place-suggestion';
+      option.id = `map-place-suggestion-${index}`;
+      option.setAttribute('role', 'option');
+      option.setAttribute('aria-selected', 'false');
+      const copy = document.createElement('span');
+      const name = document.createElement('strong');
+      const meta = document.createElement('small');
+      name.textContent = title;
+      meta.textContent = `${type} · ${address}`;
+      copy.append(name, meta);
+      const arrow = document.createElement('span');
+      arrow.className = 'map-place-suggestion-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = '↗';
+      option.append(copy, arrow);
+      option.addEventListener('click', () => {
+        search.value = title;
+        search.dispatchEvent(new Event('input', { bubbles: true }));
+        suggestionList.hidden = true;
+        search.setAttribute('aria-expanded', 'false');
+        openSheet(card, false);
+      });
+      suggestionList.append(option);
+    });
+    suggestionList.hidden = false;
+    search.setAttribute('aria-expanded', 'true');
+  }
+  search.addEventListener('keydown', event => {
+    if (event.key === 'ArrowDown' && !suggestionList.hidden) {
+      event.preventDefault();
+      suggestionList.querySelector('button')?.focus();
+    } else if (event.key === 'Escape' && !suggestionList.hidden) {
+      event.preventDefault();
+      suggestionList.hidden = true;
+      search.setAttribute('aria-expanded', 'false');
+    } else if (event.key === 'Enter' && !suggestionList.hidden) {
+      event.preventDefault();
+      suggestionList.querySelector('button')?.click();
+    }
+  });
+  suggestionList.addEventListener('keydown', event => {
+    const options = [...suggestionList.querySelectorAll('button')];
+    const index = options.indexOf(document.activeElement);
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      options[(index + (event.key === 'ArrowDown' ? 1 : options.length - 1)) % options.length]?.focus();
+    } else if (event.key === 'Escape') {
+      suggestionList.hidden = true;
+      search.setAttribute('aria-expanded', 'false');
+      search.focus();
+    }
+  });
+  document.addEventListener('click', event => {
+    if (!searchWrap?.contains(event.target)) {
+      suggestionList.hidden = true;
+      search.setAttribute('aria-expanded', 'false');
+    }
+  });
+
   const typeFilters = document.createElement('nav');
   typeFilters.className = 'map-type-tabs';
   typeFilters.setAttribute('aria-label', '실천 유형 선택');
@@ -173,10 +289,11 @@
     selectedType = button.dataset.type;
     typeFilters.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
     applyFilters();
+    updateSuggestions();
   }));
-  districtFilters.addEventListener('click', () => window.setTimeout(applyFilters, 0));
-  search.addEventListener('input', applyFilters);
-  window.addEventListener('map-place-search-change', applyFilters);
+  districtFilters.addEventListener('click', () => window.setTimeout(() => { applyFilters(); updateSuggestions(); }, 0));
+  search.addEventListener('input', () => { applyFilters(); updateSuggestions(); });
+  window.addEventListener('map-place-search-change', () => { applyFilters(); updateSuggestions(); });
 
   function addFact(label, value, iconName) {
     const row = document.createElement('div');
