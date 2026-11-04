@@ -85,6 +85,18 @@ http.createServer(async (request, response) => {
     }
     return;
   }
+  const placeReference = pathname.match(/^\/assets\/place-reference\/([A-Za-z0-9_-]+)\.(png|jpe?g|webp)$/i);
+  if (placeReference) {
+    const mediaTypes = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp' };
+    const filename = `${placeReference[1]}.${placeReference[2].toLowerCase()}`;
+    try {
+      const media = await readFile(new URL(`./assets/place-reference/${filename}`, import.meta.url));
+      response.writeHead(200, { 'Content-Type': mediaTypes[placeReference[2].toLowerCase()], 'Cache-Control': 'public, max-age=3600' }).end(media);
+    } catch {
+      response.writeHead(404).end('Place reference image unavailable');
+    }
+    return;
+  }
   if (pathname !== '/' && pathname !== '/index.html') {
     response.writeHead(404).end('Not found');
     return;

@@ -140,6 +140,12 @@ html.map-page body.mobile-layout #map .map-type-tabs{display:flex;gap:7px;overfl
 html.map-page body.mobile-layout #map .map-type-tabs::-webkit-scrollbar{display:none}
 html.map-page body.mobile-layout #map .map-type-tabs button{flex:none;padding:7px 11px;border:1px solid #e3eae1;border-radius:999px;background:#fff;color:#647569;font:inherit;font-size:11px;white-space:nowrap;cursor:pointer;transition:background .18s,border-color .18s,color .18s}
 html.map-page body.mobile-layout #map .map-type-tabs button[aria-pressed="true"]{border-color:#9ab49b;background:#f0f5ef;color:#355b47;font-weight:650}
+@media(max-width:640px){
+  html.map-page body.mobile-layout #map .map-district-tabs,html.map-page body.mobile-layout #map .map-type-tabs{display:flex;flex-wrap:wrap;gap:6px;overflow:visible;margin:0 0 10px;padding:0;scrollbar-width:auto}
+  html.map-page body.mobile-layout #map .map-district-tabs button,html.map-page body.mobile-layout #map .map-type-tabs button{min-height:34px;padding:6px 10px;font-size:10px;line-height:1.35}
+  html.map-page body.mobile-layout #map .map-type-tabs{margin-bottom:12px}
+  html.map-page body.mobile-layout #map-title:focus{outline:none;box-shadow:none}
+}
 html.map-page body.mobile-layout #map .map-place-list-status{margin:13px 2px 3px;color:#78887b;font-size:11px}
 html.map-page body.mobile-layout #map .map-place-search{position:relative;z-index:12}
 html.map-page body.mobile-layout #map .map-place-suggestions[hidden]{display:none}

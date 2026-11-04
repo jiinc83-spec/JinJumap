@@ -167,6 +167,13 @@
     const data = placeFacts[card.id] || {};
     card.dataset.mapType = data.type || 'other';
     card.dataset.mapSearch = [data.displayType, data.address, data.action, data.method].filter(Boolean).join(' ');
+    const practiceSummary = card.querySelector(':scope > .map-place-copy > p');
+    const practiceText = data.action || data.method;
+    if (practiceSummary && practiceText) {
+      practiceSummary.textContent = practiceText;
+      practiceSummary.id = `${card.id}-practice-summary`;
+      card.setAttribute('aria-describedby', practiceSummary.id);
+    }
     if (data.verifiedLocation === false) card.dataset.locationVerified = 'false';
     return true;
   });
