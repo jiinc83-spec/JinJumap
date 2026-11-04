@@ -84,6 +84,15 @@
       condition: '민원실 운영시간은 일반 기준이며 지점별 확인이 필요합니다. 무인민원발급기 이용시간과 탄소중립 실천사업 운영시간은 구분해야 합니다.',
       extraFacts: [['무인민원발급기', '24시간 운영으로 등록된 자료 있음']], verification: '일반 민원실 기준 · 무인발급기와 사업 운영시간 구분 필요'
     },
+    'map-gajwa-151-lounge-washer-card': {
+      type: 'tumbler', displayType: '다회용컵 사용 · 텀블러 세척', address: '경상국립대학교 가좌캠퍼스 사회과학관(151동) 2층 라운지',
+      action: '사회과학관 2층 라운지에 있는 텀블러 세척기를 이용할 수 있습니다.',
+      method: '151동 2층 라운지의 텀블러 세척기를 이용하세요.',
+      condition: '건물 출입 및 세척기 이용 가능 여부와 운영시간은 현장에서 확인해 주세요.',
+      hoursLabel: '이용 가능시간', hours: '확인 필요', holidays: '확인 필요', phone: '확인 필요',
+      googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=35.15467315058051%2C128.10034289841633', verifiedLocation: true, verification: '위치는 경상국립대학교 공식 캠퍼스맵의 사회과학관(151동) 건물 좌표 기준이며, 기기 실내 위치와 구분됩니다.',
+      extraFacts: [['위치 안내', '151동 2층 라운지'], ['건물 좌표', '35.15467315058051, 128.10034289841633']]
+    },
     'map-gajwa-building7-washer-card': {
       type: 'tumbler', displayType: '다회용컵 사용 · 텀블러 세척', address: '경상국립대학교 가좌캠퍼스 7동 1층',
       action: '가좌캠퍼스 7동 1층에 있는 텀블러 세척기를 이용할 수 있습니다.',
