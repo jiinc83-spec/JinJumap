@@ -514,7 +514,7 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           const center=new window.kakao.maps.LatLng(35.171,128.061);
           const mainMap=new window.kakao.maps.Map(document.querySelector('#kakao-map'),{center,level:5});
           const storePosition=new window.kakao.maps.LatLng(35.195929266277,128.08313614265);
-          const compactMapMarkerImage=new window.kakao.maps.MarkerImage('assets/map-pin.svg',new window.kakao.maps.Size(28,38),{offset:new window.kakao.maps.Point(14,38)});
+          const compactMapMarkerImage=new window.kakao.maps.MarkerImage('assets/map-pin.svg',new window.kakao.maps.Size(18,25),{offset:new window.kakao.maps.Point(9,25)});
           const storeMarker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:storePosition,title:'아름다운가게 진주평안점'});
           const zeroWastePosition=new window.kakao.maps.LatLng(35.1912036,128.0819770);
           const zeroWasteMarker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:zeroWastePosition,title:'진주제로웨이스트온'});
