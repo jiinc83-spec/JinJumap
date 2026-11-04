@@ -249,3 +249,4 @@ html.map-page body.mobile-layout .map-place-sheet-details{padding:0 18px 14px}
 body.mobile-layout :where(a,button,input,select,textarea,[role="button"],[role="link"],[tabindex="0"]):focus-visible{outline:3px solid #4d8058;outline-offset:2px;box-shadow:0 0 0 2px #fff}
 body.mobile-layout .mobile-search-result:focus-visible,html.map-page body.mobile-layout #map .map-place-suggestion:focus-visible{outline:3px solid #4d8058;outline-offset:1px;background:#f2f6f0}
 body.mobile-layout #map-title:focus{outline:3px solid #4d8058;outline-offset:4px;border-radius:4px}
+body.mobile-layout #home-title:focus{outline:none}
