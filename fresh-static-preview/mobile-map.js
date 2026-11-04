@@ -332,12 +332,18 @@
   else if (shell) shell.after(sheet);
   const nameNode = sheet.querySelector('h2');
   const photoNode = sheet.querySelector('.map-place-sheet-photo');
+  sheet.insertBefore(sheet.querySelector('.map-place-sheet-header'), photoNode);
   const photoImage = photoNode.querySelector('img');
   const typeNode = sheet.querySelector('.map-place-sheet-type');
   const actionNode = sheet.querySelector('.map-place-sheet-action');
   const factsNode = sheet.querySelector('.map-place-sheet-facts');
   const detailsNode = sheet.querySelector('.map-place-sheet-details');
   const moreButton = sheet.querySelector('.map-place-more');
+  const sheetHandle = sheet.querySelector('.map-place-sheet-handle');
+  sheetHandle.removeAttribute('aria-hidden');
+  sheetHandle.setAttribute('role', 'button');
+  sheetHandle.setAttribute('tabindex', '0');
+  sheetHandle.setAttribute('aria-label', '아래로 밀거나 Enter를 눌러 장소 정보 닫기');
   let selectedCard = null;
   let selectedType = 'all';
 
@@ -413,6 +419,8 @@
   }
   function openSheet(card, moveMap = false, focusSheet = false) {
     if (!card || card.hidden) return;
+    sheet.classList.remove('is-closing', 'is-dragging');
+    sheet.style.removeProperty('transform');
     selectedCard = card;
     places.forEach(place => {
       place.removeAttribute('aria-current');
@@ -490,6 +498,8 @@
   }
   function closeSheet(restoreFocus = false) {
     sheet.hidden = true;
+    sheet.classList.remove('is-closing', 'is-dragging');
+    sheet.style.removeProperty('transform');
     if (selectedCard) {
       selectedCard.removeAttribute('aria-current');
       selectedCard.setAttribute('aria-expanded', 'false');
@@ -500,9 +510,50 @@
   }
   window.mapSelectPlaceCard = openSheet;
   sheet.querySelector('.map-place-sheet-close').addEventListener('click', () => closeSheet(true));
-  sheet.querySelector('.map-place-sheet-header').addEventListener('click', event => {
-    if (event.target.closest('button')) return;
+  sheetHandle.addEventListener('keydown', event => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
     closeSheet(true);
+  });
+  let dragStartY = 0;
+  let dragDistance = 0;
+  let dragSurface = null;
+  const finishDrag = dismiss => {
+    if (!dragSurface) return;
+    const surface = dragSurface;
+    dragSurface = null;
+    surface.classList.remove('is-dragging');
+    sheet.classList.remove('is-dragging');
+    if (dismiss) {
+      sheet.classList.add('is-closing');
+      sheet.style.transform = 'translate(-50%, 100%)';
+      window.setTimeout(() => closeSheet(false), 230);
+    } else {
+      sheet.style.removeProperty('transform');
+    }
+  };
+  [sheetHandle, sheet.querySelector('.map-place-sheet-header')].forEach(surface => {
+    surface.addEventListener('pointerdown', event => {
+      if (event.target.closest('button, a') || (event.pointerType === 'mouse' && event.button !== 0)) return;
+      dragSurface = surface;
+      dragStartY = event.clientY;
+      dragDistance = 0;
+      surface.setPointerCapture?.(event.pointerId);
+      sheet.classList.add('is-dragging');
+    });
+    surface.addEventListener('pointermove', event => {
+      if (dragSurface !== surface) return;
+      dragDistance = Math.max(0, event.clientY - dragStartY);
+      sheet.style.transform = `translate(-50%, ${dragDistance}px)`;
+      if (dragDistance > 0) event.preventDefault();
+    });
+    surface.addEventListener('pointerup', event => {
+      if (dragSurface !== surface) return;
+      const shouldDismiss = dragDistance > Math.min(110, sheet.offsetHeight * .2);
+      if (surface.hasPointerCapture?.(event.pointerId)) surface.releasePointerCapture(event.pointerId);
+      finishDrag(shouldDismiss);
+    });
+    surface.addEventListener('pointercancel', () => finishDrag(false));
   });
   moreButton.addEventListener('click', () => {
     detailsNode.hidden = !detailsNode.hidden;

@@ -226,13 +226,17 @@ body.mobile-layout .category-overview>.category-section.is-entering{animation:mo
 @media(prefers-reduced-motion:reduce){body.mobile-layout .category-overview>.category-section.is-entering{animation:none}}
 
 /* Place information sheet follows the compact green detail layout. */
-html.map-page body.mobile-layout .map-place-sheet{position:relative;z-index:auto;left:auto;right:auto;bottom:auto;width:100%;max-height:none;margin:12px 0 16px;transform:none;overflow:visible;border-radius:16px;background:#fff;box-shadow:0 6px 22px #18331f18}
+html.map-page body.mobile-layout{animation:none!important;transform:none!important}
+html.map-page body.mobile-layout .map-place-sheet{position:fixed;z-index:75;left:50%;right:auto;bottom:calc(70px + env(safe-area-inset-bottom));width:min(calc(100% - 16px),410px);max-height:min(68dvh,600px);margin:0;transform:translateX(-50%);display:flex;flex-direction:column;overflow:hidden;border:1px solid #dfe9df;border-radius:18px;background:#fff;box-shadow:0 14px 48px #18331f30;will-change:transform}
+html.map-page body.mobile-layout .map-place-sheet.is-dragging{transition:none!important;user-select:none}
+html.map-page body.mobile-layout .map-place-sheet.is-closing{transition:transform .23s cubic-bezier(.22,.8,.25,1);pointer-events:none}
 html.map-page body.mobile-layout .map-place-sheet-photo{margin:0;overflow:hidden;border-bottom:1px solid #e7eee6;background:#f2f6f0}
 html.map-page body.mobile-layout .map-place-sheet-photo[hidden]{display:none}
 html.map-page body.mobile-layout .map-place-sheet-photo img{display:block;width:100%;height:132px;object-fit:cover}
 html.map-page body.mobile-layout .map-place-sheet-photo img[src*="reuse-store.png"]{object-position:84% center}
 html.map-page body.mobile-layout .map-place-sheet-photo figcaption{padding:5px 12px;color:#77877a;font-size:10px;line-height:1.4}
-html.map-page body.mobile-layout .map-place-sheet-handle{display:none}
+html.map-page body.mobile-layout .map-place-sheet-handle{display:block;width:38px;height:4px;flex:none;margin:9px auto 5px;border-radius:99px;background:#ccd9cd;cursor:grab;touch-action:none;user-select:none}
+html.map-page body.mobile-layout .map-place-sheet-handle:focus-visible{outline:3px solid #4d8058;outline-offset:5px}
 html.map-page body.mobile-layout .map-place-sheet-header{align-items:flex-start;gap:12px;padding:11px 16px 9px;border-bottom:1px solid #e4ebe3}
 html.map-page body.mobile-layout .map-place-sheet-heading{display:flex;flex-direction:column;gap:3px}
 html.map-page body.mobile-layout .map-place-sheet h2{order:0;color:#28563d;font-size:15px;font-weight:600;line-height:1.35}
@@ -243,14 +247,19 @@ html.map-page body.mobile-layout .map-place-sheet-action-block{display:flex;alig
 html.map-page body.mobile-layout .map-place-action-icon{display:grid;width:21px;height:21px;flex:none;place-items:center;color:#4d9364}
 html.map-page body.mobile-layout .map-place-action-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 html.map-page body.mobile-layout .map-place-sheet-action{display:block;overflow:visible;color:#55745e;font-size:13px;font-weight:600;line-height:1.5}
-html.map-page body.mobile-layout .map-place-sheet-facts{min-height:0;max-height:none;margin:0;padding:3px 16px;overflow:visible}
+html.map-page body.mobile-layout .map-place-sheet-facts{flex:1 1 auto;min-height:72px;max-height:min(28dvh,230px);margin:0;padding:3px 16px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 html.map-page body.mobile-layout .map-place-sheet-facts>div{grid-template-columns:18px 66px minmax(0,1fr);align-items:start;gap:8px;padding:8px 0;border-top:1px solid #eef2ed}
 html.map-page body.mobile-layout .map-place-fact-icon{width:20px;height:20px;color:#4d9364}
 html.map-page body.mobile-layout .map-place-sheet-facts dt{display:block;color:#78877b;font-size:10px;line-height:1.4}
 html.map-page body.mobile-layout .map-place-sheet-facts dd{color:#55745e;font-size:12px;line-height:1.45}
 html.map-page body.mobile-layout .map-place-sheet-actions{flex:none;padding:7px 14px 9px}
 html.map-page body.mobile-layout .map-place-sheet-actions a,html.map-page body.mobile-layout .map-place-sheet-actions button{min-height:34px;border-radius:9px;font-size:10px}
-html.map-page body.mobile-layout .map-place-sheet-details{padding:0 18px 14px}
+html.map-page body.mobile-layout .map-place-sheet-details{flex:1 1 auto;max-height:min(30dvh,250px);padding:0 18px 14px;overflow-y:auto;overscroll-behavior:contain}
+html.map-page body.mobile-layout .map-place-sheet-header{position:relative;z-index:2;flex:none;background:#fff;touch-action:none;user-select:none}
+html.map-page body.mobile-layout .map-place-sheet h2{max-width:100%;overflow-wrap:anywhere;word-break:keep-all;font-size:16px;line-height:1.4}
+html.map-page body.mobile-layout .map-place-sheet-photo{flex:none}
+html.map-page body.mobile-layout .map-place-sheet-action-block,html.map-page body.mobile-layout .map-place-sheet-actions{flex:none}
+@media(prefers-reduced-motion:reduce){html.map-page body.mobile-layout .map-place-sheet.is-closing{transition:none}}
 @media(max-width:380px){html.map-page body.mobile-layout .map-place-sheet-action{font-size:12px}html.map-page body.mobile-layout .map-place-sheet-facts dd{font-size:12px}}
 /* Image-led place cards in the mobile map results */
 @media(max-width:640px){
