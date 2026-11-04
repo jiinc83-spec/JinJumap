@@ -90,8 +90,8 @@
       method: '중앙도서관 1층 정문에 설치된 텀블러 세척기를 이용하세요.',
       condition: '도서관 출입 및 세척기 이용 가능 여부와 이용 조건을 현장에서 확인해 주세요.',
       hoursLabel: '이용 가능시간', hours: '확인 필요', holidays: '확인 필요', phone: '확인 필요',
-      kakaoPlaceId: '8681577', verifiedLocation: false, verification: '사용자가 제공한 위치 정보. 좌표는 확인되지 않아 지도 핀 표시는 보류했습니다.',
-      extraFacts: [['카카오맵 장소 ID', '8681577']]
+      kakaoPlaceId: '8681577', verifiedLocation: true, verification: '좌표는 사용자가 제공한 중앙도서관 좌표입니다.',
+      extraFacts: [['카카오맵 장소 ID', '8681577'], ['위도·경도', '35.1534125, 128.0995781']]
     },
     'map-gajwa-washer-card': {
       type: 'tumbler', displayType: '다회용컵 사용 · 텀블러 세척', address: '경상국립대학교 가좌캠퍼스 미래혁신관(202동) 2층 복도',
