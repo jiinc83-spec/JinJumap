@@ -263,11 +263,13 @@
   sheet.hidden = true;
   sheet.setAttribute('aria-label', '선택한 장소 정보');
   sheet.setAttribute('aria-labelledby', 'map-place-sheet-title');
-  sheet.innerHTML = '<div class="map-place-sheet-handle" aria-hidden="true"></div><header class="map-place-sheet-header"><div class="map-place-sheet-heading"><h2 id="map-place-sheet-title" tabindex="-1"></h2><span class="map-place-sheet-type"></span></div><button type="button" class="map-place-sheet-close" aria-label="장소 정보 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button></header><div class="map-place-sheet-action-block"><span class="map-place-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 4-14 11 0 3 2 5 5 5 7 0 9-8 9-16Z"/><path d="M5 20c3-5 6-8 11-11"/></svg></span><p class="map-place-sheet-action"></p></div><dl class="map-place-sheet-facts"></dl><div class="map-place-sheet-actions"><a class="map-place-directions" target="_blank" rel="noopener noreferrer">카카오맵 길찾기</a><button type="button" class="map-place-more" aria-expanded="false">자세히 보기</button></div><div class="map-place-sheet-details" hidden></div>';
+  sheet.innerHTML = '<div class="map-place-sheet-handle" aria-hidden="true"></div><figure class="map-place-sheet-photo" hidden><img alt=""><figcaption>장소 유형 참고 이미지 · 실제 장소 사진이 아닐 수 있습니다.</figcaption></figure><header class="map-place-sheet-header"><div class="map-place-sheet-heading"><h2 id="map-place-sheet-title" tabindex="-1"></h2><span class="map-place-sheet-type"></span></div><button type="button" class="map-place-sheet-close" aria-label="장소 정보 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button></header><div class="map-place-sheet-action-block"><span class="map-place-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 4-14 11 0 3 2 5 5 5 7 0 9-8 9-16Z"/><path d="M5 20c3-5 6-8 11-11"/></svg></span><p class="map-place-sheet-action"></p></div><dl class="map-place-sheet-facts"></dl><div class="map-place-sheet-actions"><a class="map-place-directions" target="_blank" rel="noopener noreferrer">카카오맵 길찾기</a><button type="button" class="map-place-more" aria-expanded="false">자세히 보기</button></div><div class="map-place-sheet-details" hidden></div>';
   const mapLegend = mapSection.querySelector('.map-legend');
   if (mapLegend) mapLegend.after(sheet);
   else if (shell) shell.after(sheet);
   const nameNode = sheet.querySelector('h2');
+  const photoNode = sheet.querySelector('.map-place-sheet-photo');
+  const photoImage = photoNode.querySelector('img');
   const typeNode = sheet.querySelector('.map-place-sheet-type');
   const actionNode = sheet.querySelector('.map-place-sheet-action');
   const factsNode = sheet.querySelector('.map-place-sheet-facts');
@@ -358,6 +360,15 @@
     const info = placeFacts[card.id] || {};
     const title = card.querySelector('.map-place-copy strong')?.textContent.trim() || card.getAttribute('aria-label') || '장소 정보';
     const type = info.displayType || typeLabels[info.type] || typeLabels.other;
+    const referenceImage = card.querySelector('.map-place-expanded-photo img, .reuse-store-cover img');
+    photoNode.hidden = !referenceImage;
+    if (referenceImage) {
+      photoImage.src = referenceImage.getAttribute('src');
+      photoImage.alt = `${title} 장소 유형 참고 이미지`;
+    } else {
+      photoImage.removeAttribute('src');
+      photoImage.alt = '';
+    }
     const address = info.address || card.querySelector('.map-place-expanded-copy p, .map-place-copy p')?.textContent.trim() || '주소 확인 필요';
     const action = info.action || '방문 전 이용 가능 여부와 환경 실천 정보를 확인해 주세요.';
     const method = info.method || action;

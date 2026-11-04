@@ -221,11 +221,15 @@ body.mobile-layout .category-overview>.category-section.is-entering{animation:mo
 
 /* Place information sheet follows the compact green detail layout. */
 html.map-page body.mobile-layout .map-place-sheet{position:relative;z-index:auto;left:auto;right:auto;bottom:auto;width:100%;max-height:none;margin:12px 0 16px;transform:none;overflow:visible;border-radius:16px;background:#fff;box-shadow:0 6px 22px #18331f18}
+html.map-page body.mobile-layout .map-place-sheet-photo{margin:0;overflow:hidden;border-bottom:1px solid #e7eee6;background:#f2f6f0}
+html.map-page body.mobile-layout .map-place-sheet-photo[hidden]{display:none}
+html.map-page body.mobile-layout .map-place-sheet-photo img{display:block;width:100%;height:132px;object-fit:cover}
+html.map-page body.mobile-layout .map-place-sheet-photo figcaption{padding:5px 12px;color:#77877a;font-size:10px;line-height:1.4}
 html.map-page body.mobile-layout .map-place-sheet-handle{display:none}
 html.map-page body.mobile-layout .map-place-sheet-header{align-items:flex-start;gap:12px;padding:11px 16px 9px;border-bottom:1px solid #e4ebe3}
 html.map-page body.mobile-layout .map-place-sheet-heading{display:flex;flex-direction:column;gap:3px}
 html.map-page body.mobile-layout .map-place-sheet h2{order:0;color:#28563d;font-size:15px;font-weight:600;line-height:1.35}
-html.map-page body.mobile-layout .map-place-sheet-type{order:1;margin:0;color:#75927a;font-size:11px}
+html.map-page body.mobile-layout .map-place-sheet-type{order:1;align-self:flex-start;margin:0;padding:3px 8px;border-radius:999px;background:#eff5ed;color:#527454;font-size:10px}
 html.map-page body.mobile-layout .map-place-sheet-close{width:28px;height:28px;display:grid;place-items:center;border-radius:0;background:transparent;color:#4e805d}
 html.map-page body.mobile-layout .map-place-sheet-close svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 html.map-page body.mobile-layout .map-place-sheet-action-block{display:flex;align-items:flex-start;gap:9px;margin:0;padding:7px 14px;border-bottom:1px solid #e4ebe3}
@@ -233,10 +237,10 @@ html.map-page body.mobile-layout .map-place-action-icon{display:grid;width:21px;
 html.map-page body.mobile-layout .map-place-action-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 html.map-page body.mobile-layout .map-place-sheet-action{display:block;overflow:visible;color:#55745e;font-size:13px;font-weight:600;line-height:1.5}
 html.map-page body.mobile-layout .map-place-sheet-facts{min-height:0;max-height:none;margin:0;padding:3px 16px;overflow:visible}
-html.map-page body.mobile-layout .map-place-sheet-facts>div{grid-template-columns:20px minmax(0,1fr);align-items:center;gap:10px;padding:7px 0;border-top:0}
+html.map-page body.mobile-layout .map-place-sheet-facts>div{grid-template-columns:18px 66px minmax(0,1fr);align-items:start;gap:8px;padding:8px 0;border-top:1px solid #eef2ed}
 html.map-page body.mobile-layout .map-place-fact-icon{width:20px;height:20px;color:#4d9364}
-html.map-page body.mobile-layout .map-place-sheet-facts dt{display:none}
-html.map-page body.mobile-layout .map-place-sheet-facts dd{color:#55745e;font-size:12px;line-height:1.35}
+html.map-page body.mobile-layout .map-place-sheet-facts dt{display:block;color:#78877b;font-size:10px;line-height:1.4}
+html.map-page body.mobile-layout .map-place-sheet-facts dd{color:#55745e;font-size:12px;line-height:1.45}
 html.map-page body.mobile-layout .map-place-sheet-actions{flex:none;padding:7px 14px 9px}
 html.map-page body.mobile-layout .map-place-sheet-actions a,html.map-page body.mobile-layout .map-place-sheet-actions button{min-height:34px;border-radius:9px;font-size:10px}
 html.map-page body.mobile-layout .map-place-sheet-details{padding:0 18px 14px}
