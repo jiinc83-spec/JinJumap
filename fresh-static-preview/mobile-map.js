@@ -339,11 +339,19 @@
   const factsNode = sheet.querySelector('.map-place-sheet-facts');
   const detailsNode = sheet.querySelector('.map-place-sheet-details');
   const moreButton = sheet.querySelector('.map-place-more');
+  const sheetToggleButton = sheet.querySelector('.map-place-sheet-close');
   const sheetHandle = sheet.querySelector('.map-place-sheet-handle');
+  const collapsibleNodes = [photoNode, actionNode.parentElement, factsNode, sheet.querySelector('.map-place-sheet-actions'), detailsNode];
   sheetHandle.removeAttribute('aria-hidden');
   sheetHandle.setAttribute('role', 'button');
   sheetHandle.setAttribute('tabindex', '0');
-  sheetHandle.setAttribute('aria-label', '아래로 밀거나 Enter를 눌러 장소 정보 닫기');
+  sheetHandle.setAttribute('aria-label', '장소 정보 접기 또는 펼치기');
+  const setSheetCollapsed = collapsed => {
+    sheet.classList.toggle('is-collapsed', collapsed);
+    sheetHandle.setAttribute('aria-expanded', String(!collapsed));
+    sheetToggleButton.setAttribute('aria-label', collapsed ? '장소 정보 펼치기' : '장소 정보 접기');
+    collapsibleNodes.forEach(node => { node.inert = collapsed; });
+  };
   let selectedCard = null;
   let selectedType = 'all';
 
@@ -421,6 +429,7 @@
     if (!card || card.hidden) return;
     sheet.classList.remove('is-closing', 'is-dragging');
     sheet.style.removeProperty('transform');
+    setSheetCollapsed(false);
     selectedCard = card;
     places.forEach(place => {
       place.removeAttribute('aria-current');
@@ -500,6 +509,7 @@
     sheet.hidden = true;
     sheet.classList.remove('is-closing', 'is-dragging');
     sheet.style.removeProperty('transform');
+    setSheetCollapsed(false);
     if (selectedCard) {
       selectedCard.removeAttribute('aria-current');
       selectedCard.setAttribute('aria-expanded', 'false');
@@ -509,28 +519,27 @@
     if (restoreFocus && previousCard && !previousCard.hidden) previousCard.focus({ preventScroll: true });
   }
   window.mapSelectPlaceCard = openSheet;
-  sheet.querySelector('.map-place-sheet-close').addEventListener('click', () => closeSheet(true));
+  sheetToggleButton.addEventListener('click', () => setSheetCollapsed(!sheet.classList.contains('is-collapsed')));
   sheetHandle.addEventListener('keydown', event => {
     if (event.key !== 'Enter' && event.key !== ' ') return;
     event.preventDefault();
-    closeSheet(true);
+    setSheetCollapsed(!sheet.classList.contains('is-collapsed'));
   });
   let dragStartY = 0;
   let dragDistance = 0;
   let dragSurface = null;
-  const finishDrag = dismiss => {
+  let suppressHandleClick = false;
+  const finishDrag = () => {
     if (!dragSurface) return;
     const surface = dragSurface;
+    suppressHandleClick = surface === sheetHandle && Math.abs(dragDistance) > 6;
     dragSurface = null;
     surface.classList.remove('is-dragging');
     sheet.classList.remove('is-dragging');
-    if (dismiss) {
-      sheet.classList.add('is-closing');
-      sheet.style.transform = 'translate(-50%, 100%)';
-      window.setTimeout(() => closeSheet(false), 230);
-    } else {
-      sheet.style.removeProperty('transform');
-    }
+    const threshold = Math.min(100, sheet.offsetHeight * .18);
+    if (dragDistance > threshold) setSheetCollapsed(true);
+    else if (dragDistance < -threshold) setSheetCollapsed(false);
+    sheet.style.removeProperty('transform');
   };
   [sheetHandle, sheet.querySelector('.map-place-sheet-header')].forEach(surface => {
     surface.addEventListener('pointerdown', event => {
@@ -543,17 +552,25 @@
     });
     surface.addEventListener('pointermove', event => {
       if (dragSurface !== surface) return;
-      dragDistance = Math.max(0, event.clientY - dragStartY);
+      dragDistance = event.clientY - dragStartY;
+      if (!sheet.classList.contains('is-collapsed')) dragDistance = Math.max(0, dragDistance);
+      else dragDistance = Math.min(0, dragDistance);
       sheet.style.transform = `translate(-50%, ${dragDistance}px)`;
-      if (dragDistance > 0) event.preventDefault();
+      if (dragDistance !== 0) event.preventDefault();
     });
     surface.addEventListener('pointerup', event => {
       if (dragSurface !== surface) return;
-      const shouldDismiss = dragDistance > Math.min(110, sheet.offsetHeight * .2);
       if (surface.hasPointerCapture?.(event.pointerId)) surface.releasePointerCapture(event.pointerId);
-      finishDrag(shouldDismiss);
+      finishDrag();
     });
-    surface.addEventListener('pointercancel', () => finishDrag(false));
+    surface.addEventListener('pointercancel', finishDrag);
+  });
+  sheetHandle.addEventListener('click', () => {
+    if (suppressHandleClick) {
+      suppressHandleClick = false;
+      return;
+    }
+    setSheetCollapsed(!sheet.classList.contains('is-collapsed'));
   });
   moreButton.addEventListener('click', () => {
     detailsNode.hidden = !detailsNode.hidden;

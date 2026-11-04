@@ -228,6 +228,8 @@ body.mobile-layout .category-overview>.category-section.is-entering{animation:mo
 /* Place information sheet follows the compact green detail layout. */
 html.map-page body.mobile-layout{animation:none!important;transform:none!important}
 html.map-page body.mobile-layout .map-place-sheet{position:fixed;z-index:75;left:50%;right:auto;bottom:calc(70px + env(safe-area-inset-bottom));width:min(calc(100% - 16px),410px);max-height:min(68dvh,600px);margin:0;transform:translateX(-50%);display:flex;flex-direction:column;overflow:hidden;border:1px solid #dfe9df;border-radius:18px;background:#fff;box-shadow:0 14px 48px #18331f30;will-change:transform}
+html.map-page body.mobile-layout .map-place-sheet{transition:max-height .28s cubic-bezier(.22,.8,.25,1)}
+html.map-page body.mobile-layout .map-place-sheet.is-collapsed{max-height:108px}
 html.map-page body.mobile-layout .map-place-sheet.is-dragging{transition:none!important;user-select:none}
 html.map-page body.mobile-layout .map-place-sheet.is-closing{transition:transform .23s cubic-bezier(.22,.8,.25,1);pointer-events:none}
 html.map-page body.mobile-layout .map-place-sheet-photo{margin:0;overflow:hidden;border-bottom:1px solid #e7eee6;background:#f2f6f0}
@@ -243,6 +245,7 @@ html.map-page body.mobile-layout .map-place-sheet h2{order:0;color:#28563d;font-
 html.map-page body.mobile-layout .map-place-sheet-type{order:1;align-self:flex-start;margin:0;padding:3px 8px;border-radius:999px;background:#eff5ed;color:#527454;font-size:10px}
 html.map-page body.mobile-layout .map-place-sheet-close{width:28px;height:28px;display:grid;place-items:center;border-radius:0;background:transparent;color:#4e805d}
 html.map-page body.mobile-layout .map-place-sheet-close svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+html.map-page body.mobile-layout .map-place-sheet.is-collapsed .map-place-sheet-close svg{transform:rotate(180deg)}
 html.map-page body.mobile-layout .map-place-sheet-action-block{display:flex;align-items:flex-start;gap:9px;margin:0;padding:7px 14px;border-bottom:1px solid #e4ebe3}
 html.map-page body.mobile-layout .map-place-action-icon{display:grid;width:21px;height:21px;flex:none;place-items:center;color:#4d9364}
 html.map-page body.mobile-layout .map-place-action-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -259,7 +262,7 @@ html.map-page body.mobile-layout .map-place-sheet-header{position:relative;z-ind
 html.map-page body.mobile-layout .map-place-sheet h2{max-width:100%;overflow-wrap:anywhere;word-break:keep-all;font-size:16px;line-height:1.4}
 html.map-page body.mobile-layout .map-place-sheet-photo{flex:none}
 html.map-page body.mobile-layout .map-place-sheet-action-block,html.map-page body.mobile-layout .map-place-sheet-actions{flex:none}
-@media(prefers-reduced-motion:reduce){html.map-page body.mobile-layout .map-place-sheet.is-closing{transition:none}}
+@media(prefers-reduced-motion:reduce){html.map-page body.mobile-layout .map-place-sheet,html.map-page body.mobile-layout .map-place-sheet.is-closing{transition:none}}
 @media(max-width:380px){html.map-page body.mobile-layout .map-place-sheet-action{font-size:12px}html.map-page body.mobile-layout .map-place-sheet-facts dd{font-size:12px}}
 /* Image-led place cards in the mobile map results */
 @media(max-width:640px){
