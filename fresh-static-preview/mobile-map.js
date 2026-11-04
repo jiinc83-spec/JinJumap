@@ -4,14 +4,14 @@
 
   const placeFacts = {
     'map-beautiful-store-card': {
-      type: 'circular', displayType: '자원순환', address: '경남 진주시 진주대로 1081, 성모의원 1층',
+      type: 'circular', displayType: '재사용·자원순환', address: '경남 진주시 진주대로 1081, 성모의원 1층',
       action: '사용하지 않는 의류와 생활용품 등 재사용 가능한 물품을 기증하거나 중고 물품을 구매할 수 있는 자원순환 매장입니다. 물품의 재사용을 통해 자원 소비와 폐기물 발생을 줄이는 실천에 참여할 수 있습니다.',
       method: '재사용 가능한 의류와 생활용품 등을 기증하거나 중고 물품을 구매할 수 있습니다.',
       condition: '기증 가능 품목과 접수시간은 방문 전 확인을 권장합니다.',
       hours: '월~토 10:30~18:00', holidays: '일·공휴일', phone: '055-741-8845', verification: '기증 가능 품목과 접수시간은 방문 전 확인 권장'
     },
     'map-zero-waste-card': {
-      type: 'circular', displayType: '자원순환 (확인 필요)', address: '경남 진주시 비봉로 6, 2층 일부',
+      type: 'circular', displayType: '재사용·자원순환 (확인 필요)', address: '경남 진주시 비봉로 6, 2층 일부',
       action: '제로웨이스트·자원순환 관련 장소로 등록되어 있습니다. 현재 구체적인 친환경 제품 판매 여부와 실천 프로그램은 확인되지 않아 추가 조사가 필요합니다.',
       method: '현재 운영 여부와 실제 제공 서비스 확인 후 이용해 주세요.',
       condition: '현재 운영 여부와 구체적인 실천 활동 확인 후 공개를 권장합니다.',
@@ -88,13 +88,13 @@
       type: 'transport', displayType: '녹색교통', address: '경남 진주시 강남로 245',
       action: '자전거 판매 매장으로, 자전거를 교통수단으로 이용하려는 방문자가 관련 제품과 정보를 알아볼 수 있습니다. 이를 통해 자동차 이용을 줄이는 친환경 이동 방식을 실천할 수 있습니다.',
       method: '자전거를 이동 수단으로 활용할 때 자동차 이용을 줄이는 데 참여할 수 있습니다.',
-      condition: '자전거 수리·정비 가능 여부는 별도로 확인해 주세요.',
-      hours: '미확인', holidays: '미확인', phone: '055-758-1189', verification: '운영시간 미확인 · 자전거 수리·정비 가능 여부 별도 확인 필요'
+      condition: '판매 품목과 운영시간은 방문 전에 매장에 확인해 주세요.',
+      hours: '미확인', holidays: '미확인', phone: '055-758-1189', verification: '운영시간 및 판매 품목 확인 필요'
     }
   };
   const typeLabels = {
-    tumbler: '텀블러',
-    circular: '자원순환',
+    tumbler: '다회용컵 사용',
+    circular: '재사용·자원순환',
     transport: '녹색교통',
     recycling: '분리배출',
     environment: '환경정보',
@@ -246,7 +246,7 @@
   const typeFilters = document.createElement('nav');
   typeFilters.className = 'map-type-tabs';
   typeFilters.setAttribute('aria-label', '실천 유형 선택');
-  typeFilters.innerHTML = '<button type="button" data-type="all" aria-pressed="true">전체 유형</button><button type="button" data-type="tumbler" aria-pressed="false">텀블러</button><button type="button" data-type="circular" aria-pressed="false">자원순환</button><button type="button" data-type="transport" aria-pressed="false">녹색교통</button><button type="button" data-type="recycling" aria-pressed="false">분리배출</button><button type="button" data-type="environment" aria-pressed="false">환경정보</button>';
+  typeFilters.innerHTML = '<button type="button" data-type="all" aria-pressed="true">전체 유형</button><button type="button" data-type="tumbler" aria-pressed="false">다회용컵 사용</button><button type="button" data-type="circular" aria-pressed="false">재사용·자원순환</button><button type="button" data-type="transport" aria-pressed="false">녹색교통</button><button type="button" data-type="recycling" aria-pressed="false">분리배출</button><button type="button" data-type="environment" aria-pressed="false">환경정보</button>';
   districtFilters.after(typeFilters);
 
   const listStatus = document.createElement('p');
