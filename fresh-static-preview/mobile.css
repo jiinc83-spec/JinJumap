@@ -229,7 +229,7 @@ html.map-page body.mobile-layout .map-place-sheet-close svg{width:21px;height:21
 html.map-page body.mobile-layout .map-place-sheet-action-block{display:flex;align-items:flex-start;gap:9px;margin:0;padding:7px 14px;border-bottom:1px solid #e4ebe3}
 html.map-page body.mobile-layout .map-place-action-icon{display:grid;width:21px;height:21px;flex:none;place-items:center;color:#4d9364}
 html.map-page body.mobile-layout .map-place-action-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-html.map-page body.mobile-layout .map-place-sheet-action{display:block;overflow:visible;color:#55745e;font-size:13px;line-height:1.5}
+html.map-page body.mobile-layout .map-place-sheet-action{display:block;overflow:visible;color:#55745e;font-size:13px;font-weight:600;line-height:1.5}
 html.map-page body.mobile-layout .map-place-sheet-facts{min-height:0;max-height:none;margin:0;padding:3px 16px;overflow:visible}
 html.map-page body.mobile-layout .map-place-sheet-facts>div{grid-template-columns:20px minmax(0,1fr);align-items:center;gap:10px;padding:7px 0;border-top:0}
 html.map-page body.mobile-layout .map-place-fact-icon{width:20px;height:20px;color:#4d9364}
