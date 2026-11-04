@@ -204,7 +204,7 @@
         search.dispatchEvent(new Event('input', { bubbles: true }));
         suggestionList.hidden = true;
         search.setAttribute('aria-expanded', 'false');
-        openSheet(card, false);
+        openSheet(card, true);
       });
       suggestionList.append(option);
     });
