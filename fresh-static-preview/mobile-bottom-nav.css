@@ -1,4 +1,11 @@
 .app-bottom-nav{display:none}
+body.mobile-layout.has-app-bottom-nav{padding-bottom:calc(62px + env(safe-area-inset-bottom))!important}
+body.mobile-layout .app-bottom-nav{position:fixed;left:50%;right:auto;bottom:0;z-index:80;display:grid;width:min(430px,100vw);grid-template-columns:repeat(4,minmax(0,1fr));transform:translateX(-50%);padding:7px 8px max(7px,env(safe-area-inset-bottom));border-top:1px solid #e7ece7;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+body.mobile-layout .app-bottom-nav a{min-width:0;min-height:43px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#66756b;text-decoration:none;font-size:9px;line-height:1.2;-webkit-tap-highlight-color:transparent}
+body.mobile-layout .app-bottom-nav svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+body.mobile-layout .app-bottom-nav a[aria-current="page"]{color:#355b47;font-weight:750}
+body.mobile-layout .app-bottom-nav a:focus-visible{outline:3px solid #8fae9170;outline-offset:-2px;border-radius:8px}
+html.map-page body.mobile-layout.has-app-bottom-nav .map-place-sheet{bottom:calc(62px + env(safe-area-inset-bottom))}
 @media(max-width:640px){
   body.has-app-bottom-nav{padding-bottom:calc(62px + env(safe-area-inset-bottom))!important}
   .app-bottom-nav{position:fixed;left:50%;right:auto;bottom:0;z-index:80;display:grid;width:min(430px,100vw);grid-template-columns:repeat(4,minmax(0,1fr));transform:translateX(-50%);padding:7px 8px max(7px,env(safe-area-inset-bottom));border-top:1px solid #e7ece7;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
