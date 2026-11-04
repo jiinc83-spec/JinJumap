@@ -515,6 +515,7 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           const mainMap=new window.kakao.maps.Map(document.querySelector('#kakao-map'),{center,level:5});
           const storePosition=new window.kakao.maps.LatLng(35.195929266277,128.08313614265);
           const compactMapMarkerImage=new window.kakao.maps.MarkerImage('assets/map-pin.svg',new window.kakao.maps.Size(18,25),{offset:new window.kakao.maps.Point(9,25)});
+          const hamotagoMarkerImage=new window.kakao.maps.MarkerImage('assets/map-pin-hamotago.svg',new window.kakao.maps.Size(18,25),{offset:new window.kakao.maps.Point(9,25)});
           const storeMarker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:storePosition,title:'아름다운가게 진주평안점'});
           const zeroWastePosition=new window.kakao.maps.LatLng(35.1912036,128.0819770);
           const zeroWasteMarker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:zeroWastePosition,title:'진주제로웨이스트온'});
@@ -533,13 +534,13 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           const netzeroCenterPosition=new window.kakao.maps.LatLng(35.1810114,128.0939071);
           const netzeroCenterMarker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:netzeroCenterPosition,title:'진주시 탄소중립지원센터'});
           const bikeRentalPosition=new window.kakao.maps.LatLng(35.18502560422833,128.0949992331689);
-          const bikeRentalMarker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:bikeRentalPosition,title:'칠암 공영 무료자전거 대여소'});
+          const bikeRentalMarker=new window.kakao.maps.Marker({map:mainMap,image:hamotagoMarkerImage,position:bikeRentalPosition,title:'칠암 공영 무료자전거 대여소'});
           const hamotagoStation1Position=new window.kakao.maps.LatLng(35.172169589614164,128.06787901813397);
-          const hamotagoStation1Marker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:hamotagoStation1Position,title:'평거 공영 무료자전거 대여소'});
+          const hamotagoStation1Marker=new window.kakao.maps.Marker({map:mainMap,image:hamotagoMarkerImage,position:hamotagoStation1Position,title:'평거 공영 무료자전거 대여소'});
           const hamotagoStation2Position=new window.kakao.maps.LatLng(35.1840610,128.119692);
-          const hamotagoStation2Marker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:hamotagoStation2Position,title:'상대 공영 무료자전거 대여소'});
+          const hamotagoStation2Marker=new window.kakao.maps.Marker({map:mainMap,image:hamotagoMarkerImage,position:hamotagoStation2Position,title:'상대 공영 무료자전거 대여소'});
           const hamotagoStation3Position=new window.kakao.maps.LatLng(35.17335835796439,128.13103333982818);
-          const hamotagoStation3Marker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:hamotagoStation3Position,title:'충무공 공영 무료자전거 대여소'});
+          const hamotagoStation3Marker=new window.kakao.maps.Marker({map:mainMap,image:hamotagoMarkerImage,position:hamotagoStation3Position,title:'충무공 공영 무료자전거 대여소'});
           const chilamOfficePosition=new window.kakao.maps.LatLng(35.18355698,128.09180393);
           const chilamOfficeMarker=new window.kakao.maps.Marker({map:mainMap,image:compactMapMarkerImage,position:chilamOfficePosition,title:'칠암현장민원실'});
           const building7WasherPosition=new window.kakao.maps.LatLng(35.15453405115274,128.10201186352603);
