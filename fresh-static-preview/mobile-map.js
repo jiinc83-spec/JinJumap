@@ -135,16 +135,24 @@
   const suggestionQuery = value => normalize(value);
   function editDistanceWithinOne(left, right) {
     if (Math.abs(left.length - right.length) > 1) return false;
+    if (left.length === right.length) {
+      const differences = [];
+      for (let i = 0; i < left.length; i++) if (left[i] !== right[i]) differences.push(i);
+      if (differences.length <= 1) return true;
+      if (differences.length === 2 && differences[1] === differences[0] + 1) {
+        const [first, second] = differences;
+        return left[first] === right[second] && left[second] === right[first];
+      }
+      return false;
+    }
     let i = 0, j = 0, edits = 0;
     while (i < left.length && j < right.length) {
       if (left[i] === right[j]) { i++; j++; continue; }
       if (++edits > 1) return false;
       if (left.length > right.length) i++;
-      else if (right.length > left.length) j++;
-      else { i++; j++; }
+      else j++;
     }
-    if (i < left.length || j < right.length) edits++;
-    return edits <= 1;
+    return true;
   }
   function updateSuggestions() {
     const query = suggestionQuery(search.value);
@@ -159,9 +167,9 @@
       const data = placeFacts[card.id] || {};
       const title = card.querySelector('.map-place-copy strong')?.textContent.trim() || card.getAttribute('aria-label') || '';
       const type = data.displayType || typeLabels[data.type] || typeLabels.other;
-      const fields = [title, type, typeLabels[data.type], data.address, card.dataset.mapAreas, data.action, data.method, data.condition, data.hours, data.holidays, data.phone].filter(Boolean).map(suggestionQuery);
-      const exact = fields.some(field => field.includes(query));
-      const fuzzy = !exact && query.length >= 3 && fields.some(field => field.split(/[^\p{L}\p{N}]+/u).filter(term => term.length >= 3).some(term => editDistanceWithinOne(query, term)));
+      const fields = [title, type, typeLabels[data.type], data.address, card.dataset.mapAreas, data.action, data.method, data.condition, data.hours, data.holidays, data.phone].filter(Boolean);
+      const exact = fields.some(field => suggestionQuery(field).includes(query));
+      const fuzzy = !exact && window.mapPlaceSearchMatches(search.value, fields.join(' '));
       const areaMatch = (card.dataset.mapAreas || '').split(/\s+/).includes(district);
       const typeMatch = selectedType === 'all' || data.type === selectedType;
       return { card, title, type, address: data.address || '주소 확인 필요', exact, fuzzy, areaMatch, typeMatch };
@@ -269,6 +277,14 @@
   let selectedType = 'all';
 
   const normalize = value => (value || '').normalize('NFC').replace(/\s+/g, '').toLocaleLowerCase();
+  window.mapPlaceSearchMatches = (query, content) => {
+    const terms = String(query || '').trim().split(/\s+/).map(normalize).filter(Boolean);
+    if (!terms.length) return true;
+    const rawContent = String(content || '');
+    const normalizedContent = normalize(rawContent);
+    const candidates = rawContent.split(/[^\p{L}\p{N}]+/u).map(normalize).filter(term => term.length >= 3);
+    return terms.every(term => normalizedContent.includes(term) || (term.length >= 3 && candidates.some(candidate => editDistanceWithinOne(term, candidate))));
+  };
   const currentDistrict = () => window.mapPlaceSearchLiveDistrict || districtFilters.querySelector('[aria-pressed="true"]')?.dataset.mapDistrict || '진주시';
   function applyFilters() {
     const district = currentDistrict();
@@ -278,7 +294,8 @@
       const data = placeFacts[card.id] || {};
       const areaMatch = (card.dataset.mapAreas || '').split(/\s+/).includes(district);
       const typeMatch = selectedType === 'all' || data.type === selectedType;
-      const textMatch = !query || normalize(card.textContent + ' ' + (card.dataset.mapAreas || '') + ' ' + (typeLabels[data.type] || '') + ' ' + card.dataset.mapSearch).includes(query);
+      const searchableText = card.textContent + ' ' + (card.dataset.mapAreas || '') + ' ' + (typeLabels[data.type] || '') + ' ' + card.dataset.mapSearch;
+      const textMatch = !query || window.mapPlaceSearchMatches(search.value, searchableText);
       card.hidden = !(areaMatch && typeMatch && textMatch);
       if (!card.hidden) visible.push(card);
     });
@@ -296,7 +313,11 @@
     updateSuggestions();
   }));
   districtFilters.addEventListener('click', () => window.setTimeout(() => { applyFilters(); updateSuggestions(); }, 0));
-  search.addEventListener('input', () => { applyFilters(); updateSuggestions(); });
+  search.addEventListener('input', () => {
+    window.mapPlaceSearchLiveQuery = search.value.trim().toLocaleLowerCase();
+    applyFilters();
+    updateSuggestions();
+  });
   window.addEventListener('map-place-search-change', () => { applyFilters(); updateSuggestions(); });
 
   function addFact(label, value, iconName) {
