@@ -74,7 +74,7 @@
       method: '현재 대여소 운영 여부와 정확한 입구 위치를 확인한 뒤 이용해 주세요.',
       hours: '09:00~17:00*', holidays: '신정·설·추석*', phone: '미확인',
       condition: '현재 운영 여부와 정확한 대여소 입구 위치 확인이 필요합니다. *기존 공공데이터 기준입니다.',
-      extraFacts: [['이용요금', '무료']], verifiedLocation: false, verification: '기존 공공데이터 기준 · 운영 여부와 입구 위치 재확인 필요'
+      extraFacts: [['이용요금', '무료']], verifiedLocation: true, verification: '마커는 기존 공공데이터 좌표 기준 · 운영 여부와 정확한 입구 위치 재확인 필요'
     },
     'map-chilam-office-card': {
       type: 'environment', displayType: '실천 내용 확인 필요', address: '경남 진주시 강남로177번길 30-7',
