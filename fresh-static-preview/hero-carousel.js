@@ -145,6 +145,18 @@
   hero.addEventListener('focusin', stopAutoplay);
   hero.addEventListener('focusout', () => { if (!hero.contains(document.activeElement)) startAutoplay(); });
   document.addEventListener('visibilitychange', () => document.hidden ? stopAutoplay() : startAutoplay());
+  window.addEventListener('pageshow', () => {
+    const copy = hero.querySelector('.hero-copy');
+    copy?.classList.remove('hero-carousel-copy-enter');
+    if (copy) {
+      copy.style.transform = 'none';
+      copy.style.opacity = '1';
+    }
+    if (mobileTrack) {
+      mobileTrack.style.scrollSnapType = '';
+      mobileTrack.scrollLeft = current * mobileTrack.clientWidth;
+    }
+  });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => entries[0].isIntersecting ? startAutoplay() : stopAutoplay(), { threshold: .25 }).observe(hero);
   }
