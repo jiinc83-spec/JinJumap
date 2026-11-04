@@ -70,10 +70,10 @@
     },
     'map-hamotago-pyeonggeo-card': {
       type: 'transport', displayType: '하모타고 · 녹색교통', address: '경상남도 진주시 남강로373번길 3',
-      action: '진주시 공영자전거 하모타고를 대여해 가까운 거리를 자전거로 이동할 수 있습니다.', method: '공식 대여소에서 하모타고를 대여해 이용하세요.',
-      condition: '최대 이용시간과 대여 가능 여부는 현장 및 공식 페이지에서 확인해 주세요.', hoursLabel: '운영시간', hours: '07:00~20:00 · 동절기 09:00~17:00', holidays: '확인 필요', phone: '055-755-3549',
-      directionsUrl: 'https://map.kakao.com/link/map/%ED%8F%89%EA%B1%B0%20%EA%B3%B5%EC%98%81%20%EB%AC%B4%EB%A3%8C%EC%9E%90%EC%A0%84%EA%B1%B0%20%EB%8C%80%EC%97%AC%EC%86%8C,35.172169589614164,128.06787901813397', verifiedLocation: true, verification: '진주시 하모타고 공식 대여소 현황 페이지의 좌표 기준. 대여 가능 대수는 실시간으로 변동되어 표시하지 않습니다.',
-      extraFacts: [['이용시간', '최대 4시간'], ['운영 정보', '대여 가능 대수는 실시간 변동']]
+      action: '남강변 자전거길에 있는 진주시 공영자전거 대여소입니다.', method: '진주시민은 신분증 확인 후 대여할 수 있으며, 타 지역 이용자는 신분증을 맡긴 뒤 대여할 수 있습니다.',
+      condition: '신분증을 지참해 대여소에서 확인해 주세요.', hoursLabel: '운영시간', hours: '하절기 08:00~19:00 · 동절기 09:00~17:00', holidays: '신정·설·추석 연휴 휴무', phone: '055-743-5066',
+      directionsUrl: 'https://map.kakao.com/link/map/%ED%8F%89%EA%B1%B0%20%EA%B3%B5%EC%98%81%20%EB%AC%B4%EB%A3%8C%EC%9E%90%EC%A0%84%EA%B1%B0%20%EB%8C%80%EC%97%AC%EC%86%8C,35.172169589614164,128.06787901813397', verifiedLocation: true, verification: '운영 정보는 제공 이미지 기준 · 대여현황은 실시간 변동',
+      extraFacts: [['운영 대수', '70대'], ['대여시간', '최대 4시간'], ['대여현황', '13대 / 70대 (제공 이미지 기준)']]
     },
     'map-hamotago-sangdae-card': {
       type: 'transport', displayType: '하모타고 · 녹색교통', address: '경상남도 진주시 상대로72번길 6',
