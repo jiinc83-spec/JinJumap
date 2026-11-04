@@ -131,9 +131,10 @@ html.map-page body.mobile-layout>.top,html.map-page body.mobile-layout>.top-info
 html.map-page body.mobile-layout main{width:100%;max-width:none;margin:0;padding:0}
 html.map-page body.mobile-layout main>*:not(#map){display:none!important}
 html.map-page body.mobile-layout #map{display:block!important;margin:0;padding:12px 14px 28px;scroll-margin-top:0}
-html.map-page body.mobile-layout .map-page-back{display:inline-flex;align-items:center;gap:5px;margin:0 0 9px;color:#5c765f;font-size:11px;font-weight:650}
+html.map-page body.mobile-layout #map{padding-top:4px}
+html.map-page body.mobile-layout .map-page-back{display:none!important}
 html.map-page body.mobile-layout .map-page-back svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-html.map-page body.mobile-layout #map .category-heading{margin-bottom:12px}
+html.map-page body.mobile-layout #map .category-heading{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 html.map-page body.mobile-layout #map .map-shell{height:50vh;min-height:320px;max-height:560px}
 html.map-page body.mobile-layout #map .map-place-card{margin-top:10px}
 html.map-page body.mobile-layout #map .map-type-tabs{display:flex;gap:7px;overflow-x:auto;margin:0 0 13px;padding:2px 0 5px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
