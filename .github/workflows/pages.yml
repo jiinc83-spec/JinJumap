@@ -50,6 +50,17 @@ jobs:
     timeout-minutes: 15
     needs: build
     steps:
+      - name: Clear timed out Pages deployment
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          status=$(curl --silent --show-error --output /dev/null --write-out "%{http_code}" --request POST --header "Accept: application/vnd.github+json" --header "Authorization: Bearer ${GH_TOKEN}" --header "X-GitHub-Api-Version: 2026-03-10" "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pages/deployments/042dae13464cebe0bfca0ae957e6f1c766379a39/cancel")
+          if [[ "$status" != "204" && "$status" != "404" ]]; then
+            printf 'Could not clear stale Pages deployment (HTTP %s).\n' "$status"
+            exit 1
+          fi
+          printf 'Stale Pages deployment cleanup returned HTTP %s.\n' "$status"
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
