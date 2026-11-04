@@ -464,6 +464,10 @@
   }
   window.mapSelectPlaceCard = openSheet;
   sheet.querySelector('.map-place-sheet-close').addEventListener('click', () => closeSheet(true));
+  sheet.querySelector('.map-place-sheet-header').addEventListener('click', event => {
+    if (event.target.closest('button')) return;
+    closeSheet(true);
+  });
   moreButton.addEventListener('click', () => {
     detailsNode.hidden = !detailsNode.hidden;
     moreButton.setAttribute('aria-expanded', String(!detailsNode.hidden));
@@ -475,6 +479,10 @@
       if (event.target.closest('a, button')) return;
       event.preventDefault();
       event.stopImmediatePropagation();
+      if (selectedCard === card) {
+        closeSheet();
+        return;
+      }
       openSheet(card, true);
     }, true);
     card.addEventListener('keydown', event => {
