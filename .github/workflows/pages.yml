@@ -28,6 +28,7 @@ jobs:
           cp fresh-static-preview/mobile.html dist/mobile.html
           cp fresh-static-preview/mobile.css dist/mobile.css
           cp fresh-static-preview/mobile-bottom-nav.css dist/mobile-bottom-nav.css
+          cp fresh-static-preview/mobile-bottom-nav.js dist/mobile-bottom-nav.js
           cp fresh-static-preview/mobile-map.js dist/mobile-map.js
           cp fresh-static-preview/map-place-details.js dist/map-place-details.js
           cp fresh-static-preview/hero-carousel.css dist/hero-carousel.css
