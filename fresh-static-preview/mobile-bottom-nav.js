@@ -38,6 +38,6 @@
     const direction = nextIndex > currentIndex ? 'left' : 'right';
     try { sessionStorage.setItem(storageKey, direction); } catch {}
     body.classList.add(direction === 'left' ? 'nav-page-leave-left' : 'nav-page-leave-right');
-    window.setTimeout(() => { location.href = destination.href; }, 220);
+    window.setTimeout(() => { location.href = destination.href; }, 300);
   });
 })();

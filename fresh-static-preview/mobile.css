@@ -245,6 +245,25 @@ html.map-page body.mobile-layout .map-place-sheet-actions{flex:none;padding:7px 
 html.map-page body.mobile-layout .map-place-sheet-actions a,html.map-page body.mobile-layout .map-place-sheet-actions button{min-height:34px;border-radius:9px;font-size:10px}
 html.map-page body.mobile-layout .map-place-sheet-details{padding:0 18px 14px}
 @media(max-width:380px){html.map-page body.mobile-layout .map-place-sheet-action{font-size:12px}html.map-page body.mobile-layout .map-place-sheet-facts dd{font-size:12px}}
+/* Image-led place cards in the mobile map results */
+@media(max-width:640px){
+  html.map-page body.mobile-layout #map .map-place-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:12px}
+  html.map-page body.mobile-layout #map .map-place-card{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;align-content:start;gap:0;min-width:0;margin:0;padding:0;overflow:hidden;border:1px solid #e5e9e4;border-radius:16px;background:#fff;box-shadow:0 2px 8px #243d100b;cursor:pointer;transition:border-color .18s,box-shadow .18s}
+  html.map-page body.mobile-layout #map .map-place-card:hover,html.map-page body.mobile-layout #map .map-place-card[aria-expanded="true"]{border-color:#b8cdb8;box-shadow:0 5px 15px #243d1015}
+  html.map-page body.mobile-layout #map .map-place-card-thumb{display:block;grid-row:1;width:100%;aspect-ratio:1.08/1;overflow:hidden;background:#eff4ed}
+  html.map-page body.mobile-layout #map .map-place-card-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+  html.map-page body.mobile-layout #map .map-place-card-thumb .map-place-category-icon{display:grid;width:100%;height:100%;place-items:center;border-radius:0;background:linear-gradient(145deg,#e8f0e4,#f5f7f2)}
+  html.map-page body.mobile-layout #map .map-place-card-thumb .map-place-category-icon svg{width:34px;height:34px}
+  html.map-page body.mobile-layout #map .map-place-card>.map-place-category-icon{display:none}
+  html.map-page body.mobile-layout #map .map-place-card>.map-place-copy{display:grid;grid-row:2;gap:4px;min-width:0;padding:10px 11px 12px}
+  html.map-page body.mobile-layout #map .map-place-card .map-place-tag{order:0;display:block;overflow:hidden;margin:0;color:#718574;font-size:9px;text-overflow:ellipsis;white-space:nowrap}
+  html.map-page body.mobile-layout #map .map-place-card .map-place-copy strong{order:1;display:-webkit-box;overflow:hidden;color:#2e4935;font-size:12px;line-height:1.45;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+  html.map-page body.mobile-layout #map .map-place-card .map-place-copy p{order:2;display:-webkit-box;overflow:hidden;margin:0;color:#7b857d;font-size:10px;line-height:1.45;-webkit-box-orient:vertical;-webkit-line-clamp:3}
+  html.map-page body.mobile-layout #map .map-place-card>.map-place-expanded{grid-row:3;grid-column:1;min-width:0;padding:10px;border-top:1px solid #edf0eb}
+  html.map-page body.mobile-layout #map .map-place-card[aria-current="true"]{border-color:#91ae93;box-shadow:0 0 0 2px #91ae9320}
+  html.map-page body.mobile-layout #map .map-place-card:focus-visible{outline:3px solid #4d8058;outline-offset:2px}
+}
+@media(max-width:350px){html.map-page body.mobile-layout #map .map-place-list{gap:8px}html.map-page body.mobile-layout #map .map-place-card>.map-place-copy{padding:9px}}
 /* Keyboard focus stays visible across mobile navigation and map controls. */
 body.mobile-layout :where(a,button,input,select,textarea,[role="button"],[role="link"],[tabindex="0"]):focus-visible{outline:3px solid #4d8058;outline-offset:2px;box-shadow:0 0 0 2px #fff}
 body.mobile-layout .mobile-search-result:focus-visible,html.map-page body.mobile-layout #map .map-place-suggestion:focus-visible{outline:3px solid #4d8058;outline-offset:1px;background:#f2f6f0}
