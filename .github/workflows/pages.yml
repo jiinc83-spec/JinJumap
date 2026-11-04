@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: write
   pages: write
   id-token: write
 concurrency:
@@ -50,6 +51,16 @@ jobs:
     timeout-minutes: 15
     needs: build
     steps:
+      - name: Force-cancel stuck workflow run
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          status=$(curl --silent --show-error --output /dev/null --write-out "%{http_code}" --request POST --header "Accept: application/vnd.github+json" --header "Authorization: Bearer ${GH_TOKEN}" --header "X-GitHub-Api-Version: 2026-03-10" "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/41861974599/force-cancel")
+          if [[ "$status" != "202" && "$status" != "409" && "$status" != "404" ]]; then
+            printf 'Could not force-cancel stuck workflow run (HTTP %s).\n' "$status"
+            exit 1
+          fi
       - name: Clear timed out Pages deployment
         shell: bash
         env:
