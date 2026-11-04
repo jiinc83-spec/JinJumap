@@ -84,6 +84,15 @@
       condition: '민원실 운영시간은 일반 기준이며 지점별 확인이 필요합니다. 무인민원발급기 이용시간과 탄소중립 실천사업 운영시간은 구분해야 합니다.',
       extraFacts: [['무인민원발급기', '24시간 운영으로 등록된 자료 있음']], verification: '일반 민원실 기준 · 무인발급기와 사업 운영시간 구분 필요'
     },
+    'map-central-library-washer-card': {
+      type: 'tumbler', displayType: '다회용컵 사용 · 텀블러 세척', address: '경남 진주시 진주대로 501 · 경상국립대학교 가좌캠퍼스 중앙도서관 1층 정문',
+      action: '중앙도서관 1층 정문에 있는 텀블러 세척기를 이용할 수 있습니다.',
+      method: '중앙도서관 1층 정문에 설치된 텀블러 세척기를 이용하세요.',
+      condition: '도서관 출입 및 세척기 이용 가능 여부와 이용 조건을 현장에서 확인해 주세요.',
+      hoursLabel: '이용 가능시간', hours: '확인 필요', holidays: '확인 필요', phone: '확인 필요',
+      kakaoPlaceId: '8681577', verifiedLocation: false, verification: '사용자가 제공한 위치 정보. 좌표는 확인되지 않아 지도 핀 표시는 보류했습니다.',
+      extraFacts: [['카카오맵 장소 ID', '8681577']]
+    },
     'map-gajwa-washer-card': {
       type: 'tumbler', displayType: '다회용컵 사용 · 텀블러 세척', address: '경상국립대학교 가좌캠퍼스 미래혁신관(202동) 2층 복도',
       action: '텀블러 세척기를 이용해 개인 텀블러를 세척할 수 있습니다.',
@@ -393,7 +402,7 @@
     addFact('정보 확인일 및 검증 상태', `공식 확인일 미기재 · ${info.verification || '추가 확인 필요'}`, 'status');
     if (info.extraFacts) info.extraFacts.forEach(([label, value]) => addFact(label, value, 'status'));
     const directions = sheet.querySelector('.map-place-directions');
-    directions.href = `https://map.kakao.com/link/search/${encodeURIComponent(title)}`;
+    directions.href = info.kakaoPlaceId ? `https://place.map.kakao.com/${encodeURIComponent(info.kakaoPlaceId)}` : `https://map.kakao.com/link/search/${encodeURIComponent(title)}`;
     detailsNode.replaceChildren();
     const appendDetail = (label, value) => {
       const group = document.createElement('section');
