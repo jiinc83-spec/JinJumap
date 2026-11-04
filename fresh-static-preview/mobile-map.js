@@ -251,10 +251,14 @@
   const shell = mapSection.querySelector('.map-shell');
   const sheet = document.createElement('section');
   sheet.className = 'map-place-sheet';
+  sheet.id = 'map-place-sheet';
   sheet.hidden = true;
   sheet.setAttribute('aria-label', '선택한 장소 정보');
-  sheet.innerHTML = '<div class="map-place-sheet-handle" aria-hidden="true"></div><header class="map-place-sheet-header"><div class="map-place-sheet-heading"><h2></h2><span class="map-place-sheet-type"></span></div><button type="button" class="map-place-sheet-close" aria-label="장소 정보 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button></header><div class="map-place-sheet-action-block"><span class="map-place-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 4-14 11 0 3 2 5 5 5 7 0 9-8 9-16Z"/><path d="M5 20c3-5 6-8 11-11"/></svg></span><p class="map-place-sheet-action"></p></div><dl class="map-place-sheet-facts"></dl><div class="map-place-sheet-actions"><a class="map-place-directions" target="_blank" rel="noopener noreferrer">카카오맵 길찾기</a><button type="button" class="map-place-more" aria-expanded="false">자세히 보기</button></div><div class="map-place-sheet-details" hidden></div>';
-  if (shell) shell.after(sheet);
+  sheet.setAttribute('aria-labelledby', 'map-place-sheet-title');
+  sheet.innerHTML = '<div class="map-place-sheet-handle" aria-hidden="true"></div><header class="map-place-sheet-header"><div class="map-place-sheet-heading"><h2 id="map-place-sheet-title" tabindex="-1"></h2><span class="map-place-sheet-type"></span></div><button type="button" class="map-place-sheet-close" aria-label="장소 정보 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button></header><div class="map-place-sheet-action-block"><span class="map-place-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 4-14 11 0 3 2 5 5 5 7 0 9-8 9-16Z"/><path d="M5 20c3-5 6-8 11-11"/></svg></span><p class="map-place-sheet-action"></p></div><dl class="map-place-sheet-facts"></dl><div class="map-place-sheet-actions"><a class="map-place-directions" target="_blank" rel="noopener noreferrer">카카오맵 길찾기</a><button type="button" class="map-place-more" aria-expanded="false">자세히 보기</button></div><div class="map-place-sheet-details" hidden></div>';
+  const mapLegend = mapSection.querySelector('.map-legend');
+  if (mapLegend) mapLegend.after(sheet);
+  else if (shell) shell.after(sheet);
   const nameNode = sheet.querySelector('h2');
   const typeNode = sheet.querySelector('.map-place-sheet-type');
   const actionNode = sheet.querySelector('.map-place-sheet-action');
@@ -321,11 +325,15 @@
       .filter(link => !link.href.includes('map.kakao.com/link/search'));
     return links;
   }
-  function openSheet(card, moveMap = false) {
+  function openSheet(card, moveMap = false, focusSheet = false) {
     if (!card || card.hidden) return;
     selectedCard = card;
-    places.forEach(place => place.removeAttribute('aria-current'));
+    places.forEach(place => {
+      place.removeAttribute('aria-current');
+      if (place !== card) place.setAttribute('aria-expanded', 'false');
+    });
     card.setAttribute('aria-current', 'true');
+    card.setAttribute('aria-expanded', 'true');
     const info = placeFacts[card.id] || {};
     const title = card.querySelector('.map-place-copy strong')?.textContent.trim() || card.getAttribute('aria-label') || '장소 정보';
     const type = info.displayType || typeLabels[info.type] || typeLabels.other;
@@ -383,20 +391,27 @@
     moreButton.setAttribute('aria-expanded', 'false');
     sheet.hidden = false;
     if (moveMap) window.focusMapPlace?.(card);
+    if (focusSheet) nameNode.focus({ preventScroll: true });
   }
-  function closeSheet() {
+  function closeSheet(restoreFocus = false) {
     sheet.hidden = true;
-    if (selectedCard) selectedCard.removeAttribute('aria-current');
+    if (selectedCard) {
+      selectedCard.removeAttribute('aria-current');
+      selectedCard.setAttribute('aria-expanded', 'false');
+    }
+    const previousCard = selectedCard;
     selectedCard = null;
+    if (restoreFocus && previousCard && !previousCard.hidden) previousCard.focus({ preventScroll: true });
   }
   window.mapSelectPlaceCard = openSheet;
-  sheet.querySelector('.map-place-sheet-close').addEventListener('click', closeSheet);
+  sheet.querySelector('.map-place-sheet-close').addEventListener('click', () => closeSheet(true));
   moreButton.addEventListener('click', () => {
     detailsNode.hidden = !detailsNode.hidden;
     moreButton.setAttribute('aria-expanded', String(!detailsNode.hidden));
     moreButton.textContent = detailsNode.hidden ? '자세히 보기' : '접기';
   });
   places.forEach(card => {
+    card.setAttribute('aria-controls', sheet.id);
     card.addEventListener('click', event => {
       if (event.target.closest('a, button')) return;
       event.preventDefault();
@@ -407,14 +422,25 @@
       if (event.key !== 'Enter' && event.key !== ' ') return;
       event.preventDefault();
       event.stopImmediatePropagation();
-      openSheet(card, true);
+      openSheet(card, true, true);
     }, true);
   });
   mapSection.querySelector('#kakao-map')?.addEventListener('click', event => {
     if (event.target === event.currentTarget) closeSheet();
   });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !sheet.hidden) closeSheet();
+    if (event.key !== 'Escape') return;
+    if (!sheet.hidden && !detailsNode.hidden) {
+      detailsNode.hidden = true;
+      moreButton.setAttribute('aria-expanded', 'false');
+      moreButton.focus({ preventScroll: true });
+      event.preventDefault();
+      return;
+    }
+    if (!sheet.hidden) {
+      closeSheet(true);
+      event.preventDefault();
+    }
   });
   applyFilters();
 })();

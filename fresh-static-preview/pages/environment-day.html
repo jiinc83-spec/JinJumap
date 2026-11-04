@@ -25,7 +25,7 @@
   <header class="top">진주시 탄소중립 <b>남강 Green Map</b></header>
   <main>
     <div class="intro-row">
-      <div><div class="eyebrow">ENVIRONMENTAL AWARENESS CALENDAR</div><h1 class="title">환경 기념일 캘린더</h1></div>
+      <div><div class="eyebrow">ENVIRONMENTAL AWARENESS CALENDAR</div><h1 class="title" tabindex="-1">환경 기념일 캘린더</h1></div>
     </div>
     <section class="calendar" aria-label="환경 기념일 및 실천 일정 달력">
       <div class="calendar-layout">
@@ -40,6 +40,7 @@
     <a class="back" href="../index.html">← GREEN MAP으로 돌아가기</a>
   </main>
   <script>
+    document.addEventListener("DOMContentLoaded",()=>document.querySelector(".title")?.focus({preventScroll:true}),{once:true});
     (()=>{
       const now=()=>new Date();let current=now();let year=current.getFullYear(),month=current.getMonth();
       const dateKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
