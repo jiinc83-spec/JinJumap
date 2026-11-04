@@ -77,25 +77,24 @@
     },
     'map-hamotago-sangdae-card': {
       type: 'transport', displayType: '하모타고 · 녹색교통', address: '경상남도 진주시 상대로72번길 6',
-      action: '진주시 공영자전거 하모타고를 대여해 가까운 거리를 자전거로 이동할 수 있습니다.', method: '공식 대여소에서 하모타고를 대여해 이용하세요.',
-      condition: '최대 이용시간과 대여 가능 여부는 현장 및 공식 페이지에서 확인해 주세요.', hoursLabel: '운영시간', hours: '07:00~20:00 · 동절기 09:00~17:00', holidays: '확인 필요', phone: '055-755-3549',
-      directionsUrl: 'https://map.kakao.com/link/map/%EC%83%81%EB%8C%80%20%EA%B3%B5%EC%98%81%20%EB%AC%B4%EB%A3%8C%EC%9E%90%EC%A0%84%EA%B1%B0%20%EB%8C%80%EC%97%AC%EC%86%8C,35.1840610,128.119692', verifiedLocation: true, verification: '진주시 하모타고 공식 대여소 현황 페이지의 좌표 기준. 대여 가능 대수는 실시간으로 변동되어 표시하지 않습니다.',
-      extraFacts: [['이용시간', '최대 4시간'], ['운영 정보', '대여 가능 대수는 실시간 변동']]
+      action: '남강변 자전거길에 있는 진주시 공영자전거 대여소입니다.', method: '진주시민은 신분증 확인 후 대여할 수 있으며, 타 지역 이용자는 신분증을 맡긴 뒤 대여할 수 있습니다.',
+      condition: '신분증을 지참해 대여소에서 확인해 주세요.', hoursLabel: '운영시간', hours: '하절기 08:00~19:00 · 동절기 09:00~17:00', holidays: '신정·설·추석 연휴 휴무', phone: '055-758-5066',
+      directionsUrl: 'https://map.kakao.com/link/map/%EC%83%81%EB%8C%80%20%EA%B3%B5%EC%98%81%20%EB%AC%B4%EB%A3%8C%EC%9E%90%EC%A0%84%EA%B1%B0%20%EB%8C%80%EC%97%AC%EC%86%8C,35.1840610,128.119692', verifiedLocation: true, verification: '위치·운영 정보는 진주시 공식 대여소 현황 기준 · 대여현황은 실시간 변동',
+      extraFacts: [['운영 대수', '70대'], ['대여시간', '최대 4시간'], ['대여현황', '실시간 변동 · 공식 페이지에서 확인']]
     },
     'map-hamotago-chungmugong-card': {
       type: 'transport', displayType: '하모타고 · 녹색교통', address: '진주시 충무공동 44',
-      action: '진주시 공영자전거 하모타고를 대여해 가까운 거리를 자전거로 이동할 수 있습니다.', method: '공식 대여소에서 하모타고를 대여해 이용하세요.',
-      condition: '최대 이용시간과 대여 가능 여부는 현장 및 공식 페이지에서 확인해 주세요.', hoursLabel: '운영시간', hours: '07:00~20:00 · 동절기 09:00~17:00', holidays: '확인 필요', phone: '055-755-3549',
-      directionsUrl: 'https://map.kakao.com/link/map/%EC%B6%A9%EB%AC%B4%EA%B3%B5%20%EA%B3%B5%EC%98%81%20%EB%AC%B4%EB%A3%8C%EC%9E%90%EC%A0%84%EA%B1%B0%20%EB%8C%80%EC%97%AC%EC%86%8C,35.17335835796439,128.13103333982818', verifiedLocation: true, verification: '진주시 하모타고 공식 대여소 현황 페이지의 좌표 기준. 대여 가능 대수는 실시간으로 변동되어 표시하지 않습니다.',
-      extraFacts: [['이용시간', '최대 4시간'], ['운영 정보', '대여 가능 대수는 실시간 변동']]
+      action: '진주시 공영자전거 대여소입니다.', method: '진주시민은 신분증 확인 후 대여할 수 있으며, 타 지역 이용자는 신분증을 맡긴 뒤 대여할 수 있습니다.',
+      condition: '신분증을 지참해 대여소에서 확인해 주세요.', hoursLabel: '운영시간', hours: '하절기 08:00~19:00 · 동절기 09:00~17:00', holidays: '신정·설·추석 연휴 휴무', phone: '055-763-5066',
+      directionsUrl: 'https://map.kakao.com/link/map/%EC%B6%A9%EB%AC%B4%EA%B3%B5%20%EA%B3%B5%EC%98%81%20%EB%AC%B4%EB%A3%8C%EC%9E%90%EC%A0%84%EA%B1%B0%20%EB%8C%80%EC%97%AC%EC%86%8C,35.17335835796439,128.13103333982818', verifiedLocation: true, verification: '위치·운영 정보는 진주시 공식 대여소 현황 기준 · 대여현황은 실시간 변동',
+      extraFacts: [['운영 대수', '70대'], ['대여시간', '최대 4시간'], ['대여현황', '실시간 변동 · 공식 페이지에서 확인']]
     },
     'map-bike-rental-card': {
-      type: 'transport', displayType: '녹색교통', address: '경남 진주시 강남로 188',
-      action: '공영자전거를 무료로 대여해 가까운 거리를 자동차 대신 자전거로 이동할 수 있습니다. 일상 이동에서 자동차 이용을 줄이는 녹색교통 실천에 참여할 수 있습니다.',
-      method: '현재 대여소 운영 여부와 정확한 입구 위치를 확인한 뒤 이용해 주세요.',
-      hours: '07:00~20:00 · 동절기 09:00~17:00', holidays: '확인 필요', phone: '055-755-3549', directionsUrl: 'https://map.kakao.com/link/map/칠암 공영 무료자전거 대여소,35.18502560422833,128.0949992331689',
-      condition: '운영시간은 계절에 따라 다릅니다. 대여 가능 여부와 현장 운영 공지를 확인해 주세요.',
-      directionsUrl: 'https://map.kakao.com/link/map/칠암 공영 무료자전거 대여소,35.18502560422833,128.0949992331689', extraFacts: [['최대 이용시간', '4시간'], ['이용요금', '무료']], verifiedLocation: true, verification: '위치·운영 정보는 진주시 하모타고 공식 대여소 현황 페이지 기준'
+      type: 'transport', displayType: '하모타고 · 녹색교통', address: '경상남도 진주시 강남로 188',
+      action: '진주시 공영자전거 대여소입니다.', method: '진주시민은 신분증 확인 후 대여할 수 있으며, 타 지역 이용자는 신분증을 맡긴 뒤 대여할 수 있습니다.',
+      condition: '신분증을 지참해 대여소에서 확인해 주세요.', hoursLabel: '운영시간', hours: '하절기 08:00~19:00 · 동절기 09:00~17:00', holidays: '신정·설·추석 연휴 휴무', phone: '055-762-5066',
+      directionsUrl: 'https://map.kakao.com/link/map/%EC%B9%A0%EC%95%94%20%EA%B3%B5%EC%98%81%20%EB%AC%B4%EB%A3%8C%EC%9E%90%EC%A0%84%EA%B1%B0%20%EB%8C%80%EC%97%AC%EC%86%8C,35.18502560422833,128.0949992331689', verifiedLocation: true, verification: '위치·운영 정보는 진주시 공식 대여소 현황 기준 · 대여현황은 실시간 변동',
+      extraFacts: [['운영 대수', '70대'], ['대여시간', '최대 4시간'], ['대여현황', '실시간 변동 · 공식 페이지에서 확인']]
     },
     'map-chilam-office-card': {
       type: 'environment', displayType: '실천 내용 확인 필요', address: '경남 진주시 강남로177번길 30-7',
