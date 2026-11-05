@@ -317,8 +317,9 @@
   filterToggle.type = 'button';
   filterToggle.className = 'map-filter-toggle';
   filterToggle.setAttribute('aria-controls', `${districtFilters.id} ${typeFilters.id}`);
-  filterToggle.setAttribute('aria-expanded', 'true');
-  filterToggle.textContent = '필터 숨기기';
+  mapSection.classList.add('is-filters-collapsed');
+  filterToggle.setAttribute('aria-expanded', 'false');
+  filterToggle.textContent = '필터 보기';
   filterToggle.addEventListener('click', () => {
     const collapsed = mapSection.classList.toggle('is-filters-collapsed');
     filterToggle.setAttribute('aria-expanded', String(!collapsed));
