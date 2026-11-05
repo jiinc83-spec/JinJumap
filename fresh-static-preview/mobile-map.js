@@ -311,6 +311,20 @@
   typeFilters.setAttribute('aria-label', '실천 유형 선택');
   typeFilters.innerHTML = '<button type="button" data-type="all" aria-pressed="true">전체 유형</button><button type="button" data-type="tumbler" aria-pressed="false">다회용컵 사용</button><button type="button" data-type="circular" aria-pressed="false">재사용·자원순환</button><button type="button" data-type="transport" aria-pressed="false">녹색교통</button><button type="button" data-type="recycling" aria-pressed="false">분리배출</button><button type="button" data-type="environment" aria-pressed="false">환경정보</button>';
   districtFilters.after(typeFilters);
+  districtFilters.id = districtFilters.id || 'map-district-tabs';
+  typeFilters.id = 'map-type-tabs';
+  const filterToggle = document.createElement('button');
+  filterToggle.type = 'button';
+  filterToggle.className = 'map-filter-toggle';
+  filterToggle.setAttribute('aria-controls', `${districtFilters.id} ${typeFilters.id}`);
+  filterToggle.setAttribute('aria-expanded', 'true');
+  filterToggle.textContent = '필터 숨기기';
+  filterToggle.addEventListener('click', () => {
+    const collapsed = mapSection.classList.toggle('is-filters-collapsed');
+    filterToggle.setAttribute('aria-expanded', String(!collapsed));
+    filterToggle.textContent = collapsed ? '필터 보기' : '필터 숨기기';
+  });
+  mapSection.append(filterToggle);
 
   const listStatus = document.createElement('p');
   listStatus.className = 'map-place-list-status';
