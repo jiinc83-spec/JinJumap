@@ -417,6 +417,9 @@ body.mobile-layout .benefits-page-header>div{display:grid;gap:2px}
 body.mobile-layout .benefits-page-header strong{font-size:17px}
 body.mobile-layout .benefits-page-header span{color:#829084;font-size:11px}
 body.mobile-layout .benefits-page-header .benefits-page-check{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:50%;background:#eff5e9;color:#5c9760;font:16px/1 sans-serif}
+body.mobile-layout .benefits-page-title-only{min-height:56px;padding:calc(env(safe-area-inset-top) + 8px) 18px 10px}
+body.mobile-layout .benefits-page-title-only>div{display:block}
+body.mobile-layout .benefits-page-title-only strong{font-size:18px}
 body.mobile-layout .benefits-page:not(.practice-info-page) .benefits-page-content #tumbler-details>.category-heading{display:none}
 body.mobile-layout .benefits-page-content{min-height:0;flex:1;overflow:auto;overscroll-behavior:contain;padding:18px max(16px,calc((100vw - 1120px)/2)) calc(30px + env(safe-area-inset-bottom));scrollbar-gutter:stable}
 body.mobile-layout .benefits-page-content #tumbler-details{margin:0}
