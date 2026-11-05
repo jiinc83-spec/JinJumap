@@ -318,6 +318,18 @@
   listStatus.setAttribute('aria-live', 'polite');
   const firstCard = places[0];
   if (firstCard) firstCard.before(listStatus);
+  const listToggle = document.createElement('button');
+  listToggle.type = 'button';
+  listToggle.className = 'map-place-list-toggle';
+  listToggle.setAttribute('aria-controls', 'map-place-list');
+  listToggle.setAttribute('aria-expanded', 'false');
+  listToggle.textContent = '장소 목록';
+  mapSection.append(listToggle);
+  listToggle.addEventListener('click', () => {
+    const isOpen = mapSection.classList.toggle('is-list-open');
+    listToggle.setAttribute('aria-expanded', String(isOpen));
+    listToggle.textContent = isOpen ? '목록 닫기' : '장소 목록';
+  });
 
   const shell = mapSection.querySelector('.map-shell');
   const sheet = document.createElement('section');
@@ -427,6 +439,9 @@
   }
   function openSheet(card, moveMap = false, focusSheet = false) {
     if (!card || card.hidden) return;
+    mapSection.classList.remove('is-list-open');
+    listToggle.setAttribute('aria-expanded', 'false');
+    listToggle.textContent = '장소 목록';
     sheet.classList.remove('is-closing', 'is-dragging');
     sheet.style.removeProperty('transform');
     setSheetCollapsed(false);
@@ -610,6 +625,13 @@
     }
     if (!sheet.hidden) {
       closeSheet(true);
+      event.preventDefault();
+    }
+    if (mapSection.classList.contains('is-list-open')) {
+      mapSection.classList.remove('is-list-open');
+      listToggle.setAttribute('aria-expanded', 'false');
+      listToggle.textContent = '장소 목록';
+      listToggle.focus({ preventScroll: true });
       event.preventDefault();
     }
   });
