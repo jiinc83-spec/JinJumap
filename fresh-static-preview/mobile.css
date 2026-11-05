@@ -406,3 +406,16 @@ body.mobile-layout .category-overview .reuse-store-cover{box-sizing:border-box;w
 body.mobile-layout .category-overview .reuse-store-cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 body.mobile-layout .category-overview .bicycle .card-art img,body.mobile-layout #tumbler-details .brand-card .card-art img{width:100%;height:100%;object-fit:cover}
 body.mobile-layout .hero{height:auto;min-height:0;aspect-ratio:4/3}
+body.mobile-layout.benefits-page-open{overflow:hidden}
+body.mobile-layout .benefits-page{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;background:#fff;color:#26342b;overflow:hidden}
+body.mobile-layout .benefits-page[hidden]{display:none}
+body.mobile-layout .benefits-page-header{display:flex;align-items:center;gap:13px;flex:none;min-height:68px;padding:calc(env(safe-area-inset-top) + 8px) 18px 10px;border-bottom:1px solid #e9eee8;background:#fff}
+body.mobile-layout .benefits-page-back{display:grid;place-items:center;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:#f4f7f2;color:#355b47;font:32px/1 sans-serif;cursor:pointer}
+body.mobile-layout .benefits-page-header>div{display:grid;gap:2px}
+body.mobile-layout .benefits-page-header strong{font-size:17px}
+body.mobile-layout .benefits-page-header span{color:#829084;font-size:11px}
+body.mobile-layout .benefits-page-content{min-height:0;flex:1;overflow:auto;overscroll-behavior:contain;padding:18px max(16px,calc((100vw - 1120px)/2)) calc(30px + env(safe-area-inset-bottom));scrollbar-gutter:stable}
+body.mobile-layout .benefits-page-content #tumbler-details{margin:0}
+body.mobile-layout .benefits-page-content #tumbler-details>.category-heading{margin:0 0 14px}
+body.mobile-layout .benefits-page-content #tumbler-details .grid{width:100%}
+@media(max-width:640px){body.mobile-layout .benefits-page-header{min-height:60px;padding-right:14px;padding-left:14px}body.mobile-layout .benefits-page-content{padding:14px 12px calc(22px + env(safe-area-inset-bottom))}}
