@@ -359,7 +359,6 @@
   else if (shell) shell.after(sheet);
   const nameNode = sheet.querySelector('h2');
   const photoNode = sheet.querySelector('.map-place-sheet-photo');
-  sheet.insertBefore(sheet.querySelector('.map-place-sheet-header'), photoNode);
   const photoImage = photoNode.querySelector('img');
   const typeNode = sheet.querySelector('.map-place-sheet-type');
   const actionNode = sheet.querySelector('.map-place-sheet-action');
@@ -463,6 +462,7 @@
     sheet.style.removeProperty('transform');
     setSheetCollapsed(false);
     selectedCard = card;
+    sheet.dataset.placeId = card.id;
     places.forEach(place => {
       place.removeAttribute('aria-current');
       if (place !== card) place.setAttribute('aria-expanded', 'false');

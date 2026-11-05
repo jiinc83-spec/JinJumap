@@ -438,7 +438,8 @@ body.mobile-layout .category-overview .tumbler-entry:focus-visible{outline:3px s
   html.map-page body.mobile-layout .map-place-sheet{top:190px;right:auto;bottom:18px;left:18px;width:min(440px,55vw);max-height:calc(100dvh - 208px);height:auto;transform:none;border-radius:16px;box-shadow:0 10px 34px #18331f26}
   html.map-page body.mobile-layout .map-place-sheet-handle{display:none}
   html.map-page body.mobile-layout .map-place-sheet-header{padding:15px 18px 12px}
-  html.map-page body.mobile-layout .map-place-sheet-photo img{height:clamp(150px,24vh,230px)}
+  html.map-page body.mobile-layout .map-place-sheet-photo img{height:auto;aspect-ratio:16/9;object-fit:cover}
+  html.map-page body.mobile-layout .map-place-sheet[data-place-id="map-gajwa-washer-card"] .map-place-sheet-photo figcaption{display:none}
   html.map-page body.mobile-layout .map-place-sheet-action-block{padding:12px 18px}
   html.map-page body.mobile-layout .map-place-sheet-action{font-size:13px;line-height:1.65}
   html.map-page body.mobile-layout .map-place-sheet-facts{max-height:none;min-height:0;padding:5px 18px;overflow:auto}
