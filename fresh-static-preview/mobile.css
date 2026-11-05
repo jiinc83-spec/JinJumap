@@ -430,3 +430,5 @@ body.mobile-layout .practice-info-reuse{width:min(100%,900px);margin:0 auto}
 body.mobile-layout .practice-info-reuse .reuse-store-cover{width:100%;max-width:none;aspect-ratio:4/3;margin:0 0 14px}
 body.mobile-layout .practice-info-reuse .reuse-store-info{display:block!important}
 @media(max-width:640px){body.mobile-layout .practice-info-card .card-art{height:clamp(132px,44vw,240px)}body.mobile-layout .practice-info-card .card-body{padding:14px}body.mobile-layout .practice-info-card h3{font-size:16px}}
+body.mobile-layout .category-overview .tumbler-entry{cursor:pointer}
+body.mobile-layout .category-overview .tumbler-entry:focus-visible{outline:3px solid #7bc83b;outline-offset:3px}
