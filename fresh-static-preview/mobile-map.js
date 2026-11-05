@@ -573,6 +573,7 @@
   };
   [sheetHandle, sheet.querySelector('.map-place-sheet-header')].forEach(surface => {
     surface.addEventListener('pointerdown', event => {
+      if (window.matchMedia('(min-width: 641px)').matches) return;
       if (event.target.closest('button, a') || (event.pointerType === 'mouse' && event.button !== 0)) return;
       dragSurface = surface;
       dragStartY = event.clientY;

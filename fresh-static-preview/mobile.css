@@ -432,3 +432,17 @@ body.mobile-layout .practice-info-reuse .reuse-store-info{display:block!importan
 @media(max-width:640px){body.mobile-layout .practice-info-card .card-art{height:clamp(132px,44vw,240px)}body.mobile-layout .practice-info-card .card-body{padding:14px}body.mobile-layout .practice-info-card h3{font-size:16px}}
 body.mobile-layout .category-overview .tumbler-entry{cursor:pointer}
 body.mobile-layout .category-overview .tumbler-entry:focus-visible{outline:3px solid #7bc83b;outline-offset:3px}
+@media(min-width:641px){
+  html.map-page body.mobile-layout .map-place-sheet{top:190px;right:auto;bottom:18px;left:18px;width:min(440px,55vw);max-height:calc(100dvh - 208px);height:auto;transform:none;border-radius:16px;box-shadow:0 10px 34px #18331f26}
+  html.map-page body.mobile-layout .map-place-sheet-handle{display:none}
+  html.map-page body.mobile-layout .map-place-sheet-header{padding:15px 18px 12px}
+  html.map-page body.mobile-layout .map-place-sheet-photo img{height:clamp(150px,24vh,230px)}
+  html.map-page body.mobile-layout .map-place-sheet-action-block{padding:12px 18px}
+  html.map-page body.mobile-layout .map-place-sheet-action{font-size:13px;line-height:1.65}
+  html.map-page body.mobile-layout .map-place-sheet-facts{max-height:none;min-height:0;padding:5px 18px;overflow:auto}
+  html.map-page body.mobile-layout .map-place-sheet-facts>div{grid-template-columns:20px 76px minmax(0,1fr);padding:10px 0}
+  html.map-page body.mobile-layout .map-place-sheet-facts dt{font-size:11px}
+  html.map-page body.mobile-layout .map-place-sheet-facts dd{font-size:12px;line-height:1.6}
+  html.map-page body.mobile-layout .map-place-sheet-actions{padding:10px 18px 14px}
+  html.map-page body.mobile-layout .map-place-sheet-details{max-height:30dvh;padding-right:18px;padding-left:18px}
+}
