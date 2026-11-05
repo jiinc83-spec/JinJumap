@@ -472,7 +472,7 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
       if(entry.kind==='benefit'&&benefitDetails.hidden)benefitButton.click();
       setTimeout(()=>{const detailButton=entry.card.querySelector('.brand-expand,.card-foot button');if(detailButton&&detailButton.getAttribute('aria-expanded')!=='true')detailButton.click();entry.card.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});},entry.kind==='benefit'?250:100);
     };
-    siteSearch.addEventListener('submit',event=>{event.preventDefault();if(!searchInput.value.trim()){searchInput.focus();return}saveHomeRecent(searchInput.value);renderSearch()});
+    siteSearch.addEventListener('submit',event=>{event.preventDefault();if(!searchInput.value.trim()){searchInput.focus();return}saveHomeRecent(searchInput.value);const matches=renderSearch();if(matches[0]?.kind==='place')selectSearchEntry(matches[0])});
     searchInput.addEventListener('input',renderSearch);
     searchInput.addEventListener('focus',()=>{if(searchInput.value.trim())renderSearch()});
     searchInput.addEventListener('keydown',event=>{if(event.key==='Escape'){closeSearch({blur:true});return}if(event.key==='ArrowDown'&&searchOpen){event.preventDefault();searchResults.querySelector('.mobile-search-result, .mobile-search-all')?.focus()}});
