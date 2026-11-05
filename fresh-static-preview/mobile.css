@@ -419,3 +419,14 @@ body.mobile-layout .benefits-page-content #tumbler-details{margin:0}
 body.mobile-layout .benefits-page-content #tumbler-details>.category-heading{margin:0 0 14px}
 body.mobile-layout .benefits-page-content #tumbler-details .grid{width:100%}
 @media(max-width:640px){body.mobile-layout .benefits-page-header{min-height:60px;padding-right:14px;padding-left:14px}body.mobile-layout .benefits-page-content{padding:14px 12px calc(22px + env(safe-area-inset-bottom))}}
+body.mobile-layout .practice-info-card{width:min(100%,820px);margin:0 auto;border-radius:16px}
+body.mobile-layout .practice-info-card .card-art{height:clamp(150px,32vw,300px)}
+body.mobile-layout .practice-info-card .card-body{padding:18px}
+body.mobile-layout .practice-info-card h3{min-height:0;font-size:19px}
+body.mobile-layout .practice-info-card .address,body.mobile-layout .practice-info-card .prep,body.mobile-layout .practice-info-card .inline-details{font-size:13px;line-height:1.75}
+body.mobile-layout .practice-info-card .card-foot{margin-top:14px}
+body.mobile-layout .practice-info-card .card-foot small{font-size:12px;line-height:1.7}
+body.mobile-layout .practice-info-reuse{width:min(100%,900px);margin:0 auto}
+body.mobile-layout .practice-info-reuse .reuse-store-cover{width:100%;max-width:none;aspect-ratio:4/3;margin:0 0 14px}
+body.mobile-layout .practice-info-reuse .reuse-store-info{display:block!important}
+@media(max-width:640px){body.mobile-layout .practice-info-card .card-art{height:clamp(132px,44vw,240px)}body.mobile-layout .practice-info-card .card-body{padding:14px}body.mobile-layout .practice-info-card h3{font-size:16px}}
