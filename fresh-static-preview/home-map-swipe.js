@@ -56,7 +56,7 @@
   const start = event => {
     if (event.touches.length !== 1) return;
     const target = event.target instanceof Element ? event.target : null;
-    if (!target || target.closest('a,button,input,textarea,select,[role="button"],.category-overview,.mobile-category-tabs,.mobile-search,.app-bottom-nav,.map-section')) return;
+    if (!target || target.closest('input,textarea,select,[contenteditable="true"],.mobile-search,.app-bottom-nav')) return;
     startX = lastX = event.touches[0].clientX;
     startY = event.touches[0].clientY;
     lastTime = performance.now();
