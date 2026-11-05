@@ -347,6 +347,8 @@ html.map-page:has(body.mobile-layout){background:#fff}
   html.map-page body.mobile-layout #map .map-place-list-toggle:focus-visible{outline:3px solid #4d8058;outline-offset:2px}
   html.map-page body.mobile-layout .map-place-sheet{bottom:70px;width:min(520px,calc(100vw - 32px));max-height:min(70dvh,640px)}
 }
+html.map-page body.mobile-layout .map-place-sheet-facts>div.is-simple{grid-template-columns:20px minmax(0,1fr);align-items:center;gap:10px;padding:9px 0}
+html.map-page body.mobile-layout .map-place-sheet-facts>div.is-simple dt{display:none}
 @media(min-width:641px) and (max-width:1024px){
   html.map-page body.mobile-layout #map .map-place-search{left:18px;top:16px;width:min(520px,calc(100vw - 36px))}
   html.map-page body.mobile-layout #map .map-district-tabs,html.map-page body.mobile-layout #map .map-type-tabs{left:14px;width:calc(100vw - 28px)}

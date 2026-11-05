@@ -132,8 +132,8 @@
       extraFacts: [['카카오맵 장소 ID', '8681577'], ['위도·경도', '35.1534125, 128.0995781']]
     },
     'map-gajwa-washer-card': {
-      type: 'tumbler', displayType: '다회용컵 사용 · 텀블러 세척', address: '경상국립대학교 가좌캠퍼스 미래혁신관(202동) 2층 복도',
-      action: '텀블러 세척기를 이용해 개인 텀블러를 세척할 수 있습니다.',
+      type: 'tumbler', displayType: '다회용컵 사용 · 텀블러 세척', address: '경상국립대학교 가좌캠퍼스 · 202동',
+      action: '개인 텀블러 세척을 통한 다회용컵 사용 실천', locationLabel: '2층 복도', compactFacts: true,
       method: '미래혁신관 2층 복도에 설치된 텀블러 세척기를 이용하세요.',
       condition: '교내 시설의 이용 가능 여부와 이용 조건은 현장에서 확인해 주세요.',
       hoursLabel: '이용 가능시간', hours: '확인 필요', holidays: '확인 필요', phone: '확인 필요',
@@ -429,6 +429,7 @@
   function addFact(label, value, iconName) {
     const row = document.createElement('div');
     row.className = 'map-place-sheet-fact';
+    if (!label) row.classList.add('is-simple');
     const icon = document.createElement('span');
     icon.className = 'map-place-fact-icon';
     icon.setAttribute('aria-hidden', 'true');
@@ -436,6 +437,7 @@
       hours: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/>',
       holiday: '<rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M8 3.5v4M16 3.5v4M4 9.5h16M9 13l6 5m0-5-6 5"/>',
       address: '<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.2"/>',
+      floor: '<path d="m5 4 14 8-14 8Z"/>',
       phone: '<path d="M7 4h3l1.3 4-2 1.5a14 14 0 0 0 5.2 5.2l1.5-2 4 1.3v3c0 1.1-.9 2-2 2A15 15 0 0 1 5 6c0-1.1.9-2 2-2Z"/>',
       status: '<path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/>'
     };
@@ -487,12 +489,17 @@
     typeNode.textContent = type;
     actionNode.textContent = action;
     factsNode.replaceChildren();
-    addFact(info.hoursLabel || '운영시간', [info.hours || '운영시간 확인 필요', info.hoursNote].filter(Boolean).join(' · '), 'hours');
-    addFact('정기 휴무일', info.holidays || '휴무일 확인 필요', 'holiday');
-    addFact('주소', address, 'address');
-    addFact(info.contactLabel || '연락처', info.phone || '연락처 확인 필요', 'phone');
-    addFact('정보 확인일 및 검증 상태', `공식 확인일 미기재 · ${info.verification || '추가 확인 필요'}`, 'status');
-    if (info.extraFacts) info.extraFacts.forEach(([label, value]) => addFact(label, value, 'status'));
+    if (info.compactFacts) {
+      addFact('', address, 'address');
+      addFact('', info.locationLabel || '위치 확인 필요', 'floor');
+    } else {
+      addFact(info.hoursLabel || '운영시간', [info.hours || '운영시간 확인 필요', info.hoursNote].filter(Boolean).join(' · '), 'hours');
+      addFact('정기 휴무일', info.holidays || '휴무일 확인 필요', 'holiday');
+      addFact('주소', address, 'address');
+      addFact(info.contactLabel || '연락처', info.phone || '연락처 확인 필요', 'phone');
+      addFact('정보 확인일 및 검증 상태', `공식 확인일 미기재 · ${info.verification || '추가 확인 필요'}`, 'status');
+      if (info.extraFacts) info.extraFacts.forEach(([label, value]) => addFact(label, value, 'status'));
+    }
     const directions = sheet.querySelector('.map-place-directions');
     directions.href = info.directionsUrl || info.googleMapsUrl || (info.kakaoPlaceId ? `https://place.map.kakao.com/${encodeURIComponent(info.kakaoPlaceId)}` : `https://map.kakao.com/link/search/${encodeURIComponent(title)}`);
     detailsNode.replaceChildren();
