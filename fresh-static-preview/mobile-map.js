@@ -195,6 +195,119 @@
   search.setAttribute('aria-controls', suggestionList.id);
   search.setAttribute('aria-expanded', 'false');
 
+  // Move the existing search control into a dedicated, accessible search view.
+  // Keeping the same input preserves the map's existing search and filtering handlers.
+  const searchPlaceholder = document.createComment('map search position');
+  searchWrap?.before(searchPlaceholder);
+  const searchScreen = document.createElement('section');
+  searchScreen.className = 'map-search-screen';
+  searchScreen.id = 'map-search-screen';
+  searchScreen.hidden = true;
+  searchScreen.setAttribute('role', 'dialog');
+  searchScreen.setAttribute('aria-modal', 'true');
+  searchScreen.setAttribute('aria-label', '장소 검색');
+  searchScreen.innerHTML = `
+    <div class="map-search-screen-inner">
+      <header class="map-search-screen-header">
+        <button class="map-search-back" type="button" aria-label="지도 화면으로 돌아가기"><span aria-hidden="true">←</span></button>
+        <span class="map-search-brand" aria-hidden="true">⌕</span>
+        <div class="map-search-field-host"></div>
+      </header>
+      <section class="map-search-recent" aria-labelledby="map-search-recent-title">
+        <div class="map-search-section-heading"><h2 id="map-search-recent-title">최근 검색어</h2><button class="map-search-clear" type="button" hidden>전체 삭제</button></div>
+        <p class="map-search-empty">최근 검색어 내역이 없습니다.</p>
+        <ul class="map-search-recent-list"></ul>
+      </section>
+      <section class="map-search-popular" aria-labelledby="map-search-popular-title">
+        <div class="map-search-section-heading"><h2 id="map-search-popular-title">추천 검색어</h2><span class="map-search-info" aria-label="진주 친환경 장소와 지역을 추천합니다">i</span></div>
+        <ol class="map-search-popular-list"></ol>
+      </section>
+    </div>`;
+  document.body.append(searchScreen);
+  const screenFieldHost = searchScreen.querySelector('.map-search-field-host');
+  const recentList = searchScreen.querySelector('.map-search-recent-list');
+  const recentEmpty = searchScreen.querySelector('.map-search-empty');
+  const recentClear = searchScreen.querySelector('.map-search-clear');
+  const recentSearchKey = 'namgang-green-map-recent-searches';
+  const popularSearchTerms = ['텀블러 세척기', '재사용·자원순환', '경상국립대 가좌캠퍼스', '하모타고', '분리배출', '자전거', '경상국립대 칠암캠퍼스', '제로웨이스트', '평거동', '칠암동'];
+  const readRecentSearches = () => {
+    try { const value = JSON.parse(localStorage.getItem(recentSearchKey) || '[]'); return Array.isArray(value) ? value.filter(item => typeof item === 'string').slice(0, 10) : []; }
+    catch { return []; }
+  };
+  function renderRecentSearches() {
+    const terms = readRecentSearches();
+    recentList.replaceChildren();
+    recentEmpty.hidden = terms.length > 0;
+    recentClear.hidden = terms.length === 0;
+    terms.forEach(term => {
+      const row = document.createElement('li');
+      const choose = document.createElement('button');
+      choose.type = 'button'; choose.className = 'map-search-term'; choose.textContent = term;
+      choose.addEventListener('click', () => chooseSearchTerm(term));
+      const remove = document.createElement('button');
+      remove.type = 'button'; remove.className = 'map-search-remove'; remove.setAttribute('aria-label', `${term} 검색어 삭제`); remove.textContent = '×';
+      remove.addEventListener('click', () => { const next = readRecentSearches().filter(item => item !== term); localStorage.setItem(recentSearchKey, JSON.stringify(next)); renderRecentSearches(); });
+      row.append(choose, remove); recentList.append(row);
+    });
+  }
+  function saveRecentSearch(term) {
+    const normalized = term.trim();
+    if (!normalized) return;
+    try { localStorage.setItem(recentSearchKey, JSON.stringify([normalized, ...readRecentSearches().filter(item => item !== normalized)].slice(0, 10))); } catch {}
+    renderRecentSearches();
+  }
+  function closeSearchScreen(restoreFocus = false) {
+    if (searchScreen.hidden) return;
+    searchScreen.hidden = true;
+    mapSection.inert = false;
+    const bottomNav = document.querySelector('.app-bottom-nav');
+    if (bottomNav) bottomNav.inert = false;
+    if (searchPlaceholder.parentNode) searchPlaceholder.parentNode.insertBefore(searchWrap, searchPlaceholder);
+    if (restoreFocus) search.focus({ preventScroll: true });
+  }
+  function openSearchScreen() {
+    if (!searchScreen.hidden) return;
+    searchScreen.hidden = false;
+    screenFieldHost.append(searchWrap);
+    mapSection.inert = true;
+    const bottomNav = document.querySelector('.app-bottom-nav');
+    if (bottomNav) bottomNav.inert = true;
+    renderRecentSearches();
+  }
+  function chooseSearchTerm(term) {
+    search.value = term;
+    search.dispatchEvent(new Event('input', { bubbles: true }));
+    saveRecentSearch(term);
+    closeSearchScreen(false);
+    search.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+  }
+  const popularList = searchScreen.querySelector('.map-search-popular-list');
+  popularSearchTerms.forEach((term, index) => {
+    const row = document.createElement('li');
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = 'map-search-term';
+    const rank = document.createElement('span'); rank.className = 'map-search-rank'; rank.textContent = String(index + 1);
+    const label = document.createElement('span'); label.textContent = term;
+    button.append(rank, label); button.addEventListener('click', () => chooseSearchTerm(term));
+    row.append(button); popularList.append(row);
+  });
+  searchScreen.querySelector('.map-search-back').addEventListener('click', () => closeSearchScreen(false));
+  recentClear.addEventListener('click', () => { try { localStorage.removeItem(recentSearchKey); } catch {} renderRecentSearches(); });
+  search.addEventListener('focus', openSearchScreen);
+  searchWrap?.addEventListener('click', openSearchScreen);
+  searchScreen.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); closeSearchScreen(true); return; }
+    if (event.key !== 'Tab') return;
+    const focusable = [...searchScreen.querySelectorAll('button:not([hidden]), input:not([hidden])')].filter(node => !node.disabled && node.getClientRects().length);
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+  search.addEventListener('keydown', event => { if (event.key === 'Enter' && search.value.trim()) saveRecentSearch(search.value); }, true);
+  document.querySelector('#map-place-search-submit')?.addEventListener('click', () => { if (search.value.trim()) saveRecentSearch(search.value); closeSearchScreen(false); }, true);
+  renderRecentSearches();
+
   const suggestionQuery = value => normalize(value);
   function editDistanceWithinOne(left, right) {
     if (Math.abs(left.length - right.length) > 1) return false;
@@ -264,6 +377,7 @@
       option.append(copy, arrow);
       option.addEventListener('click', () => {
         search.value = title;
+        saveRecentSearch(title);
         search.dispatchEvent(new Event('input', { bubbles: true }));
         suggestionList.hidden = true;
         search.setAttribute('aria-expanded', 'false');
@@ -439,6 +553,7 @@
   }
   function openSheet(card, moveMap = false, focusSheet = false) {
     if (!card || card.hidden) return;
+    closeSearchScreen(false);
     mapSection.classList.remove('is-list-open');
     listToggle.setAttribute('aria-expanded', 'false');
     listToggle.textContent = '장소 목록';
