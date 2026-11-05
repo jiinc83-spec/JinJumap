@@ -462,6 +462,7 @@
     sheet.style.removeProperty('transform');
     setSheetCollapsed(false);
     selectedCard = card;
+    window.dispatchEvent(new CustomEvent('map-place-marker-select', { detail: { cardId: card.id } }));
     sheet.dataset.placeId = card.id;
     places.forEach(place => {
       place.removeAttribute('aria-current');
@@ -544,6 +545,7 @@
   }
   function closeSheet(restoreFocus = false) {
     sheet.hidden = true;
+    window.dispatchEvent(new Event('map-place-marker-reset'));
     sheet.classList.remove('is-closing', 'is-dragging');
     sheet.style.removeProperty('transform');
     setSheetCollapsed(false);
