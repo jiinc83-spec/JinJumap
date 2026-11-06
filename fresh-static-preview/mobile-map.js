@@ -156,6 +156,68 @@
     environment: '환경정보',
     other: '실천 정보 미분류'
   };
+  if (document.documentElement.classList.contains('map-page')) {
+    const officialStations = Array.isArray(window.JINJU_HAMOTAGO_STATIONS) ? window.JINJU_HAMOTAGO_STATIONS : [];
+    const stationList = mapSection.querySelector('#map-place-list') || mapSection;
+    const bikeIcon = '<svg viewBox="0 0 24 24"><circle cx="6" cy="17" r="3"></circle><circle cx="18" cy="17" r="3"></circle><path d="m6 17 4-8h4l4 8M10 9l2 8m-6 0h6M9 6h3"></path></svg>';
+    officialStations.forEach((station, index) => {
+      const stationNumber = String(index + 1).padStart(2, '0');
+      const cardId = `map-hamotago-official-${stationNumber}`;
+      const stationName = String(station.name || '').replace(/^\d+\.\s*/, '').trim();
+      const areas = [...new Set([...(station.areas || []), '진주시'])].join(' ');
+      const card = document.createElement('article');
+      card.className = 'map-place-card is-expandable';
+      card.id = cardId;
+      card.dataset.lat = String(station.lat);
+      card.dataset.lng = String(station.lng);
+      card.dataset.mapAreas = areas;
+      card.dataset.mapSource = 'hamotago-official';
+      card.setAttribute('aria-label', `하모타고 대여소 · ${stationName}`);
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-expanded', 'false');
+      card.hidden = true;
+
+      const icon = document.createElement('span');
+      icon.className = 'map-place-category-icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.innerHTML = bikeIcon;
+      const copy = document.createElement('div');
+      copy.className = 'map-place-copy';
+      const tag = document.createElement('span');
+      tag.className = 'map-place-tag';
+      tag.textContent = '하모타고 · 녹색교통';
+      const title = document.createElement('strong');
+      title.textContent = `하모타고 대여소 · ${stationName}`;
+      const summary = document.createElement('p');
+      summary.textContent = `진주시 공영자전거 대여 위치 · ${Number(station.lat).toFixed(6)}, ${Number(station.lng).toFixed(6)}`;
+      copy.append(tag, title, summary);
+      const details = document.createElement('div');
+      details.className = 'map-place-expanded';
+      details.hidden = true;
+      const source = document.createElement('a');
+      source.className = 'source-link';
+      source.href = 'https://www.jinju.go.kr/hamotago';
+      source.target = '_blank';
+      source.rel = 'noopener noreferrer';
+      source.textContent = '진주시 하모타고 공식 페이지';
+      details.append(source);
+      card.append(icon, copy, details);
+      stationList.append(card);
+
+      placeFacts[cardId] = {
+        type: 'transport', displayType: '하모타고 · 녹색교통',
+        address: `공식 좌표 ${Number(station.lat).toFixed(6)}, ${Number(station.lng).toFixed(6)}`,
+        action: '진주시 공영자전거 하모타고를 대여할 수 있는 공식 거점입니다.',
+        method: '대여 가능 자전거 수와 실제 이용 가능 여부는 하모타고 공식 페이지에서 확인해 주세요.',
+        condition: '2시간 무료 이용 안내가 제공됩니다. 최신 이용 조건과 대여 가능 수량은 공식 페이지를 확인해 주세요.',
+        hours: '07:00~20:00', holidays: '공식 페이지 참고', phone: '055-755-3549',
+        verification: '진주시 하모타고 공개 대여소 API 좌표 · 2026-11-06 확인',
+        extraFacts: [['대여소 위치', stationName]],
+        directionsUrl: `https://map.kakao.com/link/map/${encodeURIComponent(`하모타고 ${stationName}`)},${station.lat},${station.lng}`
+      };
+    });
+  }
   const cards = [...mapSection.querySelectorAll('.map-place-card')];
   const seenIds = new Set();
   const places = cards.filter(card => {
