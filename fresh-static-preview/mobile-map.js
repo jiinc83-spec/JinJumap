@@ -353,7 +353,7 @@
   sheet.hidden = true;
   sheet.setAttribute('aria-label', '선택한 장소 정보');
   sheet.setAttribute('aria-labelledby', 'map-place-sheet-title');
-  sheet.innerHTML = '<div class="map-place-sheet-handle" aria-hidden="true"></div><figure class="map-place-sheet-photo" hidden><img alt=""><figcaption>장소 유형 참고 이미지 · 실제 장소 사진이 아닐 수 있습니다.</figcaption></figure><header class="map-place-sheet-header"><div class="map-place-sheet-heading"><h2 id="map-place-sheet-title" tabindex="-1"></h2><span class="map-place-sheet-type"></span></div><button type="button" class="map-place-sheet-close" aria-label="장소 정보 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button></header><div class="map-place-sheet-action-block"><span class="map-place-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 4-14 11 0 3 2 5 5 5 7 0 9-8 9-16Z"/><path d="M5 20c3-5 6-8 11-11"/></svg></span><p class="map-place-sheet-action"></p></div><dl class="map-place-sheet-facts"></dl><div class="map-place-sheet-actions"><a class="map-place-directions" target="_blank" rel="noopener noreferrer">카카오맵 길찾기</a><button type="button" class="map-place-more" aria-expanded="false">자세히 보기</button></div><div class="map-place-sheet-details" hidden></div>';
+  sheet.innerHTML = '<div class="map-place-sheet-handle" aria-hidden="true"></div><figure class="map-place-sheet-photo" hidden><img alt=""><figcaption>장소 유형 참고 이미지 · 실제 장소 사진이 아닐 수 있습니다.</figcaption></figure><header class="map-place-sheet-header"><div class="map-place-sheet-heading"><h2 id="map-place-sheet-title" tabindex="-1"></h2><span class="map-place-sheet-type"></span></div><button type="button" class="map-place-sheet-close" aria-label="장소 정보 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button></header><div class="map-place-sheet-action-block"><span class="map-place-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 4-14 11 0 3 2 5 5 5 7 0 9-8 9-16Z"/><path d="M5 20c3-5 6-8 11-11"/></svg></span><p class="map-place-sheet-action"></p></div><dl class="map-place-sheet-facts"></dl><div class="map-place-sheet-actions"><a class="map-place-directions" target="_blank" rel="noopener noreferrer">카카오 길찾기</a><a class="map-place-naver-directions" target="_blank" rel="noopener noreferrer">네이버 길찾기</a><button type="button" class="map-place-more" aria-expanded="false">자세히 보기</button></div><div class="map-place-sheet-details" hidden></div>';
   const mapLegend = mapSection.querySelector('.map-legend');
   if (mapLegend) mapLegend.after(sheet);
   else if (shell) shell.after(sheet);
@@ -503,6 +503,16 @@
     }
     const directions = sheet.querySelector('.map-place-directions');
     directions.href = info.directionsUrl || info.googleMapsUrl || (info.kakaoPlaceId ? `https://place.map.kakao.com/${encodeURIComponent(info.kakaoPlaceId)}` : `https://map.kakao.com/link/search/${encodeURIComponent(title)}`);
+    const naverDirections = sheet.querySelector('.map-place-naver-directions');
+    const selectedCard = document.getElementById(sheet.dataset.placeId);
+    const latitude = Number(selectedCard?.dataset.lat), longitude = Number(selectedCard?.dataset.lng);
+    if (Number.isFinite(latitude) && Number.isFinite(longitude) && latitude >= -85 && latitude <= 85) {
+      const mercatorX = (longitude * 20037508.34) / 180;
+      const mercatorY = Math.log(Math.tan(((90 + latitude) * Math.PI) / 360)) * (20037508.34 / Math.PI);
+      naverDirections.href = `https://map.naver.com/p/directions/-/${mercatorX.toFixed(3)},${mercatorY.toFixed(3)},${encodeURIComponent(title)},,PLACE_POI/-/transit?c=15.00,0,0,0,dh`;
+    } else {
+      naverDirections.href = `https://map.naver.com/p/search/${encodeURIComponent(title)}`;
+    }
     detailsNode.replaceChildren();
     const appendDetail = (label, value) => {
       const group = document.createElement('section');

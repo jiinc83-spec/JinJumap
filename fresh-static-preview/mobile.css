@@ -178,14 +178,14 @@ html.map-page body.mobile-layout .map-place-sheet-facts dt{color:#78857c;font-si
 html.map-page body.mobile-layout .map-place-sheet-facts dd{margin:0;color:#45564a;font-size:10px;line-height:1.45;overflow-wrap:anywhere}
 html.map-page body.mobile-layout .map-place-sheet-actions{display:flex;gap:8px;padding:9px 15px 13px}
 html.map-page body.mobile-layout .map-place-sheet-actions a,html.map-page body.mobile-layout .map-place-sheet-actions button{display:flex;min-height:36px;flex:1;align-items:center;justify-content:center;padding:0 10px;border:1px solid #e0e8df;border-radius:9px;background:#f5f8f4;color:#4e6d54;font:inherit;font-size:11px;font-weight:650;text-decoration:none;cursor:pointer}
-html.map-page body.mobile-layout .map-place-sheet-actions .map-place-directions{border-color:#355b47;background:#355b47;color:#fff}
+html.map-page body.mobile-layout .map-place-sheet-actions .map-place-directions{border-color:#355b47;background:#355b47;color:#fff}html.map-page body.mobile-layout .map-place-sheet-actions .map-place-naver-directions{border-color:#03c75a;background:#03c75a;color:#fff}
 html.map-page body.mobile-layout .map-place-sheet-details{overflow:auto;padding:0 15px 14px;border-top:1px solid #edf1ec;overscroll-behavior:contain}
 html.map-page body.mobile-layout .map-place-sheet-details[hidden]{display:none}
 html.map-page body.mobile-layout .map-place-sheet-details section{padding:10px 0 8px;border-bottom:1px solid #eff2ee}
 html.map-page body.mobile-layout .map-place-sheet-details h3{margin:0 0 4px;color:#637a67;font-size:10px;font-weight:650}
 html.map-page body.mobile-layout .map-place-sheet-details p,html.map-page body.mobile-layout .map-place-sheet-details a{margin:0;color:#627267;font-size:10px;line-height:1.55;overflow-wrap:anywhere}
 html.map-page body.mobile-layout .map-place-sheet-details a{display:block;margin-top:4px;color:#3f7051;text-decoration:underline;text-underline-offset:2px}
-html.map-page body.mobile-layout .map-place-directions:focus-visible,html.map-page body.mobile-layout .map-place-more:focus-visible,html.map-page body.mobile-layout .map-place-sheet-close:focus-visible{outline:3px solid #8fae9170;outline-offset:2px}
+html.map-page body.mobile-layout .map-place-directions:focus-visible,html.map-page body.mobile-layout .map-place-naver-directions:focus-visible,html.map-page body.mobile-layout .map-place-more:focus-visible,html.map-page body.mobile-layout .map-place-sheet-close:focus-visible{outline:3px solid #8fae9170;outline-offset:2px}
 @media(prefers-reduced-motion:reduce){html.map-page body.mobile-layout .map-type-tabs button{transition:none}}
 body.mobile-layout .mobile-discovery{margin:0 0 20px;padding:0;background:transparent;border:0}
 body.mobile-layout .mobile-map-entry{justify-content:flex-start;gap:13px;margin:12px 0 17px;padding:11px 13px;border:1px solid #d5e3d3;border-radius:15px;background:#fff;box-shadow:0 3px 12px #28422d08}
