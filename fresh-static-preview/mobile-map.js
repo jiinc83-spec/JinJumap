@@ -532,6 +532,7 @@
     });
     card.setAttribute('aria-current', 'true');
     card.setAttribute('aria-expanded', 'true');
+    window.showMapPlaceInfoWindow?.(card.id);
     const info = placeFacts[card.id] || {};
     const title = card.querySelector('.map-place-copy strong')?.textContent.trim() || card.getAttribute('aria-label') || '장소 정보';
     const type = info.displayType || typeLabels[info.type] || typeLabels.other;
@@ -617,6 +618,7 @@
   }
   function closeSheet(restoreFocus = false) {
     sheet.hidden = true;
+    window.dismissMapPlaceInfoWindow?.();
     window.dispatchEvent(new Event('map-place-marker-reset'));
     sheet.classList.remove('is-closing', 'is-dragging');
     sheet.style.removeProperty('transform');
