@@ -695,10 +695,6 @@
       if (event.target.closest('a, button')) return;
       event.preventDefault();
       event.stopImmediatePropagation();
-      if (selectedCard === card) {
-        closeSheet();
-        return;
-      }
       openSheet(card, true);
     }, true);
     card.addEventListener('keydown', event => {
