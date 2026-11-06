@@ -371,7 +371,7 @@
   const typeFilters = document.createElement('nav');
   typeFilters.className = 'map-type-tabs';
   typeFilters.setAttribute('aria-label', '실천 유형 선택');
-  typeFilters.innerHTML = '<button type="button" data-type="all" aria-pressed="true">전체 유형</button><button type="button" data-type="tumbler" aria-pressed="false">다회용컵 사용</button><button type="button" data-type="circular" aria-pressed="false">재사용·자원순환</button><button type="button" data-type="transport" aria-pressed="false">녹색교통</button><button type="button" data-type="recycling" aria-pressed="false">분리배출</button><button type="button" data-type="environment" aria-pressed="false">환경정보</button>';
+  typeFilters.innerHTML = '<button type="button" data-type="all" aria-pressed="true">전체 유형</button><button type="button" data-type="tumbler" aria-pressed="false">다회용컵 사용</button><button type="button" data-type="circular" aria-pressed="false">재사용·자원순환</button><button type="button" data-type="transport" aria-pressed="false">녹색교통</button><button type="button" data-type="recycling" aria-pressed="false">분리배출</button><button type="button" data-type="environment" aria-pressed="false">환경정보</button><button type="button" data-type="bike-course" aria-pressed="false">자전거 코스 · 41.4km</button>';
   districtFilters.after(typeFilters);
   districtFilters.id = districtFilters.id || 'map-district-tabs';
   typeFilters.id = 'map-type-tabs';
@@ -426,6 +426,12 @@
   listToggle.setAttribute('aria-expanded', 'false');
   listToggle.textContent = '장소 목록';
   mapSection.append(listToggle);
+  const bikeCourseBadge = document.createElement('div');
+  bikeCourseBadge.className = 'map-bike-course-badge';
+  bikeCourseBadge.setAttribute('aria-live', 'polite');
+  bikeCourseBadge.innerHTML = '<span>진양호 자전거 코스</span><strong>41.4km</strong><small>경유지 16곳</small>';
+  bikeCourseBadge.hidden = true;
+  mapSection.append(bikeCourseBadge);
   listToggle.addEventListener('click', () => {
     const isOpen = mapSection.classList.toggle('is-list-open');
     listToggle.setAttribute('aria-expanded', String(isOpen));
@@ -481,17 +487,25 @@
   function applyFilters() {
     const district = currentDistrict();
     const query = normalize(search.value);
+    const bikeCourseSelected = selectedType === 'bike-course';
+    mapSection.classList.toggle('is-bike-course-active', bikeCourseSelected);
+    bikeCourseBadge.hidden = !bikeCourseSelected;
     const visible = [];
     places.forEach(card => {
       const data = placeFacts[card.id] || {};
       const areaMatch = (card.dataset.mapAreas || '').split(/\s+/).includes(district);
-      const typeMatch = selectedType === 'all' || data.type === selectedType;
+      const typeMatch = !bikeCourseSelected && (selectedType === 'all' || data.type === selectedType);
       const searchableText = card.textContent + ' ' + (card.dataset.mapAreas || '') + ' ' + (typeLabels[data.type] || '') + ' ' + card.dataset.mapSearch;
       const textMatch = !query || window.mapPlaceSearchMatches(search.value, searchableText);
       card.hidden = !(areaMatch && typeMatch && textMatch);
       if (!card.hidden) visible.push(card);
     });
-    listStatus.textContent = visible.length ? `장소 ${visible.length}곳` : '조건에 맞는 장소가 없습니다. 다른 지역이나 실천 유형을 선택해 보세요.';
+    listStatus.textContent = bikeCourseSelected ? '진양호 자전거 코스 · 41.4km · 경유지 16곳' : visible.length ? `장소 ${visible.length}곳` : '조건에 맞는 장소가 없습니다. 다른 지역이나 실천 유형을 선택해 보세요.';
+    if (bikeCourseSelected && mapSection.classList.contains('is-list-open')) {
+      mapSection.classList.remove('is-list-open');
+      listToggle.setAttribute('aria-expanded', 'false');
+      listToggle.textContent = '장소 목록';
+    }
     window.mapPlaceSearchLiveType = selectedType === 'all' ? '' : selectedType;
     window.mapPlaceSearchLiveDistrict = district;
     window.dispatchEvent(new Event('map-place-search-live'));
