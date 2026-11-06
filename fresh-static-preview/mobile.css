@@ -159,7 +159,7 @@ html.map-page body.mobile-layout #map .map-place-suggestion small{overflow:hidde
 html.map-page body.mobile-layout #map .map-place-suggestion-arrow{flex:none;color:#6f8c72;font-size:16px}
 html.map-page body.mobile-layout #map .map-place-card[aria-current="true"]{border-color:#91ae93;box-shadow:0 0 0 2px #91ae9320}
 html.map-page body.mobile-layout .map-place-sheet[hidden]{display:none}
-html.map-page body.mobile-layout .map-place-sheet{position:fixed;z-index:40;left:50%;bottom:max(10px,env(safe-area-inset-bottom));display:flex;width:min(calc(100% - 20px),410px);max-height:min(54vh,440px);flex-direction:column;overflow:hidden;transform:translateX(-50%);border:1px solid #dfe9df;border-radius:18px;background:#fff;box-shadow:0 14px 48px #18331f30}
+html.map-page body.mobile-layout .map-place-sheet{position:fixed;z-index:12001;left:50%;bottom:max(10px,env(safe-area-inset-bottom));display:flex;width:min(calc(100% - 20px),410px);max-height:min(54vh,440px);flex-direction:column;overflow:hidden;transform:translateX(-50%);border:1px solid #dfe9df;border-radius:18px;background:#fff;box-shadow:0 14px 48px #18331f30}
 html.map-page body.mobile-layout .map-place-sheet-handle{width:34px;height:4px;flex:none;margin:8px auto 3px;border-radius:5px;background:#d7e0d7}
 html.map-page body.mobile-layout .map-place-sheet-header{display:flex;align-items:flex-start;gap:12px;padding:7px 15px 0}
 html.map-page body.mobile-layout .map-place-sheet-heading{min-width:0;flex:1}

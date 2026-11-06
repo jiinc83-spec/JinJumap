@@ -689,14 +689,16 @@
     moreButton.setAttribute('aria-expanded', String(!detailsNode.hidden));
     moreButton.textContent = detailsNode.hidden ? '자세히 보기' : '접기';
   });
+  mapSection.addEventListener('click', event => {
+    if (!(event.target instanceof Element)) return;
+    const card = event.target.closest('.map-place-card');
+    if (!card || !mapSection.contains(card) || card.hidden || event.target.closest('a, button')) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openSheet(card, true);
+  }, true);
   places.forEach(card => {
     card.setAttribute('aria-controls', sheet.id);
-    card.addEventListener('click', event => {
-      if (event.target.closest('a, button')) return;
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      openSheet(card, true);
-    }, true);
     card.addEventListener('keydown', event => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
       event.preventDefault();
