@@ -299,6 +299,14 @@ html.map-page:has(body.mobile-layout){background:#fff}
   html.map-page body.mobile-layout #map .map-place-search{position:absolute;top:calc(env(safe-area-inset-top) + 10px);left:12px;right:12px;z-index:24;height:48px;margin:0;padding:0 14px;border:1px solid #e6ebe6;border-radius:15px;background:#fff;box-shadow:0 4px 16px #172b1818}
   html.map-page body.mobile-layout #map .map-place-search input{font-size:16px}
   html.map-page body.mobile-layout #map .map-place-suggestions{z-index:28}
+  /* Keep the selected place photo and action description directly below search. */
+  html.map-page body.mobile-layout #map .map-place-sheet{top:calc(env(safe-area-inset-top) + 66px);right:auto;bottom:auto;left:50%;width:calc(100% - 24px);max-height:min(42dvh,360px);transform:translateX(-50%);z-index:25}
+  html.map-page body.mobile-layout #map .map-place-sheet-photo img{height:104px}
+  html.map-page body.mobile-layout #map .map-place-sheet-facts{display:none}
+  html.map-page body.mobile-layout #map .map-place-sheet-actions{padding-top:6px}
+  html.map-page body.mobile-layout #map .map-place-sheet-actions .map-place-directions,html.map-page body.mobile-layout #map .map-place-sheet-actions .map-place-naver-directions{display:none}
+  html.map-page body.mobile-layout #map.is-place-selected .map-filter-toggle{display:none}
+  html.map-page body.mobile-layout #map.is-place-selected .map-district-tabs,html.map-page body.mobile-layout #map.is-place-selected .map-type-tabs{display:none!important}
   html.map-page body.mobile-layout #map .map-district-tabs,html.map-page body.mobile-layout #map .map-type-tabs{position:absolute;left:8px;right:8px;z-index:20;display:flex;flex-wrap:nowrap;gap:7px;width:auto;margin:0;padding:3px 4px 7px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   html.map-page body.mobile-layout #map .map-district-tabs{top:calc(env(safe-area-inset-top) + 65px)}
   html.map-page body.mobile-layout #map .map-type-tabs{top:calc(env(safe-area-inset-top) + 108px)}

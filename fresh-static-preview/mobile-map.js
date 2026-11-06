@@ -613,11 +613,13 @@
     moreButton.textContent = '자세히 보기';
     moreButton.setAttribute('aria-expanded', 'false');
     sheet.hidden = false;
+    mapSection.classList.add('is-place-selected');
     if (moveMap) window.focusMapPlace?.(card);
     if (focusSheet) nameNode.focus({ preventScroll: true });
   }
   function closeSheet(restoreFocus = false) {
     sheet.hidden = true;
+    mapSection.classList.remove('is-place-selected');
     window.dismissMapPlaceInfoWindow?.();
     window.dispatchEvent(new Event('map-place-marker-reset'));
     sheet.classList.remove('is-closing', 'is-dragging');
