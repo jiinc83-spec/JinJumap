@@ -388,6 +388,30 @@
     filterToggle.textContent = collapsed ? '필터 보기' : '필터 숨기기';
   });
   mapSection.append(filterToggle);
+  const mobileFilterRow = document.createElement('div');
+  mobileFilterRow.className = 'map-mobile-filter-row';
+  mobileFilterRow.setAttribute('aria-label', '지도 필터');
+  const makeMobileFilter = (source, valueKey, label, icon) => {
+    const wrapper = document.createElement('label');
+    wrapper.className = 'map-mobile-filter-control';
+    wrapper.innerHTML = `<span class="map-mobile-filter-icon" aria-hidden="true">${icon}</span><select aria-label="${label}"></select><span class="map-mobile-filter-chevron" aria-hidden="true">⌄</span>`;
+    const select = wrapper.querySelector('select');
+    source.querySelectorAll('button').forEach(button => {
+      const option = document.createElement('option');
+      option.value = button.dataset[valueKey];
+      option.textContent = valueKey === 'type' && option.value === 'all' ? '모든 실천' : button.textContent.trim();
+      option.selected = button.getAttribute('aria-pressed') === 'true';
+      select.append(option);
+    });
+    select.addEventListener('change', () => [...source.querySelectorAll('button')].find(button => button.dataset[valueKey] === select.value)?.click());
+    return { wrapper, select };
+  };
+  const districtMobileFilter = makeMobileFilter(districtFilters, 'mapDistrict', '지역 선택', '<svg viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.2"/></svg>');
+  const typeMobileFilter = makeMobileFilter(typeFilters, 'type', '실천 유형 선택', '<svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 3-14 10a6 6 0 0 0 6 6c7 0 8-8 8-16ZM4 21c3-5 7-9 13-13"/></svg>');
+  mobileFilterRow.append(districtMobileFilter.wrapper, typeMobileFilter.wrapper);
+  searchWrap?.after(mobileFilterRow);
+  districtFilters.addEventListener('click', () => window.setTimeout(() => { districtMobileFilter.select.value = districtFilters.querySelector('button[aria-pressed="true"]')?.dataset.mapDistrict || ''; }, 0));
+  typeFilters.addEventListener('click', () => window.setTimeout(() => { typeMobileFilter.select.value = typeFilters.querySelector('button[aria-pressed="true"]')?.dataset.type || 'all'; }, 0));
 
   const listStatus = document.createElement('p');
   listStatus.className = 'map-place-list-status';
@@ -415,7 +439,7 @@
   sheet.hidden = true;
   sheet.setAttribute('aria-label', '선택한 장소 정보');
   sheet.setAttribute('aria-labelledby', 'map-place-sheet-title');
-  sheet.innerHTML = '<div class="map-place-sheet-handle" aria-hidden="true"></div><figure class="map-place-sheet-photo" hidden><img alt=""><figcaption>장소 유형 참고 이미지 · 실제 장소 사진이 아닐 수 있습니다.</figcaption></figure><header class="map-place-sheet-header"><div class="map-place-sheet-heading"><h2 id="map-place-sheet-title" tabindex="-1"></h2><span class="map-place-sheet-type"></span></div><button type="button" class="map-place-sheet-close" aria-label="장소 정보 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg></button></header><div class="map-place-sheet-action-block"><span class="map-place-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 4-14 11 0 3 2 5 5 5 7 0 9-8 9-16Z"/><path d="M5 20c3-5 6-8 11-11"/></svg></span><p class="map-place-sheet-action"></p></div><dl class="map-place-sheet-facts"></dl><div class="map-place-sheet-actions"><a class="map-place-directions" target="_blank" rel="noopener noreferrer">카카오 길찾기</a><a class="map-place-naver-directions" target="_blank" rel="noopener noreferrer">네이버 길찾기</a><button type="button" class="map-place-more" aria-expanded="false">자세히 보기</button></div><div class="map-place-sheet-details" hidden></div>';
+  sheet.innerHTML = '<div class="map-place-sheet-handle" aria-hidden="true"></div><figure class="map-place-sheet-photo" hidden><img alt=""><figcaption>장소 유형 참고 이미지 · 실제 장소 사진이 아닐 수 있습니다.</figcaption></figure><header class="map-place-sheet-header"><div class="map-place-sheet-heading"><h2 id="map-place-sheet-title" tabindex="-1"></h2><span class="map-place-sheet-type"></span></div><div class="map-place-sheet-header-actions"><button type="button" class="map-place-bookmark" aria-label="장소 저장" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/></svg></button><button type="button" class="map-place-sheet-close" aria-label="장소 정보 닫기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div></header><div class="map-place-sheet-action-block"><span class="map-place-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4c-8 0-14 4-14 11 0 3 2 5 5 5 7 0 9-8 9-16Z"/><path d="M5 20c3-5 6-8 11-11"/></svg></span><p class="map-place-sheet-action"></p></div><dl class="map-place-sheet-facts"></dl><div class="map-place-sheet-actions"><a class="map-place-directions" target="_blank" rel="noopener noreferrer">카카오 길찾기</a><a class="map-place-naver-directions" target="_blank" rel="noopener noreferrer">네이버 길찾기</a><button type="button" class="map-place-more" aria-expanded="false">상세 보기 →</button></div><div class="map-place-sheet-details" hidden></div>';
   const mapLegend = mapSection.querySelector('.map-legend');
   if (mapLegend) mapLegend.after(sheet);
   else if (shell) shell.after(sheet);
@@ -427,6 +451,7 @@
   const factsNode = sheet.querySelector('.map-place-sheet-facts');
   const detailsNode = sheet.querySelector('.map-place-sheet-details');
   const moreButton = sheet.querySelector('.map-place-more');
+  const bookmarkButton = sheet.querySelector('.map-place-bookmark');
   const sheetToggleButton = sheet.querySelector('.map-place-sheet-close');
   const sheetHandle = sheet.querySelector('.map-place-sheet-handle');
   const collapsibleNodes = [photoNode, actionNode.parentElement, factsNode, sheet.querySelector('.map-place-sheet-actions'), detailsNode];
@@ -437,7 +462,7 @@
   const setSheetCollapsed = collapsed => {
     sheet.classList.toggle('is-collapsed', collapsed);
     sheetHandle.setAttribute('aria-expanded', String(!collapsed));
-    sheetToggleButton.setAttribute('aria-label', collapsed ? '장소 정보 펼치기' : '장소 정보 접기');
+    sheetToggleButton.setAttribute('aria-label', '장소 정보 닫기');
     collapsibleNodes.forEach(node => { node.inert = collapsed; });
   };
   let selectedCard = null;
@@ -538,6 +563,7 @@
     const type = info.displayType || typeLabels[info.type] || typeLabels.other;
     const referenceImage = card.querySelector('.map-place-expanded-photo img, .reuse-store-cover img');
     photoNode.hidden = !referenceImage;
+    sheet.classList.toggle('has-place-photo', Boolean(referenceImage));
     if (referenceImage) {
       photoImage.src = referenceImage.getAttribute('src');
       photoImage.alt = `${title} 장소 유형 참고 이미지`;
@@ -553,13 +579,24 @@
     typeNode.textContent = type;
     actionNode.textContent = action;
     factsNode.replaceChildren();
+    if (bookmarkButton) {
+      bookmarkButton.dataset.placeId = card.id;
+      try {
+        const saved = JSON.parse(localStorage.getItem('greenMapSavedPlaceIds') || '[]');
+        const isSaved = saved.includes(card.id);
+        bookmarkButton.setAttribute('aria-pressed', String(isSaved));
+        bookmarkButton.setAttribute('aria-label', isSaved ? '저장한 장소 취소' : '장소 저장');
+      } catch {
+        bookmarkButton.setAttribute('aria-pressed', 'false');
+        bookmarkButton.setAttribute('aria-label', '장소 저장');
+      }
+    }
     if (info.compactFacts) {
       addFact('', address, 'address');
       addFact('', info.locationLabel || '위치 확인 필요', 'floor');
     } else {
-      addFact(info.hoursLabel || '운영시간', [info.hours || '운영시간 확인 필요', info.hoursNote].filter(Boolean).join(' · '), 'hours');
-      addFact('정기 휴무일', info.holidays || '휴무일 확인 필요', 'holiday');
       addFact('주소', address, 'address');
+      addFact(info.hoursLabel || '운영시간', [info.hours || '운영시간 확인 필요', info.hoursNote, info.holidays].filter(Boolean).join(' · '), 'hours');
       addFact(info.contactLabel || '연락처', info.phone || '연락처 확인 필요', 'phone');
       addFact('정보 확인일 및 검증 상태', `공식 확인일 미기재 · ${info.verification || '추가 확인 필요'}`, 'status');
       if (info.extraFacts) info.extraFacts.forEach(([label, value]) => addFact(label, value, 'status'));
@@ -634,7 +671,19 @@
     if (restoreFocus && previousCard && !previousCard.hidden) previousCard.focus({ preventScroll: true });
   }
   window.mapSelectPlaceCard = openSheet;
-  sheetToggleButton.addEventListener('click', () => setSheetCollapsed(!sheet.classList.contains('is-collapsed')));
+  sheetToggleButton.addEventListener('click', () => closeSheet());
+  bookmarkButton?.addEventListener('click', () => {
+    const placeId = bookmarkButton.dataset.placeId;
+    if (!placeId) return;
+    let saved = [];
+    try { saved = JSON.parse(localStorage.getItem('greenMapSavedPlaceIds') || '[]'); } catch {}
+    if (!Array.isArray(saved)) saved = [];
+    const wasSaved = saved.includes(placeId);
+    saved = wasSaved ? saved.filter(id => id !== placeId) : [...saved, placeId];
+    try { localStorage.setItem('greenMapSavedPlaceIds', JSON.stringify(saved)); } catch {}
+    bookmarkButton.setAttribute('aria-pressed', String(!wasSaved));
+    bookmarkButton.setAttribute('aria-label', wasSaved ? '장소 저장' : '저장한 장소 취소');
+  });
   sheetHandle.addEventListener('keydown', event => {
     if (event.key !== 'Enter' && event.key !== ' ') return;
     event.preventDefault();
@@ -691,7 +740,7 @@
   moreButton.addEventListener('click', () => {
     detailsNode.hidden = !detailsNode.hidden;
     moreButton.setAttribute('aria-expanded', String(!detailsNode.hidden));
-    moreButton.textContent = detailsNode.hidden ? '자세히 보기' : '접기';
+    moreButton.textContent = detailsNode.hidden ? '상세 보기 →' : '상세 접기 ↑';
   });
   mapSection.addEventListener('click', event => {
     if (!(event.target instanceof Element)) return;
