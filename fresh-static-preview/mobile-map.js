@@ -152,6 +152,7 @@
     tumbler: '다회용컵 사용',
     circular: '재사용·자원순환',
     transport: '녹색교통',
+    'bike-rental': '자전거 대여',
     recycling: '분리배출',
     environment: '환경정보',
     other: '실천 정보 미분류'
@@ -218,6 +219,7 @@
       };
     });
   }
+  const isBikeRentalPlace = card => card.id === 'map-bike-rental-card' || card.id.startsWith('map-hamotago-');
   const cards = [...mapSection.querySelectorAll('.map-place-card')];
   const seenIds = new Set();
   const places = cards.filter(card => {
@@ -227,7 +229,7 @@
     }
     seenIds.add(card.id);
     const data = placeFacts[card.id] || {};
-    card.dataset.mapType = data.type || 'other';
+    card.dataset.mapType = isBikeRentalPlace(card) ? 'bike-rental' : (data.type || 'other');
     card.dataset.mapSearch = [data.displayType, data.address, data.action, data.method].filter(Boolean).join(' ');
     const practiceSummary = card.querySelector(':scope > .map-place-copy > p');
     const practiceText = data.action || data.method;
@@ -371,7 +373,7 @@
   const typeFilters = document.createElement('nav');
   typeFilters.className = 'map-type-tabs';
   typeFilters.setAttribute('aria-label', '실천 유형 선택');
-  typeFilters.innerHTML = '<button type="button" data-type="all" aria-pressed="true">전체 유형</button><button type="button" data-type="tumbler" aria-pressed="false">다회용컵 사용</button><button type="button" data-type="circular" aria-pressed="false">재사용·자원순환</button><button type="button" data-type="transport" aria-pressed="false">녹색교통</button><button type="button" data-type="recycling" aria-pressed="false">분리배출</button><button type="button" data-type="environment" aria-pressed="false">환경정보</button><button type="button" data-type="bike-course" aria-pressed="false">자전거 코스 · 41.4km</button>';
+  typeFilters.innerHTML = '<button type="button" data-type="all" aria-pressed="true">전체 유형</button><button type="button" data-type="tumbler" aria-pressed="false">다회용컵 사용</button><button type="button" data-type="circular" aria-pressed="false">재사용·자원순환</button><button type="button" data-type="transport" aria-pressed="false">녹색교통</button><button type="button" data-type="bike-rental" aria-pressed="false">자전거 대여</button><button type="button" data-type="recycling" aria-pressed="false">분리배출</button><button type="button" data-type="environment" aria-pressed="false">환경정보</button><button type="button" data-type="bike-course" aria-pressed="false">자전거 코스 · 41.4km</button>';
   districtFilters.after(typeFilters);
   districtFilters.id = districtFilters.id || 'map-district-tabs';
   typeFilters.id = 'map-type-tabs';
@@ -488,19 +490,21 @@
     const district = currentDistrict();
     const query = normalize(search.value);
     const bikeCourseSelected = selectedType === 'bike-course';
+    const bikeRentalSelected = selectedType === 'bike-rental';
     mapSection.classList.toggle('is-bike-course-active', bikeCourseSelected);
     bikeCourseBadge.hidden = !bikeCourseSelected;
     const visible = [];
     places.forEach(card => {
       const data = placeFacts[card.id] || {};
       const areaMatch = (card.dataset.mapAreas || '').split(/\s+/).includes(district);
-      const typeMatch = !bikeCourseSelected && (selectedType === 'all' || data.type === selectedType);
+      const isBikeRental = card.dataset.mapType === 'bike-rental';
+      const typeMatch = bikeCourseSelected ? false : bikeRentalSelected ? isBikeRental : isBikeRental ? false : selectedType === 'all' || data.type === selectedType;
       const searchableText = card.textContent + ' ' + (card.dataset.mapAreas || '') + ' ' + (typeLabels[data.type] || '') + ' ' + card.dataset.mapSearch;
       const textMatch = !query || window.mapPlaceSearchMatches(search.value, searchableText);
       card.hidden = !(areaMatch && typeMatch && textMatch);
       if (!card.hidden) visible.push(card);
     });
-    listStatus.textContent = bikeCourseSelected ? '진양호 자전거 코스 · 41.4km · 경유지 16곳' : visible.length ? `장소 ${visible.length}곳` : '조건에 맞는 장소가 없습니다. 다른 지역이나 실천 유형을 선택해 보세요.';
+    listStatus.textContent = bikeCourseSelected ? '진양호 자전거 코스 · 41.4km · 경유지 16곳' : bikeRentalSelected ? `자전거 대여 장소 ${visible.length}곳` : visible.length ? `장소 ${visible.length}곳` : '조건에 맞는 장소가 없습니다. 다른 지역이나 실천 유형을 선택해 보세요.';
     if (bikeCourseSelected && mapSection.classList.contains('is-list-open')) {
       mapSection.classList.remove('is-list-open');
       listToggle.setAttribute('aria-expanded', 'false');
