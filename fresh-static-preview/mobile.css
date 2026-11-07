@@ -53,19 +53,24 @@ body.mobile-layout .category-overview>.category-section>.category-heading h2{fon
 body.mobile-layout .category-overview>.category-section>.category-heading p{font-size:10px;line-height:1.4}
 body.mobile-layout .category-overview>.category-section>.category-heading>a{display:none}
 body.mobile-layout .category-overview .feature-empty,body.mobile-layout .category-overview .bicycle .card{box-sizing:border-box;width:100%;height:auto;min-height:0;aspect-ratio:auto;display:flex;flex:1;flex-direction:column;margin:0;border:0;border-radius:0;overflow:hidden;box-shadow:none}
-body.mobile-layout .category-overview>#tumbler .tumbler-entry{box-sizing:border-box;display:grid;grid-template-columns:120px minmax(0,1fr) 90px;align-items:center;gap:10px;width:100%;height:auto;min-height:112px;flex:0 0 auto;aspect-ratio:auto;margin:0;padding:12px;overflow:visible;border:0;border-radius:0;box-shadow:none}
+body.mobile-layout .category-overview>#tumbler .tumbler-entry{box-sizing:border-box;display:grid;grid-template-columns:44px minmax(0,1fr) 28px;grid-template-rows:auto auto;align-items:center;gap:0 12px;width:100%;height:auto;min-height:0;flex:0 0 auto;aspect-ratio:auto;margin:0;padding:0;overflow:hidden;border:0;border-radius:0;box-shadow:none}
+body.mobile-layout .category-overview>#tumbler>.category-heading{justify-content:center;text-align:center}
+body.mobile-layout .category-overview>#tumbler>.category-heading>div{text-align:center}
+body.mobile-layout .category-overview>#tumbler .tumbler-entry .cup-icon{grid-column:1/-1;grid-row:1;width:100%;height:auto;min-height:0;aspect-ratio:4/3;align-self:stretch;margin:0;border-radius:0;overflow:hidden}
+body.mobile-layout .category-overview>#tumbler .tumbler-benefit-icon{grid-column:1;grid-row:2;display:grid;place-items:center;width:44px;height:44px;margin:12px 0 12px 14px;border-radius:13px;background:#eff5e9;color:#36845a}
+body.mobile-layout .category-overview>#tumbler .tumbler-benefit-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 body.mobile-layout .category-overview .feature-empty .feature-visual,body.mobile-layout .category-overview .bicycle .card-art{width:100%;height:105px;min-height:105px;align-self:stretch;margin:0;border-radius:0;font-size:39px}
-body.mobile-layout .category-overview>#tumbler .tumbler-entry .cup-icon{box-sizing:border-box;grid-column:1;grid-row:1;width:120px;height:90px;min-height:0;aspect-ratio:4/3;align-self:center;margin:0;border-radius:10px;overflow:hidden}
+
 body.mobile-layout .category-overview .feature-empty>div:last-child{padding:14px 16px}
-body.mobile-layout .category-overview>#tumbler .tumbler-entry>div:not(.tumbler-actions){grid-column:2;grid-row:1;min-width:0;align-self:center;padding:0}
+body.mobile-layout .category-overview>#tumbler .tumbler-entry>div:not(.tumbler-actions){grid-column:2;grid-row:2;min-width:0;align-self:center;padding:11px 0}
 body.mobile-layout .category-overview .feature-empty strong{font-size:14px}
 body.mobile-layout .category-overview>#tumbler .tumbler-entry strong{font-size:12px;line-height:1.4}
 body.mobile-layout .category-overview .feature-empty p{font-size:11px;line-height:1.5;margin-top:5px}
 body.mobile-layout .category-overview>#tumbler .tumbler-entry p{display:-webkit-box;overflow:hidden;margin:4px 0 0;font-size:10px;line-height:1.4;-webkit-box-orient:vertical;-webkit-line-clamp:2}
-body.mobile-layout .category-overview>#tumbler .tumbler-actions{grid-column:3;grid-row:1;width:auto;margin:0;padding:0;display:block}
-body.mobile-layout .category-overview>#tumbler .tumbler-actions button{box-sizing:border-box;width:100%;padding:9px 6px;font-size:9px;white-space:normal}
+body.mobile-layout .category-overview>#tumbler .tumbler-actions{grid-column:3;grid-row:2;width:auto;margin:0;padding:0 12px 0 0;display:block}
+body.mobile-layout .category-overview>#tumbler .tumbler-actions button{box-sizing:border-box;width:28px;height:36px;padding:0;border:0;border-radius:8px;background:transparent;color:#66826a;font-size:24px;line-height:1}
 body.mobile-layout .category-overview .tumbler-map-link{font-size:10px}
-@media(max-width:380px){body.mobile-layout .category-overview>#tumbler .tumbler-entry{grid-template-columns:82px minmax(0,1fr) 72px;gap:8px;padding:10px}body.mobile-layout .category-overview>#tumbler .tumbler-entry .cup-icon{width:82px;height:62px;aspect-ratio:4/3}body.mobile-layout .category-overview>#tumbler .tumbler-actions button{font-size:8px;padding:8px 4px}}
+@media(max-width:380px){body.mobile-layout .category-overview>#tumbler .tumbler-entry{grid-template-columns:40px minmax(0,1fr) 26px;gap:0 9px}body.mobile-layout .category-overview>#tumbler .tumbler-benefit-icon{width:40px;height:40px;margin-left:10px}body.mobile-layout .category-overview>#tumbler .tumbler-actions{padding-right:8px}body.mobile-layout .category-overview>#tumbler .tumbler-actions button{width:26px}}
 body.mobile-layout .category-overview .bicycle .grid{display:flex;flex:1;min-height:0}
 body.mobile-layout .category-overview .bicycle .card-body{display:flex;flex:1;flex-direction:column;gap:4px;padding:13px 16px;min-height:0}
 body.mobile-layout .category-overview .bicycle .card h3{font-size:14px;min-height:0;margin:0}
