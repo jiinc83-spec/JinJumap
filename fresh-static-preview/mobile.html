@@ -664,16 +664,20 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
           const syncJinYanghoCourse=()=>{const visible=window.mapPlaceSearchLiveType==='bike-course';if(visible===lastBikeCourseState)return;lastBikeCourseState=visible;const map=visible?mainMap:null;jinYanghoCourseLine.setMap(map);jinYanghoCourseCasing.setMap(map);jinYanghoCourseMarkers.forEach(marker=>marker.setMap(map));if(visible)mainMap.setBounds(jinYanghoCourseBounds,35);else if(defaultMapBounds)mainMap.setBounds(defaultMapBounds,45)};
           window.addEventListener('map-place-search-live',syncJinYanghoCourse);syncJinYanghoCourse();
           const locateButton=document.querySelector('#map-current-location'),gpsFeedback=document.querySelector('#map-gps-feedback');let gpsMarker=null,gpsAccuracyCircle=null,gpsMessageTimer,gpsSearchTimer,gpsWatchId=null;
+          let userMovedMap=false;
+          const mapCanvas=document.querySelector('#kakao-map');
+          ['wheel','pointerdown','touchstart'].forEach(type=>mapCanvas.addEventListener(type,()=>{userMovedMap=true},{passive:true}));
           const showGpsMessage=(message,duration=6500)=>{gpsFeedback.textContent=message;gpsFeedback.hidden=false;clearTimeout(gpsMessageTimer);gpsMessageTimer=setTimeout(()=>{gpsFeedback.hidden=true},duration)};
           const drawGpsPosition=(position,announce=false)=>{
             const {latitude,longitude,accuracy}=position.coords,here=new window.kakao.maps.LatLng(latitude,longitude),radius=Math.max(10,Number(accuracy)||30);
             if(!gpsAccuracyCircle)gpsAccuracyCircle=new window.kakao.maps.Circle({center:here,radius,strokeWeight:1,strokeColor:'#2879e8',strokeOpacity:.65,fillColor:'#2879e8',fillOpacity:.14,map:mainMap});else{gpsAccuracyCircle.setPosition(here);gpsAccuracyCircle.setRadius(radius);gpsAccuracyCircle.setMap(mainMap)}
             if(!gpsMarker)gpsMarker=new window.kakao.maps.CustomOverlay({content:'<span class="gps-current-location" aria-label="현재 위치"></span>',position:here,xAnchor:.5,yAnchor:.5,zIndex:20,clickable:false,map:mainMap});else{gpsMarker.setPosition(here);gpsMarker.setMap(mainMap)}
-            const zoomLevel=accuracy>3000?8:accuracy>1200?7:accuracy>400?6:accuracy>120?5:4;mainMap.setLevel(zoomLevel);mainMap.panTo(here);
+            if(announce&&!userMovedMap){const zoomLevel=accuracy>3000?8:accuracy>1200?7:accuracy>400?6:accuracy>120?5:4;mainMap.setLevel(zoomLevel);mainMap.panTo(here)}
             const accuracyText=`±${Math.round(Number(accuracy)||0)}m`;
             if(announce)showGpsMessage(Number(accuracy)>200?`현재 위치 오차 범위가 큽니다 · ${accuracyText}`:`현재 위치를 표시했어요 · 오차 범위 ${accuracyText}`);
           };
           locateButton?.addEventListener('click',()=>{
+            userMovedMap=false;
             if(!navigator.geolocation){showGpsMessage('이 브라우저에서는 위치 기능을 사용할 수 없어요.');return}
             if(!window.isSecureContext){showGpsMessage('현재 위치 기능은 HTTPS 연결에서 사용할 수 있어요.');return}
             if(gpsWatchId!==null)navigator.geolocation.clearWatch(gpsWatchId);
