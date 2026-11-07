@@ -580,7 +580,7 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
       const card=event.target.closest('.card:not(.brand-card)');
       if(card&&section.contains(card)){
         event.preventDefault();event.stopPropagation();
-        const copy=card.cloneNode(true);copy.classList.add('practice-info-card');
+        const copy=card.cloneNode(true);copy.classList.add('practice-info-card');if(section.classList.contains('bicycle'))copy.querySelector('.card-art')?.remove();
         const detail=copy.querySelector('.inline-details');if(detail)detail.hidden=false;
         copy.querySelectorAll('.card-foot button').forEach(button=>button.remove());
         const title=card.querySelector('h3')?.textContent.trim()||section.querySelector('.category-heading h2')?.textContent.trim()||'실천 장소 정보';
