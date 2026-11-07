@@ -522,3 +522,4 @@ html.map-page body.mobile-layout #map.is-bike-course-active .map-place-list-togg
   html.map-page body.mobile-layout #map.is-list-open .map-place-card .map-place-copy p{display:-webkit-box;overflow:hidden;margin:0;font-size:10px;line-height:1.4;-webkit-box-orient:vertical;-webkit-line-clamp:2}
 }
 html.map-page body.mobile-layout #map .map-gps-feedback{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media(min-width:1100px){body.mobile-layout .category-overview>#bicycle>.category-heading{transform:none!important;justify-content:flex-start;text-align:left}body.mobile-layout .category-overview>#bicycle>.category-heading h2{text-align:left}}
