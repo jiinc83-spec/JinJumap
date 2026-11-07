@@ -526,3 +526,4 @@ html.map-page body.mobile-layout #map .map-gps-feedback{position:absolute!import
 body.mobile-layout .card-foot .official-site-link{display:block;width:100%;box-sizing:border-box;margin:8px 0;padding:10px 12px;border:1px solid #dce9d7;border-radius:8px;background:#f5f8f1;color:#426b31;text-align:center;text-decoration:none;font-size:11px;font-weight:800;line-height:1.4;transition:background .18s,border-color .18s}
 body.mobile-layout .card-foot .official-site-link:hover{border-color:#aac89b;background:#edf6e7}
 body.mobile-layout .card-foot .official-site-link:focus-visible{outline:3px solid #8fae9170;outline-offset:2px}
+body.mobile-layout .card .hamotago-description{font-weight:700;color:#455e46}
