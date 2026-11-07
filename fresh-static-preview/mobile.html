@@ -641,7 +641,7 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
         if(!window.kakao?.maps){status.innerHTML='<div><strong>카카오맵 SDK 응답을 확인할 수 없어요</strong><p>JavaScript 키와 지도 서비스 활성화를 확인해 주세요.</p></div>';return}
         window.kakao.maps.load(()=>{
           const center=new window.kakao.maps.LatLng(35.171,128.061);
-          const mainMap=new window.kakao.maps.Map(document.querySelector('#kakao-map'),{center,level:5});
+          const mainMap=new window.kakao.maps.Map(document.querySelector('#kakao-map'),{center,level:5});status.hidden=true;
           const jinYanghoCourseStops=[
             ['평거동 자전거대여소',35.172153,128.067946],['희망교 교차로',35.170820,128.062120],['진주국토관리사무소 사거리',35.1609,128.0355],['남강댐 노을공원',35.161275,128.030420],
             ['삼계 교차로',35.1539,128.0313],['호반길 교차로',35.1383,128.0150],['진수대교',35.1621,127.9978],['당촌삼거리',35.1834,127.9741],
