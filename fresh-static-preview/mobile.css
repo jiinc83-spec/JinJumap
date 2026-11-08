@@ -53,8 +53,8 @@ body.mobile-layout .category-overview>.category-section>.category-heading p{font
 body.mobile-layout .category-overview>.category-section>.category-heading>a{display:none}
 body.mobile-layout .category-overview .feature-empty,body.mobile-layout .category-overview .bicycle .card{box-sizing:border-box;width:100%;height:auto;min-height:0;aspect-ratio:auto;display:flex;flex:1;flex-direction:column;margin:0;border:0;border-radius:0;overflow:hidden;box-shadow:none}
 body.mobile-layout .category-overview>#tumbler .tumbler-entry{box-sizing:border-box;display:grid;grid-template-columns:44px minmax(0,1fr) 28px;grid-template-rows:auto auto;align-items:center;gap:0 12px;width:100%;height:auto;min-height:0;flex:0 0 auto;aspect-ratio:auto;margin:0;padding:0;overflow:hidden;border:0;border-radius:0;box-shadow:none}
-body.mobile-layout .category-overview>#tumbler>.category-heading{justify-content:center;text-align:center}
-body.mobile-layout .category-overview>#tumbler>.category-heading>div{text-align:center}
+body.mobile-layout .category-overview>#tumbler>.category-heading,body.mobile-layout .category-overview>#upcycle>.category-heading{justify-content:flex-start;text-align:left}
+body.mobile-layout .category-overview>#tumbler>.category-heading>div,body.mobile-layout .category-overview>#upcycle>.category-heading>div{text-align:left}
 body.mobile-layout .category-overview>#tumbler .tumbler-entry .cup-icon{grid-column:1/-1;grid-row:1;width:100%;height:auto;min-height:0;aspect-ratio:4/3;align-self:stretch;margin:0;border-radius:0;overflow:hidden}
 body.mobile-layout .category-overview>#tumbler .tumbler-benefit-icon{grid-column:1;grid-row:2;display:grid;place-items:center;width:44px;height:44px;margin:12px 0 12px 14px;border-radius:13px;background:#eff5e9;color:#36845a}
 body.mobile-layout .category-overview>#tumbler .tumbler-benefit-icon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
