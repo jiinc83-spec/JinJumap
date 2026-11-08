@@ -560,6 +560,12 @@
   }
   function openSheet(card, moveMap = false, focusSheet = false) {
     if (!card || card.hidden) return;
+    if (window.matchMedia('(max-width: 640px)').matches) {
+      closeSheet();
+      window.showMapPlaceInfoWindow?.(card.id);
+      if (moveMap) window.focusMapPlace?.(card);
+      return;
+    }
     mapSection.classList.remove('is-list-open');
     listToggle.setAttribute('aria-expanded', 'false');
     listToggle.textContent = '장소 목록';
