@@ -452,6 +452,10 @@ body.mobile-layout .practice-info-card h3{min-height:0;font-size:19px}
 body.mobile-layout .practice-info-card .address,body.mobile-layout .practice-info-card .prep,body.mobile-layout .practice-info-card .inline-details{font-size:13px;line-height:1.75}
 body.mobile-layout .practice-info-card .card-foot{margin-top:14px}
 body.mobile-layout .practice-info-card .card-foot small{font-size:12px;line-height:1.7}
+body.mobile-layout .agreement-brands section+section{margin-top:12px}
+body.mobile-layout .agreement-brands strong{display:block;color:#355b47}
+body.mobile-layout .agreement-brands p{margin:4px 0 0}
+body.mobile-layout .agreement-brands .agreement-caution{margin-top:14px;padding-top:12px;border-top:1px solid #dfe9df}
 body.mobile-layout .practice-info-reuse{width:min(100%,900px);margin:0 auto}
 body.mobile-layout .practice-info-reuse .reuse-store-cover{width:100%;max-width:none;aspect-ratio:4/3;margin:0 0 14px}
 body.mobile-layout .practice-info-reuse .reuse-store-info{display:block!important}

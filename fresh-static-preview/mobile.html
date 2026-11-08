@@ -267,21 +267,22 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
       ],
       bicycle:[
         {name:'칠암동 공영자전거 무료대여소',hideName:true,title:'하모타고',icon:'🚲',description:'하모타고는 진주시에서 운영하는 공영자전거 서비스로, 시민 누구나 일상 속에서 편리하게 자전거를 이용할 수 있도록 지원합니다. 자동차 대신 자전거를 이용해 탄소배출을 줄이고 친환경 이동 문화를 확산하는 데 기여합니다.',note:'신정·설·추석 휴무* · 운영 여부와 정확한 대여소 입구 위치 확인 필요 (기존 공공데이터 기준)',address:'진주시 강남로 188',externalUrl:'https://www.jinju.go.kr/hamotago',externalLabel:'하모타고 공식 사이트 바로가기 ↗'},
-        {name:'진주프로바이클',title:'자전거 이용 정보 확인하기',icon:'🚲',prepare:'진주시 강남로 245',note:'자전거 판매 매장 · 운영시간 미확인 · 055-758-1189',address:'진주시 강남로 245'}
+        {name:'커피·패스트푸드·제과점 23개 업체',title:'탈플라스틱 실천문화 확산 협약 참여 브랜드',icon:'♻️',badge:'2026 협약',hideAddress:true,detailLabel:'참여 브랜드 보기',note:'기후에너지환경부 2026.07.13 발표 · 개별 지점의 실천 여부는 확인 필요',detailsHtml:'<div class="agreement-brands"><section><strong>커피전문점 · 16개</strong><p>달콤, 더벤티, 던킨, 배스킨라빈스, 스타벅스, 이디야, 엔제리너스, 하삼동커피, 할리스, 크리스피크림도넛, 탐앤탐스, 투썸플레이스, 텐퍼센트커피, 파스쿠찌, 폴바셋, 빽다방</p></section><section><strong>패스트푸드점 · 5개</strong><p>롯데리아, 맥도날드, 버거킹, KFC, 파파이스</p></section><section><strong>제과점 · 2개</strong><p>파리바게뜨, 뚜레쥬르</p></section><p class="agreement-caution">브랜드의 협약 참여는 가까운 지점의 할인이나 다회용컵 제공을 보장하지 않습니다. 이용 전 해당 매장에 확인해 주세요.</p></div>',externalUrl:'https://www.mcee.go.kr/home/web/board/read.do?boardId=1877100&boardMasterId=939&menuId=10598',externalLabel:'기후에너지환경부 발표 보기 ↗'}
       ]
     };
     function addCards(target,items){
       const grid=document.querySelector(target);
       items.forEach(item=>{
         const card=document.createElement('article');card.className=`card${item.wordmark?' brand-card':''}${item.hideName?' no-name':''}`;
+        const detailLabel=item.detailLabel||'장소 자세히 보기';
         if(item.wordmark){
           const logo=item.logoSrc?`<img class="brand-logo ${item.logoClass}" src="${item.logoSrc}" alt="${item.appLabel||item.name} 앱 아이콘">`:`<span class="brand-logo-fallback">${item.wordmark}</span>`;
           card.innerHTML=`<div class="brand-row"><div class="brand-heading"><span class="brand-logo-box">${logo}</span><div class="brand-copy"><h3>${item.name}</h3><span>${item.benefitKind}</span></div></div><div class="brand-trailing"><strong class="brand-amount">${item.benefit}</strong><button type="button" class="brand-expand" aria-label="${item.name} 혜택 자세히 보기" aria-expanded="false"><span>›</span></button></div></div><div class="inline-details brand-details" hidden><p>${item.condition}</p><small>${item.note}</small>${item.source?`<a class="brand-source" href="${item.source}" target="_blank" rel="noreferrer">${item.sourceLabel||'공식 안내'} ↗</a>`:''}</div>`;
         }else{
-          card.innerHTML=`<div class="card-art"><span class="badge">조사 후보</span><span>${item.icon}</span></div><div class="card-body"><h3>${item.title}</h3>${item.hideName?'':`<div class="name">${item.name}</div>`}<div class="address">⌖ ${item.address||'진주 지역 · 방문 전 확인'}</div>${item.prepare?`<div class="prep">준비하기 <b>${item.prepare}</b></div>`:''}<div class="inline-details${item.description?' hamotago-description':''}" hidden>${item.description||item.note}</div><div class="card-foot"><small>${item.note}</small>${item.externalUrl?`<a class="official-site-link" href="${item.externalUrl}" target="_blank" rel="noopener noreferrer">${item.externalLabel||'공식 사이트 바로가기 ↗'}</a>`:''}<button type="button" aria-expanded="false">장소 자세히 보기 <span>↓</span></button></div></div>`;
+          card.innerHTML=`<div class="card-art"><span class="badge">${item.badge||'조사 후보'}</span><span>${item.icon}</span></div><div class="card-body"><h3>${item.title}</h3>${item.hideName?'':`<div class="name">${item.name}</div>`}${item.hideAddress?'':`<div class="address">⌖ ${item.address||'진주 지역 · 방문 전 확인'}</div>`}${item.prepare?`<div class="prep">준비하기 <b>${item.prepare}</b></div>`:''}<div class="inline-details${item.description?' hamotago-description':''}${item.detailsHtml?' agreement-details':''}" hidden>${item.detailsHtml||item.description||item.note}</div><div class="card-foot"><small>${item.note}</small>${item.externalUrl?`<a class="official-site-link" href="${item.externalUrl}" target="_blank" rel="noopener noreferrer">${item.externalLabel||'공식 사이트 바로가기 ↗'}</a>`:''}<button type="button" aria-expanded="false">${detailLabel} <span>↓</span></button></div></div>`;
         }
         const detailButton=card.querySelector('button');const detailPanel=card.querySelector('.inline-details');
-        detailButton.onclick=()=>{const opening=detailPanel.hidden;detailPanel.hidden=!opening;detailButton.setAttribute('aria-expanded',String(opening));if(item.wordmark){detailButton.setAttribute('aria-label',`${item.name} 혜택 ${opening?'접기':'자세히 보기'}`);detailButton.querySelector('span').textContent=opening?'⌄':'›';}else{detailButton.firstChild.textContent=opening?'상세 접기 ':'장소 자세히 보기 ';detailButton.querySelector('span').textContent=opening?'↑':'↓';}if(opening)detailPanel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'nearest'});};
+        detailButton.onclick=()=>{const opening=detailPanel.hidden;detailPanel.hidden=!opening;detailButton.setAttribute('aria-expanded',String(opening));if(item.wordmark){detailButton.setAttribute('aria-label',`${item.name} 혜택 ${opening?'접기':'자세히 보기'}`);detailButton.querySelector('span').textContent=opening?'⌄':'›';}else{detailButton.firstChild.textContent=opening?'상세 접기 ':`${detailLabel} `;detailButton.querySelector('span').textContent=opening?'↑':'↓';}if(opening)detailPanel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'nearest'});};
         grid.append(card);
       });
     }
@@ -295,14 +296,18 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
     const categoryOverview=document.createElement('div');
     categoryOverview.className='category-overview';
     document.querySelector('#tumbler').before(categoryOverview);
-    const secondBicycle=document.createElement('section');
-    secondBicycle.className='category-section bicycle bicycle-second';
-    secondBicycle.id='bicycle-second';
-    const secondBicycleGrid=document.createElement('div');
-    secondBicycleGrid.className='grid';
-    secondBicycleGrid.append(document.querySelector('#bicycle-cards .card:last-child'));
-    secondBicycle.append(document.querySelector('#bicycle .category-heading').cloneNode(true),secondBicycleGrid);
-    categoryOverview.append(document.querySelector('#tumbler'),document.querySelector('#upcycle'),document.querySelector('#bicycle'),secondBicycle,document.querySelector('#recycling'));
+    const agreementSection=document.createElement('section');
+    agreementSection.className='category-section bicycle agreement';
+    agreementSection.id='agreement';
+    const agreementGrid=document.createElement('div');
+    agreementGrid.className='grid';
+    agreementGrid.append(document.querySelector('#bicycle-cards .card:last-child'));
+    const agreementHeading=document.querySelector('#bicycle .category-heading').cloneNode(true);
+    agreementHeading.querySelector('h2').textContent='탈플라스틱 실천문화 확산 협약 참여 브랜드';
+    agreementHeading.querySelector('.category-number').textContent='04';
+    agreementSection.append(agreementHeading,agreementGrid);
+    document.querySelector('#recycling .category-number').textContent='05';
+    categoryOverview.append(document.querySelector('#tumbler'),document.querySelector('#upcycle'),document.querySelector('#bicycle'),agreementSection,document.querySelector('#recycling'));
     const browserHead=document.createElement('div');
     browserHead.className='category-browser-head';
     browserHead.innerHTML='<div><h2>실천 장소 둘러보기</h2></div><span class="category-browser-count" aria-live="polite">01 / 05</span>';
@@ -529,8 +534,9 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
     document.body.append(practiceInfoPage);
     const practiceInfoContent=practiceInfoPage.querySelector('.benefits-page-content');
     const closePracticeInfo=()=>{practiceInfoPage.hidden=true;practiceInfoContent.replaceChildren();document.body.classList.remove('benefits-page-open')};
-    const openPracticeInfo=(title,content)=>{
+    const openPracticeInfo=(title,content,subtitle='탄소중립 실천 안내')=>{
       practiceInfoPage.querySelector('.practice-info-title').textContent=title;
+      practiceInfoPage.querySelector('.benefits-page-header span').textContent=subtitle;
       practiceInfoContent.replaceChildren(content);
       practiceInfoPage.hidden=false;document.body.classList.add('benefits-page-open');
       history.pushState({practiceInfoPage:true},'',`${location.pathname}${location.search}#practice-info`);
@@ -549,7 +555,7 @@ main{max-width:1200px}.category-section{margin-bottom:54px}.category-heading h2{
         const detail=copy.querySelector('.inline-details');if(detail)detail.hidden=false;
         copy.querySelectorAll('.card-foot button').forEach(button=>button.remove());
         const title=card.querySelector('h3')?.textContent.trim()||section.querySelector('.category-heading h2')?.textContent.trim()||'실천 장소 정보';
-        openPracticeInfo(title,copy);return;
+        openPracticeInfo(title,copy,section.classList.contains('agreement')?'2026 협약 안내':'탄소중립 실천 안내');return;
       }
       if(event.target.closest('.reuse-store-cover,.reuse-store-summary')){
         event.preventDefault();event.stopPropagation();
