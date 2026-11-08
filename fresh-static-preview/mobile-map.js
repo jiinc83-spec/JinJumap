@@ -456,6 +456,7 @@
   const photoImage = photoNode.querySelector('img');
   const typeNode = sheet.querySelector('.map-place-sheet-type');
   const actionNode = sheet.querySelector('.map-place-sheet-action');
+  sheet.querySelector('.map-place-action-icon')?.remove();
   const factsNode = sheet.querySelector('.map-place-sheet-facts');
   const detailsNode = sheet.querySelector('.map-place-sheet-details');
   const moreButton = sheet.querySelector('.map-place-more');
@@ -560,12 +561,6 @@
   }
   function openSheet(card, moveMap = false, focusSheet = false) {
     if (!card || card.hidden) return;
-    if (window.matchMedia('(max-width: 640px)').matches) {
-      closeSheet();
-      window.showMapPlaceInfoWindow?.(card.id);
-      if (moveMap) window.focusMapPlace?.(card);
-      return;
-    }
     mapSection.classList.remove('is-list-open');
     listToggle.setAttribute('aria-expanded', 'false');
     listToggle.textContent = '장소 목록';
