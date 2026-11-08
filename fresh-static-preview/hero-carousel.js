@@ -289,13 +289,5 @@
 
   slides.slice(1).forEach(slide => { const image = new Image(); image.src = slide.image; });
   showSlide(0);
-  if (document.body.classList.contains('splash-active')) {
-    const splashObserver = new MutationObserver(() => {
-      if (!document.body.classList.contains('splash-active')) {
-        splashObserver.disconnect();
-        window.setTimeout(startAutoplay, 500);
-      }
-    });
-    splashObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-  } else startAutoplay();
+  startAutoplay();
 })();

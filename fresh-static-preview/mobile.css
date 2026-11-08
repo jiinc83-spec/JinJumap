@@ -22,7 +22,6 @@ body.mobile-layout .mobile-category-tabs{display:flex;gap:22px;overflow-x:auto;m
 body.mobile-layout .mobile-category-tabs::-webkit-scrollbar{display:none}
 body.mobile-layout .mobile-category-tabs button{flex:none;padding:8px 0 10px;border:0;border-bottom:2px solid transparent;background:transparent;color:#747d76;font-size:12px;white-space:nowrap;cursor:pointer}
 body.mobile-layout .mobile-category-tabs button.is-active{border-bottom-color:#75b83e;color:#263d2a;font-weight:800}
-body.mobile-layout .entry-splash-brand span{display:none}
 body.mobile-layout .mobile-search-status{margin:7px 0 0;color:#6f7b70;font-size:10px}
 body.mobile-layout .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 body.mobile-layout .mobile-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:-10px 0 24px}
