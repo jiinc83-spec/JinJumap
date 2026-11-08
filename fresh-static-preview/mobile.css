@@ -74,6 +74,7 @@ body.mobile-layout .category-overview .bicycle .grid{display:flex;flex:1;min-hei
 body.mobile-layout .category-overview .bicycle .card-body{display:flex;flex:1;flex-direction:column;gap:4px;padding:13px 16px;min-height:0}
 body.mobile-layout .category-overview .bicycle .card h3{font-size:14px;min-height:0;margin:0}
 body.mobile-layout .category-overview .bicycle .name,body.mobile-layout .category-overview .bicycle .address{font-size:10px}
+body.mobile-layout .category-overview>#bicycle .card.no-name .card-body>h3,body.mobile-layout .category-overview>#bicycle .card.no-name .card-body>.address{display:none}
 body.mobile-layout .category-overview .bicycle .prep{font-size:10px;padding:7px;margin-top:4px}
 body.mobile-layout .category-overview .bicycle .card-foot{margin:auto 0 0;padding-top:7px}
 body.mobile-layout .category-overview .bicycle .card-foot button{font-size:10px;padding:9px}
