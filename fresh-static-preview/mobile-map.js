@@ -622,8 +622,7 @@
     const directions = sheet.querySelector('.map-place-directions');
     directions.href = info.directionsUrl || info.googleMapsUrl || (info.kakaoPlaceId ? `https://place.map.kakao.com/${encodeURIComponent(info.kakaoPlaceId)}` : `https://map.kakao.com/link/search/${encodeURIComponent(title)}`);
     const naverDirections = sheet.querySelector('.map-place-naver-directions');
-    const selectedCard = document.getElementById(sheet.dataset.placeId);
-    const latitude = Number(selectedCard?.dataset.lat), longitude = Number(selectedCard?.dataset.lng);
+    const latitude = Number(card.dataset.lat), longitude = Number(card.dataset.lng);
     if (Number.isFinite(latitude) && Number.isFinite(longitude) && latitude >= -85 && latitude <= 85) {
       const mercatorX = (longitude * 20037508.34) / 180;
       const mercatorY = Math.log(Math.tan(((90 + latitude) * Math.PI) / 360)) * (20037508.34 / Math.PI);
